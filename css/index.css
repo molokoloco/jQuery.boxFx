@@ -1,0 +1,106 @@
+* { margin:0; padding:0; }
+
+body {
+    font:16px/110% "Lucida Grande", Helvetica, Arial, sans-serif;
+    color:rgb(34, 117, 185);
+    text-shadow:0 1px 2px rgba(255,255,255,1);
+    text-align:center;
+    background:#05abe0;
+    background: linear-gradient(top, #87e0fd 0%,#53cbf1 40%,#05abe0 100%);
+        background: -moz-linear-gradient(top, #87e0fd 0%, #53cbf1 40%, #05abe0 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#87e0fd), color-stop(40%,#53cbf1), color-stop(100%,#05abe0));
+        background: -webkit-linear-gradient(top, #87e0fd 0%,#53cbf1 40%,#05abe0 100%);
+        background: -o-linear-gradient(top, #87e0fd 0%,#53cbf1 40%,#05abe0 100%);
+        background: -ms-linear-gradient(top, #87e0fd 0%,#53cbf1 40%,#05abe0 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#87e0fd',endColorstr='#05abe0',GradientType=0);
+}
+
+a {
+    color:#1E5799;
+    text-decoration:none;
+}
+    a:hover {
+        color:#333333;
+    }
+
+a.button {}
+    a.button.selected {
+        border-top:1px solid rgba(255,255,255,1);
+        border-bottom:1px solid rgba(255,255,255,1);
+        background:rgba(255,255,255,0.3);
+    }
+    a.button:hover {
+        background:rgba(255,255,255,0.5);
+    }
+
+a.ribbon {
+    position:fixed;
+    top:0; right:0;
+}
+
+div#page {
+    display:block;
+    margin:30px auto;
+    width:600px;
+    text-align:left;
+    background:rgba(255, 255, 255, 0.5);
+    padding:20px 30px 30px 30px;
+    border-radius:6px;
+    border:1px solid white;
+}
+
+div#page p {
+    margin:5px 0;
+    text-align:left;
+}
+
+    p.tips, p.tips a {
+        font-size:13px;
+    }
+
+pre#readMe {
+    font:12px Consola, "Courier New", Courier, monospace;
+    color:#000066;
+    white-space: pre-wrap;
+    margin:0 auto;
+    width:640px;
+    text-align:left;
+    background:rgba(255, 255, 255, 0.5);
+    padding:20px 10px 30px 10px;
+    border-radius:6px;
+    border:1px solid white;
+}
+
+.spacer {
+    clear:both;
+    width:100%;
+    height:20px;
+}
+
+/* ---- Editor (Only for the demo) ---- */
+textarea#options {
+    font:11px/100% 'Courier New', Courier;
+    color:#666666;
+    width:100%;
+    height:356px;
+    padding:3px;
+    background:white;
+    border:1px solid grey;
+    text-shadow:none;
+    border-radius:3px;
+}
+    textarea#options:hover {
+        color:#333333;
+        border:1px solid red;
+    }
+
+/* ---- Stats (Only for the demo) ---- */
+div#sps {
+    position:absolute;
+    z-index:999999;
+    right:10px;
+    bottom:10px;
+    font:11px/100% 'Courier New', Courier;
+    color:#999999;
+    text-shadow:none;
+}
