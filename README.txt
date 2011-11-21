@@ -1,13 +1,13 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 // jQuery.boxFx.js (Beta V0.92) is like a "DOM particles emitter" factory
-// Clash the DOM with the most optimized jQuery animations framework on earth ^^		   
+// "Clash the DOM with the most optimized jQuery animations framework on earth" ^^           
 // GPL/MIT/Copyleft : @molokoloco 28/10/2011 - http://b2bweb.fr
 //
 // Infos            : http://goo.gl/P18db
-// Plain demo       : http://www.b2bweb.fr/framework/jquery.boxFx/jquery.boxFx.html
-// Cloud9ide        : http://cloud9ide.com/molokoloco/jquery_boxFx
-// Live demo        : http://jsfiddle.net/molokoloco/aqfsC/
-// Sources          : https://github.com/molokoloco/jquery.boxFx
+// Plain demo       : http://www.b2bweb.fr/framework/jquery.boxFx/
+// Cloud9Ide        : http://cloud9ide.com/molokoloco/jquery_boxFx/
+// Live example     : http://jsfiddle.net/molokoloco/sBqWq/
+// Sources          : https://github.com/molokoloco/jquery.boxFx/
 // Download (V0.6!) : http://www.b2bweb.fr/framework/jquery.boxFx/jquery.boxFx.zip
 //////////////////////////////////////////////////////////////////////////////////////////
 

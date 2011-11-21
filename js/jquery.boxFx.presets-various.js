@@ -40,7 +40,7 @@ $(function() { // Wait jQuery to be ready
     ///////////////////////////////////////////////////////////////////////////////
     
     optionsVarious.transitionWithTemplate = {
-        seeds          : '<div class="test">N°{id} - {title}</div>',
+        seeds          : '<div>N°{id} - {title}</div>',
         data           : [
             {id:1, title:'toto'}, {id:2, title:'tutu'}, {id:3, title:'toto'}, {id:4, title:'tutu'},
             {id:5, title:'toto'}, {id:6, title:'tutu'}, {id:7, title:'toto'}, {id:8, title:'tutu'}
@@ -51,7 +51,9 @@ $(function() { // Wait jQuery to be ready
             width          : 150,
             opacity        : 0,
             background     : 'white',
-            transform      : 'rotate(-20deg) translate(200px, 300px)'
+            transform      : 'rotate(-20deg) translate(200px, 300px)',
+            textAlign      : 'center',
+            borderRadius   : '3px'
         },
         transition     : {
             duration       : '3000ms',
@@ -139,7 +141,7 @@ $(function() { // Wait jQuery to be ready
     
     ///////////////////////////////////////////////////////////////////////////////
     // Data for filling the template is provided by a function with asynchronous JSONP inside
-    // Ex. : http://jsfiddle.net/molokoloco/Ebc27/ - http://stackoverflow.com/q/8190016/174449
+    // Ex. : http://jsfiddle.net/molokoloco/sBqWq/ - http://stackoverflow.com/q/8190016/174449
     ///////////////////////////////////////////////////////////////////////////////
     
     var twitsObj = null,
@@ -218,9 +220,9 @@ $(function() { // Wait jQuery to be ready
         newAtTop          : 'random',
         delay             : 1000,
         maxSeeds          : 10,
-        emitterRadius       : 0,
-        emitterCenterLeft   : '50%',
-        emitterCenterTop    : '125%',
+        emitterRadius     : 0,
+        emitterCenterLeft : '50%',
+        emitterCenterTop  : '125%',
         
         styles            : {
             width             : 320, 
