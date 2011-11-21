@@ -12,6 +12,7 @@
     <meta name="description" content="" />
     <meta name="author" content="Remixed by @molokoloco 2011 - http://b2bweb.fr" />
     <meta name="viewport" content="width=720" />
+    <link href="http://fonts.googleapis.com/css?family=Droid+Sans+Mono|Droid+Sans" rel="stylesheet" type="text/css">
     <link href="./css/index.css" rel="stylesheet" type="text/css">
     <style type="text/css">
 
@@ -89,7 +90,7 @@
 </head>
 <body>
 
-    <div id="page">
+    <div class="page">
         <p>
            <strong>Motion effects JS plugin powered with CSS3 animations and transitions</strong><br />
            <strong><a href="https://github.com/molokoloco/jquery.boxFx" target="_blank" title="Fork me on GitHub">jQuery.boxFx.js</a> (Beta V0.92) is like a "DOM particles emitter factory"</strong><br />
@@ -124,11 +125,12 @@
         <div class="spacer"></div>
         <p class="tips">
             <strong>Tips :</strong> Add your properties, set unwanted existing ones to "null" (live editor constrain)<br />
-            <em>gradient</em>, <em>boxShadow</em>, <em>pacity</em>, <em>borderRadius</em>... are CPU consumming<br />
+            <em>gradient</em>, <em>boxShadow</em>, <em>opacity</em>, <em>borderRadius</em>... are CPU consumming<br />
+            Some properties like functions doesn't appear in the JSON export you see above (Print only string value)<br />
             <br />
             Read the fucking <a href="./README.txt" id="pause">./README.txt</a> for (much) more infos ~=[,,_,,]:3<br />
             <br />
-            There so much possibilities... help me if you found bug
+            There so much possibilities... help me if you found bug<br />
             Fork it and get updated on GitHub : <a href="https://github.com/molokoloco/jquery.boxfx" target="_blank">https://github.com/molokoloco/jquery.boxfx</a><br />
             Edit it in your <a href="http://cloud9ide.com" target="_blank">http://cloud9ide.com</a> editor and send me feedback ;)<br />
             <br />
@@ -138,13 +140,24 @@
     
     <div class="spacer"></div>
     
-    <pre id="readMe">
+    <pre id="readMe" class="page">
     	<!--// inlusion of ./README.txt //-->
     </pre>
 
     <div class="spacer"></div>
     
-    <!--// Here come the DISCUSS ? Forum //-->
+    <div id="disqus_thread" class="page">
+         <script type="text/javascript">
+            var disqus_shortname = 'jqueryboxfx';
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
     
     <div class="spacer"></div>
     
@@ -334,18 +347,20 @@ $(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
     // optionsVarious
     for(var k in optionsVarious)
         btnHtml.push('<a id="btn_'+k+'" href="javascript:void(0);" class="button">'+k+'</a>'); // 'a.button'
-    $presets.append('<p class="tips"><strong>Various options presets :</strong><br />'+btnHtml.join(', ')+'</p>');
+    $presets.append('<p class="tips"><strong>Various options presets :</strong> '+btnHtml.join(', ')+'</p>');
     
 	// optionsEffects
     btnHtml = [];
     for(var k in optionsEffects)
         btnHtml.push('<a id="btn_'+k+'" href="javascript:void(0);" class="button">'+k+'</a>'); // 'a.button'
-    $presets.append('<p class="tips"><strong>Effects with transitions :</strong><br />'+btnHtml.join(', ')+'</p>');
+    $presets.append('<p class="tips"><strong>Effects with transitions :</strong> '+btnHtml.join(', ')+'</p>');
     
 	// boxFxFullOptions
-    $presets.append('<p class="tips"><strong>Full plugin options :</strong><br /><a id="btn_boxFxFullOptions" href="javascript:void(0);" class="button">boxFxFullOptions</a></p>');
+    $presets.append('<p class="tips"><strong>Full plugin options :</strong> <a id="btn_boxFxFullOptions" href="javascript:void(0);" class="button">boxFxFullOptions</a></p>');
 
     $presets.delegate('a.button', 'click', buttonsClickSetOptions);
+    
+    if (hash) $('a#btn_'+hash).addClass('selected');
     
 });
 </script>

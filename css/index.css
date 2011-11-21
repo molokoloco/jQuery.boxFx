@@ -1,7 +1,7 @@
 * { margin:0; padding:0; }
 
 body {
-    font:16px/110% "Lucida Grande", Helvetica, Arial, sans-serif;
+    font:16px/110% "Droid Sans", "Lucida Grande", Helvetica, Arial, sans-serif;
     color:rgb(34, 117, 185);
     text-shadow:0 1px 0 rgba(255,255,255,1);
     text-align:center;
@@ -23,7 +23,9 @@ a {
         color:#333333;
     }
 
-a.button {}
+a.button {
+    border-radius: 5px;
+}
     a.button.selected {
         border-top:1px solid rgba(255,255,255,1);
         border-bottom:1px solid rgba(255,255,255,1);
@@ -38,7 +40,7 @@ a.ribbon {
     top:0; right:0;
 }
 
-div#page {
+.page {
     display:block;
     margin:30px auto;
     width:600px;
@@ -49,26 +51,22 @@ div#page {
     border:1px solid white;
 }
 
-div#page p {
+.page p {
     margin:5px 0;
     text-align:left;
 }
 
     p.tips, p.tips a {
-        font-size:13px;
+        font-size:14px;
     }
 
 pre#readMe {
-    font:12px Consola, "Courier New", Courier, monospace;
+    font:11px/100% "Droid Sans Mono", Consola, "Courier New", Courier, monospace;
     color:#000066;
     white-space: pre-wrap;
     margin:0 auto;
     width:640px;
-    text-align:left;
-    background:rgba(255, 255, 255, 0.5);
     padding:20px 10px 30px 10px;
-    border-radius:6px;
-    border:1px solid white;
 }
 
 .spacer {
@@ -79,7 +77,7 @@ pre#readMe {
 
 /* ---- Editor (Only for the demo) ---- */
 textarea#options {
-    font:11px/100% 'Courier New', Courier;
+    font:11px/100% "Droid Sans Mono", Consola, "Courier New", Courier, monospace;
     color:#666666;
     width:100%;
     height:356px;
@@ -100,7 +98,7 @@ div#sps {
     z-index:999999;
     right:10px;
     bottom:10px;
-    font:11px/100% 'Courier New', Courier;
+    font:11px/100% "Droid Sans Mono", Consola, "Courier New", Courier, monospace;
     color:#999999;
     text-shadow:none;
 }

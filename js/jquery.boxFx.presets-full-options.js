@@ -197,7 +197,7 @@ $(function() { // Wait jQuery to be ready
     // animation : 'myAnim0 3s steps(10, end) 0 3 forwards, myAnim1 .8s ease 0 infinite',...
     // Each keyframes animation can have differents parameters and differents steps, for exemple one is infinite an the other occurs twice
     // You can use $.cubicBeziers ( console.log($.cubicBeziers) ) for 'timingFunction'
-    boxFxFullOptions.keyframes = [{               // The 7 arguments must be sets
+    boxFxFullOptions.keyframes = [{          // The 7 arguments must be sets
             duration              : '5s',
             timingFunction        : $.cubicBeziers.easeOutQuad, // $.cubicBeziers.xxx OR steps(10, end) OR ease, ease-out, ease-in, ease-in-out, linear, cubic-bezier(1,.2,1,1)
             delay                 : 0,       // time // Wait until start anim ?

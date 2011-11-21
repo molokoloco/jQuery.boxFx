@@ -4,11 +4,11 @@
 // GPL/MIT/Copyleft : @molokoloco 28/10/2011 - http://b2bweb.fr
 //
 // Infos            : http://goo.gl/P18db
-// Plain demo       : http://www.b2bweb.fr/framework/jquery.boxFx/
-// Cloud9Ide        : http://cloud9ide.com/molokoloco/jquery_boxFx/
+// Plain demo       : http://www.b2bweb.fr/framework/jquery.boxfx/
+// Cloud9Ide        : http://cloud9ide.com/molokoloco/jquery_boxfx/
 // Live example     : http://jsfiddle.net/molokoloco/sBqWq/
 // Sources          : https://github.com/molokoloco/jquery.boxFx/
-// Download (V0.6!) : http://www.b2bweb.fr/framework/jquery.boxFx/jquery.boxFx.zip
+// Download         : http://www.b2bweb.fr/framework/jquery.boxFx/XXX.zip
 //////////////////////////////////////////////////////////////////////////////////////////
 
     
@@ -19,12 +19,12 @@
         With JavaScript, we dynamically animate HTML elements based on CSS3, like a proxy
         We take avantage of the both world, GPU acceleration and interactivity
         
-        We work on a set of HTML "<elements>" ("Seeds") inside a "box".
-        A "box" can be ether the <body>, a <div>, or whatever jQuery element we want.
-        The seeds are generated one after other in the "box", they can be any element that have display.
+        We work on a set of HTML <elements> ("Seeds") inside a "box".
+        A "Box" and a "Seed" can be ether the <body>, a <div>, or whatever jQuery element we want.
+        The seeds are generated one after other in the "box".
         
         A "options.delay" parameters tell the plugin the time to wait before (re)generate a new seed.
-        If "0" is used, plugin create as fast as possible a new seed ("requestAnimationFrame") otherwise it use a "setTimeout()"...
+        If "0" is used, plugin create as fast as possible a new one with "requestAnimationFrame" otherwise it use a "setTimeout()"...
         
         The seeds are created with a starting styles OBJ and/or a starting class.
         
@@ -86,15 +86,17 @@
     // LIMITATIONS
     //////////////////////////////////////////////////////////////////////////////////////
     
-        We cannot animate more than a certain number of DOM elements. In one of the effect i have tested 800
-        This is already to much ^^
-        Some CSS3 properties are good animation speed killer : gradient, boxShadow, opacity, borderRadius...
-        
-        In the plugin, witch is a proxy of the CSS3 model, you can setup hundreds of properties.
-        I recommand to only use few of them each time.
+        We cannot animate more than a certain number of DOM elements.
+        In one of the effect i have tested 800... This is already to much ^^
+        The purpose is to animate few HTML elements, otherwise it's better to use Canvas or SVG
+        The plugin is like a proxy of the CSS3 model, you can setup hundreds of properties.
+        I recommand to only use few of them each time. Some CSS3 properties are good
+        speed killer : gradient, boxShadow, opacity, borderRadius...
     
         CSS Animations keyframes and CSS Transitions styles properties can be in conflict. 
-        We cannot animate the same CSS property in "options.transition.stylesTo.XXX" and in "options.keyframes[0].steps.XXX" (The same apply between two keyframes : "options.keyframes[0].steps.XXX" and "options.keyframes[1].steps.XXX").
+        We cannot animate the same CSS property in "options.transition.stylesTo.XXX" and
+        in "options.keyframes[0].steps.XXX" (The same apply between two keyframes : 
+        "options.keyframes[0].steps.XXX" and "options.keyframes[1].steps.XXX").
         But, for example, you can move 1 times the seed with 'options.transition.stylesTo.left'
         ...and do an infinite rotation in 'options.keyframes[0].steps[0].transform'
     

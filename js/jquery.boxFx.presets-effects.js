@@ -120,13 +120,13 @@ $(function() { // Wait jQuery to be ready
         maxSeeds          : 16,
         emitterRadius     : 60,
         emitterCenterLeft : '50%',
-        emitterCenterTop  : '120%',
+        emitterCenterTop  : '140%',
         styles            : {
             position         : 'absolute',
             width            : 50,
             height           : 100,
             backgroundColor  : 'rgba(219,20,80,1)',
-            borderRadius     : 1000,
+            borderRadius     : '50px / 100px',
             boxShadow        : '0 0 50px rgba(219,20,80,1)'
         },
         transition         : {
@@ -134,15 +134,45 @@ $(function() { // Wait jQuery to be ready
             timingFunction   : 'cubic-bezier(1, 1, 0, 0)',
             stylesTo         : {
                 width          : 1,
-                height         : 500,
-                maxSize        : 200,
-                borderRadius   : 1000, // '1px / 250px'
+                height         : 600,
+                borderRadius   : '1px / 600px',
                 backgroundColor: 'rgba(255,255,5,1)',
                 boxShadow      : '0 0 50px rgba(255,255,5,1)',
                 opacity        : 0
             }
         }
     };
+    /*
+    {
+    "effect": "artifice",
+    "newAtTop": "random",
+    "delay": 500,
+    "maxSeeds": 16,
+    "emitterRadius": 60,
+    "emitterCenterLeft": "50%",
+    "emitterCenterTop": "140%",
+    "styles": {
+        "position": "absolute",
+        "width": 30,
+        "height": 200,
+        "backgroundColor": "rgba(219,20,80,1)",
+        "borderRadius": 1000,
+        "boxShadow": "0 0 50px rgba(219,20,80,1)"
+    },
+    "transition": {
+        "duration": "7000ms",
+        "timingFunction": "cubic-bezier(1, 1, 0, 0)",
+        "stylesTo": {
+            "width": 1,
+            "height": 600,
+            "borderRadius": 1000,
+            "backgroundColor": "rgba(255,255,5,1)",
+            "boxShadow": "0 0 50px rgba(255,255,5,1)",
+            "opacity": 0
+        }
+    }
+}
+*/
     
     optionsEffects.sunnyClouds = {
         effect            : 'artifice',
@@ -327,10 +357,11 @@ $(function() { // Wait jQuery to be ready
             position         : 'absolute',
             width            : 5,
             maxSize          : 12,
-            backgroundImage  : '-'+$.browserPrefix+'-radial-gradient(33% 33%, circle cover,#FFFD69 30%,white 70%,#FFFD69 100%)',
+            backgroundImage  : '-'+$.browserPrefix+'-radial-gradient(50% 50%, circle cover,#FFFD69 30%,violet 70%,#FFFD69 100%)',
             backgroundSize   : '150px 150px',
-            border           : '8px solid #FFFD69',
-            opacity          : 0,
+            backgroundPosition: 'center center',
+            border           : '1px solid violet ',
+            opacity          : 0.1,
             borderRadius     : '50%'
         },
         transition        : {
@@ -340,9 +371,9 @@ $(function() { // Wait jQuery to be ready
                 width            : '150%',
                 maxSize          : '160%',
 				backgroundSize   : '1px 1px',
-                border           : '1px solid #FFFD69',
+                border           : '8px solid #FFFD69',
                 borderRadius     : '50%',
-                transform        : 'rotate(-500deg)',
+                transform        : 'rotate(-300deg)',
                 opacity          : 1
             }
         }

@@ -62,7 +62,7 @@
         // Can be overriden by options.effect && options.transition.stylesTo
         // Every CSS property allowed, see ./js/jquery.boxFx.presets.js for examples
         styles                : null,
-        // Nb : You cannot animate both 'options.transition.stylesTo.transform' and 'options.keyframes[0].steps[0].transform'
+        // Nb : You cannot animate two times the same property eg. 'options.transition.stylesTo.width' and 'options.keyframes[0].steps[0].width'
         // But, for example, you can move 1 times the seed with 'options.transition.stylesTo.left'
         // ...and do an infinite rotation in 'options.keyframes[x].steps[x].transform'
         transition            : null,        // By default no transition
@@ -106,7 +106,7 @@
     $.fn.boxFx = function(options) {
         if (_db_)  db('$.fn.boxFx(options)', options); // Debug with console.log
 
-        // Deep merge options with defaut (ex. options.styles.width)
+        // Deep merge options with defaut
         options = $.extend(true, {}, $.boxFxOptions, options); // jQuery.extend([deep], target, object1 [, objectN])
 
         return this.each(function() {
@@ -118,14 +118,14 @@
             var initFx = function() {        // Internals boxFX properties
                 FX                    = {};
                 S                     = {};
-                FX.render             = true; // Continuous requestAnimation ?
-                FX.timer              = null; // setInterval ?
+                FX.render             = true;// Continuous requestAnimation ?
+                FX.timer              = null;// setInterval ?
                 FX.id                 = $.getUniqueName('boxFx'); // boxFx element unique ID
                 FX.currentData        = 0;
                 FX.targets            = null;
                 FX.transitionDuration = 0;
                 FX.keyframesDuration  = 0;
-                window[FX.id]         = [];   // Global unique nameSpace to stock all seeds $element
+                window[FX.id]         = [];  // Global unique nameSpace to stock all seeds $element
             };
             initFx();
             
@@ -133,7 +133,7 @@
             // boxFx jQuery plugin externals methods
             var publicMethods = {
                 start:function() {
-                    if (_db_)  db('$.boxFx.trigger.start()');
+                    if (_db_) db('$.boxFx.trigger.start()');
                     setTimeout(function() {  // Be sure all dom manip is over...
                         privateMethods.configSetupFix();
                         FX.render = true;
@@ -147,7 +147,7 @@
                 },
                 stop:function() {
                     if (_db_) db('$.boxFx.trigger.stop()');
-                    FX.render = false;        // if requestAnimFrame
+                    FX.render = false;       // if requestAnimFrame
                     if (FX.timer) clearTimeout(FX.timer); // if setTimeout Kill factory
                     FX.timer = null;
                 },
@@ -155,14 +155,16 @@
                 reset:function() {
                     if (_db_) db('$.boxFx.trigger.reset()'); 
                     publicMethods.stop();
-                    var i = window[FX.id].length;
-                    while(i--) {
-                        if (window[FX.id][i] && window[FX.id][i].length > 0)
-                            window[FX.id][i].empty().remove(); // Clean DOM
-                        delete window[FX.id][i]; // Clean Obj
-                    }
-                    delete window[FX.id];
-                    initFx();
+                    setTimeout(function() {
+                        var i = window[FX.id].length;
+                        while(i--) {
+                            if (window[FX.id][i] && window[FX.id][i].length > 0)
+                                window[FX.id][i].empty().remove(); // Clean DOM
+                            delete window[FX.id][i]; // Clean Obj
+                        }
+                        delete window[FX.id];
+                        initFx();
+                    }, 0);
                 },
                 // Update somes values in the current options
                 update:function(event, newOptions) { // $boxFx1.trigger('update', [{prop:val,...}]);
@@ -177,8 +179,10 @@
                     if (_db_) db('$.boxFx.trigger.setOptions()', newOptions);
                     if (!newOptions || $.isEmptyObject(newOptions)) return;
                     publicMethods.reset(); // If seed HTML is modified, must clear old ones
-                    options = $.extend(true, {}, $.boxFxOptions, newOptions);
-                    publicMethods.start();
+                    setTimeout(function() {
+                        options = $.extend(true, {}, $.boxFxOptions, newOptions);
+                        publicMethods.start();
+                    }, 0);
                 }
             };
 
