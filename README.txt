@@ -1,34 +1,51 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 // jQuery.boxFx.js (Beta V0.92) is like a "DOM particles emitter" factory
 // "Clash the DOM with the most optimized jQuery animations framework on earth" ^^           
-// GPL/MIT/Copyleft : @molokoloco 28/10/2011 - http://b2bweb.fr
+// GPL/MIT/Copyleft @molokoloco 28/10/2011 - http://b2bweb.fr
 //
 // Infos            : http://goo.gl/P18db
+//
 // Plain demo       : http://www.b2bweb.fr/framework/jquery.boxfx/
-// Cloud9Ide        : http://cloud9ide.com/molokoloco/jquery_boxfx/
 // Live example     : http://jsfiddle.net/molokoloco/sBqWq/
-// Sources          : https://github.com/molokoloco/jquery.boxFx/
-// Download         : http://www.b2bweb.fr/framework/jquery.boxFx/XXX.zip
+// Cloud9Ide        : http://cloud9ide.com/molokoloco/jquery_boxfx/
+//
+// Sources          : https://github.com/molokoloco/jQuery.boxFx/
+// Download         : https://github.com/molokoloco/jQuery.boxFx/downloads/
 //////////////////////////////////////////////////////////////////////////////////////////
 
     
     //////////////////////////////////////////////////////////////////////////////////////
-    // PARADIGMS
+    // WHAT are we talking about ?
     //////////////////////////////////////////////////////////////////////////////////////
     
+        The idea behind boxFx was to give ten lines facilities for developper and designer 
+        to animate HTML elements with polished CSS3. Dead simple and hard at the same time !
+
+        Basically, you can use the plugin in a lot of way :
+
+            - Create elements or use existing collections
+            - Manage simple transitions or keyframes or effects or all in the same time 
+            - Create pure animations, full of graphics or only automatise DOM inserting
+            - Mass handle CSS and animations properties, or fine tune based on element index
+            - Apply some "effects" on all the elements and manage them in the time
+            - If you use a data provider (JSON), you can deal with a template foreach elements
+
+    //////////////////////////////////////////////////////////////////////////////////////
+    // PARADIGMS
+    //////////////////////////////////////////////////////////////////////////////////////
+
         With JavaScript, we dynamically animate HTML elements based on CSS3, like a proxy
         We take avantage of the both world, GPU acceleration and interactivity
-        
+
         We work on a set of HTML <elements> ("Seeds") inside a "box".
         A "Box" and a "Seed" can be ether the <body>, a <div>, or whatever jQuery element we want.
+
         The seeds are generated one after other in the "box".
-        
         A "options.delay" parameters tell the plugin the time to wait before (re)generate a new seed.
         If "0" is used, plugin create as fast as possible a new one with "requestAnimationFrame" otherwise it use a "setTimeout()"...
         
-        The seeds are created with a starting styles OBJ and/or a starting class.
-        
-        If "options.transition" is setted, plugin apply ending styles ("options.transition.stylesTo") immediatly after starting styles ("options.styles").
+        The seeds are created with a starting styles OBJ and/or a starting class ("options.styles").
+        If "options.transition" is set, plugin also apply the "ending" styles ("options.transition.stylesTo")
         The "options.transition.duration" you've set determine the time to morph properties from one(s) to the other(s).
         
         Effect can also be used for applying individual settings to each seed, in opposite to values for the entire set.

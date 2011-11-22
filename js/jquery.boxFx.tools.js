@@ -17,6 +17,7 @@
     };
     
     // Cross-browsers requestAnimationFrame
+    // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
     window.requestAnimFrame = (function() {
       return  window.requestAnimationFrame       ||
               window.webkitRequestAnimationFrame ||
@@ -37,7 +38,7 @@
         return parseInt(miin + (Math.random() * (maax - miin)), 10);
     };
     
-    // Lightest TPL // $.getTpl('<div>N°{id} - {title}</div>', {id:1, title:'toto'}) == '<div>N°1 - toto</div>'
+    // Lightest TPL // $.getTpl('<div>Nï¿½{id} - {title}</div>', {id:1, title:'toto'}) == '<div>Nï¿½1 - toto</div>'
     $.getTpl = function(tpl, val) {
         for (var p in val)
             tpl = tpl.replace(new RegExp('({'+p+'})', 'g'), val[p] || '');
@@ -47,7 +48,7 @@
     var uniqueId = null;
     $.getUniqueName = function(prefix) {
         if (!uniqueId) uniqueId = (new Date()).getTime();
-        return prefix + (uniqueId++);
+        return (prefix ? prefix : 'id_') + uniqueId++;
     };
     
     /*
@@ -57,12 +58,11 @@
         s.setAttribute('src', jsPath);
         document.getElementsByTagName('head')[0].appendChild(s);
     };
-
     $.callJs = function(src, async, callback) { // callJs('./other.js', function() { ok(); }); // On-demand same domain JS
         $.ajax({
             url:src, async:async || 0, dataType:'script', cache:1,
             error:function(){ alert('Sorry, some JS file not found : '+src); },
-            success:function(response) { if (callback && typeof callback == 'function') callback(); }
+            success:function() { if (callback && typeof callback == 'function') callback(); }
         });
     };
     */
@@ -166,22 +166,14 @@
         });
     };
     
-    // Set (overwritte) a new style
+    // Set or update a new CSS style in <head> // TODO - BETTER !!!
     var $cssAnimation = $('style#cssAnimation');
     $.setCssClass = function(clss) {
         if (!$cssAnimation || $cssAnimation.length < 1)
             $cssAnimation = $('<style type="text/css" id="cssAnimation"></style>').appendTo('head');
-        $cssAnimation.html(clss);
-    };
-    
-    // Update or set a new style // TODO - BETTER !!!
-    var $cssOveride = $('style#cssOveride');
-    $.addCssClass = function(clss, name) {
-        if (!$cssOveride || $cssOveride.length < 1)
-            $cssOveride = $('<style type="text/css" id="cssOveride"></style>').appendTo('head');
-        // var currentStyle = ($cssOveride.html()).replace(new RegExp('('+clss+'{'+p+'})', 'g'), val[p] || '');
+        // var currentStyle = ($cssOveride.html()).replace(new RegExp('('+clss+'{'+p+'})', 'g'), val[p] || ''); // TODO
         // div#sprite > div { background-color:'+value+'; }\
-        $cssOveride.html($cssOveride.html() + clss); // TODO
+        $cssAnimation.html($cssAnimation.html() + clss);
     };
     
     // Building CSS animation(s) from 'options.keyframes' OBJ (cf. ./jquery.boxFx.presets.js)

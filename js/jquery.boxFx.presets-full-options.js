@@ -24,14 +24,14 @@ $(function() { // Wait jQuery to be ready
 
         // Effect work mostly with 'options.transition', giving custom ending style foreach elements
         // At least if you use effect, specify 'options.style.width'
-        effect                : 'nebula',    // 'nebula', 'artifice', 'center', 'YOUR' or null // Add your custom effect !
+        effect                : 'artifice',  // 'nebula', 'artifice', 'center', 'YOUR' or null // Add your custom effect !
         
-        delay                 : 0,           // New seed/target every 'ms' (not 's'), Set to 0 and the plugin will use requestAnimationFrame (as fast as possible)
-        maxSeeds              : 100,         // Max simultaneous seeds, overrided by 'options.targets.length' and, by default, 'options.transition.duration / options.delays'
+        delay                 : 250,         // New seed/target every 'ms' (not 's'), Set to 0 and the plugin will use requestAnimationFrame (as fast as possible)
+        maxSeeds              : 50,          // Max simultaneous seeds, overrided by 'options.targets.length' and, by default, 'options.transition.duration / options.delays'
         newAtTop              : 'random',    // 'random' OR bolean // New element appear in top of others ?
         stopAtEnd             : false,       // Force continuous animation, even without effect
 
-        emitterRadius         : '20px',      // 10, '10px' or '50%' // Radius of the boxFx inside the boxFx
+        emitterRadius         : '0px',      // 10, '10px' or '50%' // Radius of the boxFx inside the boxFx
         emitterCenterLeft     : '50%',       // 10, '10px' or '50%' // boxFx position, 50% to put in the center
         emitterCenterTop      : '50%',
 
@@ -44,16 +44,17 @@ $(function() { // Wait jQuery to be ready
         keyframes             : {}
     };
 
-    // TODO : more advanced background-image: linear-gradient()
-    // https://github.com/codler/jQuery-Css3-Finalize/
-
     ///////////////////////////////////////////////////////////////////////////////
-    // Pure CSS3 styles, cross-browser compatibility added when possible with modernizr.js
+    // Element (Starting) CSS, some relevants examples properties
+    // ANY CSS/1/2/3 you want... 
+    //     - Except "transition, transitionName, transitionDuration..." (it's in options.transition)
+    //     - Except "animation, animationName, animationDelay..." (it's in options.keyframes)
+    // Cross-browser compatibility added when possible with modernizr.js
     // Can be overriden by options.effect && options.transition.stylesTo
-    // Element (Starting) CSS, some relevants examples properties, everything else allowed
 
     // Not Full (but interresting) properties list
     // It's a sample, do not activate all CSS effects if you want to keep some rendering rate ^^
+    
     boxFxFullOptions.styles = {
 
         // Some default properties, not animatable... --------------------------------
@@ -69,8 +70,9 @@ $(function() { // Wait jQuery to be ready
         textAlign             : 'center',    // 'nowrap',
 
         maskImage             : null,        // 'gradient()' | 'url()' // Text effect
-        backgroundImage       : '-'+$.browserPrefix+'-radial-gradient(33% 33%, circle cover,rgba(230,230,0,1) 25%,rgba(50,50,0,1) 80%)', // 'url()' | '-BROWSER-radial-gradient()'
-
+        backgroundImage       : '-'+$.browserPrefix+'-radial-gradient(33% 33%, circle cover,rgba(230,230,0,1) 25%,rgba(180,180,0,1) 80%)', // 'url()' | '-BROWSER-radial-gradient()'
+                                             // TODO : Add advanced background-image: linear-gradient() https://github.com/codler/jQuery-Css3-Finalize/
+        
         // Some properties, managed by 'options.effect' --------------------------------
         top                   : 0,           // Element is positionned within the boxFx 'options.emitterRadius' with 'top'/'left'
         left                  : 0,
@@ -79,8 +81,8 @@ $(function() { // Wait jQuery to be ready
 
         // Some properties, ANIMATABLE ! --------------------------------
 
-        width                 : 50,          // '10', '10px' or '50%' // Radius of a seed, minimalist settings // Can also be use by 'options.effect'
-        height                : 50,          // Default == width
+        width                 : 160,         // '10', '10px' or '50%' // Radius of a seed, minimalist settings // Can also be use by 'options.effect'
+        height                : 30,          // Default == width
 
                                              // translate(10px, 0px), translate3d, translateX, translateY, translateZ, scale(5), scale3d(x,y,z), scaleX, scaleY, scaleZ,
         transform             : null,        // rotate(180deg), rotateX, rotateY, rotateZ, skew(-10deg,10deg), skewX, skewY, perspective, matrix, matrix3d and rotate3d(1,1,0,360deg)
@@ -114,22 +116,22 @@ $(function() { // Wait jQuery to be ready
         boxShadow             : '1px 1px 3px rgba(30,30,0,0.8)', // '' || '0 0 10px rgba(0,0,0,1)', // OFFSET_X OFFSET_Y SPREAD COLOR
         boxReflect            : null,        // 'below 5px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.5, transparent), to(white))'
 
-        border                : '1px solid rgb(0,0,0)', // '1px dashed rgb(0,0,0)', // buggus with rgba() alpha
+        border                : '1px solid white', // '1px dashed rgb(0,0,0)', // buggus with rgba() alpha
         borderImage           : null,        // 'url(border-image.jpg) 45 20 45 30 repeat'
         borderWidth           : null,
-        borderRadius          : '50%',       // '10px' or '50%',  '10px 30px 20px 0px' or '50px / 150px' // Default round with half W/H radius
+        borderRadius          : '20px / 50px',       // '10px' or '50%',  '10px 30px 20px 0px' or '50px / 150px' // Default round with half W/H radius or 50%
         outline               : null,        // '1px dashed rgb(0,0,0)',
         outlineOffset         : null,        // '10px', ...
         
-        color                 : 'rgba(0,0,0,1)',
+        color                 : 'navy',
         
-        textShadow            : '0 0 3px rgba(255,255,255,1)', // '0 0 30px rgba(255,255,255,1)'
+        textShadow            : null, // '0 0 30px rgba(255,255,255,1)'
         textStroke            : null,        // '2px #006600'
         fontSize              : '25px',
         letterSpacing         : null,
         wordSpacing           : null,
         textIndent            : null,
-        lineHeight            : '50px',
+        lineHeight            : '30px',      // Same as height, for text to be verticaly aligned in the middle
 
         opacity               : 1,           // 0 <= 0.xxx <= 1
 
@@ -178,17 +180,16 @@ $(function() { // Wait jQuery to be ready
 
     boxFxFullOptions.transition = {
         properties            : 'all',       // 'all', 'width,height'
-        duration              : '3000ms',    // time // with unit : '1500ms' | '3s'
+        duration              : '5000ms',    // time // with unit : '1500ms' | '3s'
         timingFunction        : 'ease',      // $.cubicBeziers.xxx OR steps(10, end) OR ease, ease-out, ease-in, ease-in-out, linear, cubic-bezier(1,.2,1,1)
         clssTo                : null,        // Custom static CSS class TO, added at the end
-        stylesTo              :  {           // Any CSS you want... except transition, that have been setted above...
-            opacity             : 1,
-            width               : '150px',   // '10', '10px' or '50%' ...
-            lineHeight          : '150px',
-            backgroundColor     : 'rgba(100, 100, 100, 1)',
+        stylesTo              :  {           // Any CSS/1/2/3 you want... except "transition, transitionName, transitionDuration..." (it's just above...)
+            opacity               : 1,
+            color                 : 'white',
+            backgroundColor       : 'rgba(100, 100, 0, 1)',
             //...
                                              // Custom 'options.effect' property...
-            maxSize             : null       // 10, '10px' or '50%' // Randomize size between width/height and maxSize ?
+            maxSize               : null       // 10, '10px' or '50%' // Randomize size between width/height and maxSize ?
         }
     };
 
@@ -198,7 +199,7 @@ $(function() { // Wait jQuery to be ready
     // Each keyframes animation can have differents parameters and differents steps, for exemple one is infinite an the other occurs twice
     // You can use $.cubicBeziers ( console.log($.cubicBeziers) ) for 'timingFunction'
     boxFxFullOptions.keyframes = [{          // The 7 arguments must be sets
-            duration              : '5s',
+            duration              : '2s',
             timingFunction        : $.cubicBeziers.easeOutQuad, // $.cubicBeziers.xxx OR steps(10, end) OR ease, ease-out, ease-in, ease-in-out, linear, cubic-bezier(1,.2,1,1)
             delay                 : 0,       // time // Wait until start anim ?
             iterationCount        : 5,       // infinite | <number>
@@ -206,14 +207,14 @@ $(function() { // Wait jQuery to be ready
             fillMode              : 'forwards', // to persist the end state // none/backwards/forwards/both
             steps: [{
                     step              : '0%, 100%', // % or [%,%] // Example : Keyframe will be at 0% and 100% of the duration
-                    opacity           : 0
+                    boxShadow         : '0 0 0 rgba(0,0,0,0)',
                     // ...
                 }, {
                     step              : '50%',
-                    opacity           : 1
+                    boxShadow         : '0 0 30px rgba(100, 100, 0, 1)',
             }]
         }, {
-            duration              : '1500ms',
+            duration              : '500ms',
             timingFunction        : 'linear',
             delay                 : 0, //function() { return 1000* Math.random(); },
             iterationCount        : 'infinite', // often used with an 'animationDirection' : 'alternate'
@@ -225,10 +226,10 @@ $(function() { // Wait jQuery to be ready
                 }, {
                     step              : 33,
                     timingFunction    : $.cubicBeziers.easeInOutQuad, // Can also re-insert custom timingFunction for a step
-                    transform         : 'skew(-10deg, 10deg)'
+                    transform         : function(index) { return 'translate('+(20 - (Math.random()*40))+'px, 0)'; }
                 }, {
                     step              : 100, // Keyframe 'to' : 100%
-                    transform         : 'translate(50px,150px)'
+                    transform         : 'translate(0,0)'
             }]
     }];
 

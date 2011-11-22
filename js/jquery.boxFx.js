@@ -1,17 +1,11 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
 // jQuery.boxFx.js (Beta V0.92) is like a "DOM particles emitter" factory
-// Clash the DOM with the most optimized jQuery animations framework on earth ^^
-// GPL/MIT/Copyleft : @molokoloco 28/10/2011 - http://b2bweb.fr
-//
-// Infos            : http://goo.gl/P18db
-// Plain demo       : http://www.b2bweb.fr/framework/jquery.emitter/jquery.emitter.html
-// Cloud9ide        : http://cloud9ide.com/molokoloco/jquery_emitter
-// Live demo        : http://jsfiddle.net/molokoloco/aqfsC/
-// Sources          : https://github.com/molokoloco/jquery.emitter
-// Download         : http://www.b2bweb.fr/framework/jquery.emitter/jquery.emitter.zip (V0.6)
-//
-// ./README.txt for for infos !!!
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// "Clash the DOM with the most optimized jQuery animations framework on earth" ^^           
+// GPL/MIT/Copyleft @molokoloco 28/10/2011 - http://b2bweb.fr
+// Sources : https://github.com/molokoloco/jQuery.boxFx/
+// Download : https://github.com/molokoloco/jQuery.boxFx/downloads/
+//////////////////////////////////////////////////////////////////////////////////////////
+
 
 // Ok, i use this for debuging ^^
 ;var db  = function() { 'console' in window && console.log.call(console, arguments); },
@@ -188,10 +182,12 @@
 
             ///////////////////////////////////////////////////////////////////////////////
             // PRIVATES
+            ///////////////////////////////////////////////////////////////////////////////
             var privateMethods = {
                 
                 ///////////////////////////////////////////////////////////////////////////////
-                // Some "logics" for DEFAULT SETUP and cleanning of the configurable values...
+                // Some "logics" for DEFAULT SETUP and cleannup of the configurable values...
+                // I know this part of the code i weird. But i don't know 1000 solutions to do "smarts settings"
                 configSetupFix: function() {
                     if (_db_) db('configSetupFix() start', options);
 
@@ -199,18 +195,20 @@
                     FX.canvasH = parseInt($canvas.height(), 10);
 
                     // Transform keyframes obj to usable CSS animation(s)
-                    // All properties are exported in STATIC CSS class, inside <head>
                     if (options.keyframes) {
                         // Execute functions if we've got some dyn properties in keyframes steps styles
                         $.each(options.keyframes, function(k, val) {
                             $.each(val.steps, function(k2, val2) {
-                                if (typeof val2 == 'function') // Execute fct
-                                    options.keyframes[k].steps[k2] = options.keyframes[k].steps[k2](S.index);
+                                $.each(val2, function(k3, val3) {
+                                    if (typeof val3 == 'function') // Execute fct
+                                        options.keyframes[k].steps[k2][k3] = options.keyframes[k].steps[k2][k3](/* S.index */); // No index for keyframes
+                                });
                             });
                         });
                         // Overwrite some minimal default settings
                         options.keyframes = $.extend(true, {}, options.defaultKeyframes, options.keyframes);
                         // Get css "obj" with 'animation' et 'animationFillMode'
+                        // All properties are inserted in STATIC CSS class, inside <head>
                         options.animationsClss = $.buildKeyframeClass(options.keyframes);
                     }
                     
@@ -229,7 +227,6 @@
 							options.styles.position = 'absolute';
                     }
 					
-                    
                     // CSS Transition ?
                     if (options.effect && !options.transition)
                         options.transition = {};
@@ -304,6 +301,7 @@
                     
                     if (_db_) db('configSetupFix() - end', options);
                 },
+                ///////////////////////////////////////////////////////////////////////////////
                 // Generate default starting CSS obj
                 getCssStart: function() { 
                     // if (_db_) db('getCssStart()');
@@ -347,6 +345,7 @@
                         height      : css.height // ...
                     });
                 },
+                ///////////////////////////////////////////////////////////////////////////////
                 getCssEnd: function(cssStart) {
                     // if (_db_) db('getCssEnd()');
                     if (!options.transition || !options.transition.stylesTo) // Seed minimal ending CSS object ?
@@ -378,6 +377,7 @@
                         height       : css.height
                    });
                 },
+                ///////////////////////////////////////////////////////////////////////////////
                 // Apply CSS on the element
                 applyCssStart: function(name_, index_, cssStart_) {
                     // if (_db_) db('applyCssStart()');
@@ -395,6 +395,7 @@
                     if (options.animationsClss) // && !window[name_][index_].hasClass(options.animationsClss))
                         window[name_][index_].crossCss(options.animationsClss); // APPLY generated CSS keyframe anim ?
                 },
+                ///////////////////////////////////////////////////////////////////////////////
                 // Apply ending CSS (Apply transition at this moment)
                 applyCssEnd: function(name_, index_, cssEnd_) {
                     // if (_db_) db('applyCssEnd()');
@@ -429,6 +430,8 @@
 
             ///////////////////////////////////////////////////////////////////////////////
             // Create new element (private main method)
+            ///////////////////////////////////////////////////////////////////////////////
+            
             var addSeed = function() {
                 if (!FX.render) return;
 
@@ -505,7 +508,8 @@
                         });
                     }
                     
-                    // SPRITE EFFECTS (CSS OVERWRITE) ////////////////////////////////////////////////////
+                    ///////////////////////////////////////////////////////////////////////////////
+                    // SPRITE EFFECTS (CSS OVERWRITE)
                     // Animate seeds in the pseudo canvas, with the help of CSS transition
                     // Seeds are created within boxFx center radius and 'options.effect' CAN dispatch them - override default CSS
 

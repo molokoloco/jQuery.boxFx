@@ -90,15 +90,13 @@
 </head>
 <body>
 
+    <div class="pageHeader">
+       <h2>Motion effects JS plugin powered with CSS3 animations and transitions</h2>
+       <h2><a href="https://github.com/molokoloco/jquery.boxFx" target="_blank" title="Fork me on GitHub">jQuery.boxFx.js</a> (Beta V0.92) is like a "DOM particles emitter factory"</h2>
+       <p><em>Clash the DOM with the most optimized jQuery animations framework on earth</em> ^^<p>
+    </div>
+    
     <div class="page">
-        <p>
-           <strong>Motion effects JS plugin powered with CSS3 animations and transitions</strong><br />
-           <strong><a href="https://github.com/molokoloco/jquery.boxFx" target="_blank" title="Fork me on GitHub">jQuery.boxFx.js</a> (Beta V0.92) is like a "DOM particles emitter factory"</strong><br />
-           <br />
-           <em>Clash the DOM with the most optimized jQuery animations framework on earth</em> ^^
-        </p>
-        
-        <div class="spacer"></div>
         <div id="presets" title="Some examples you can play with :)">
             <!--// Here come the demo effects presets (cf. bottom of this page) //-->
         </div>
@@ -115,7 +113,7 @@
         </p>
         
         <div class="spacer"></div>
-        <p>Live edit funny boxFx plugin properties !<p>
+        <h2>Live edit funny boxFx plugin properties !</h2>
         
         <div class="spacer"></div> 
         <div id="edit">
@@ -138,24 +136,25 @@
         </p>
     </div>
     
-    <div class="spacer"></div>
-    
+    <div class="pageHeader">
+       <h2>./README.txt</h2>
+    </div>
     <pre id="readMe" class="page">
     	<!--// inlusion of ./README.txt //-->
     </pre>
 
-    <div class="spacer"></div>
-    
+    <div class="pageHeader">
+       <h2>DISQUS</h2>
+    </div>
     <div id="disqus_thread" class="page">
          <script type="text/javascript">
-            var disqus_shortname = 'jqueryboxfx';
+            /* var disqus_shortname = 'jqueryboxfx';
             (function() {
                 var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
                 dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
                 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
+            })(); */
         </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
         <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
     
@@ -186,9 +185,9 @@ $(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Some "options presets" for the demo
-    var optionsVarious     = window.optionsVarious || {},   // optionsVarious object contain a list of various options
-        optionsEffects     = window.optionsEffects || {},
-        boxFxFullOptions   = window.boxFxFullOptions || {}; // boxFxFullOptions contain only one (big) config
+    var optionsVarious     = window.optionsVarious   || {}, // optionsVarious object contain a list of various options
+        optionsEffects     = window.optionsEffects   || {}, // Some effects with transitions
+        boxFxFullOptions   = window.boxFxFullOptions || {}; // boxFxFullOptions contain only one (full) options config
     
     if (!optionsVarious.simpleTransition)
         return alert('For the demo you must include presets files');

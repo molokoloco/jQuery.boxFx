@@ -200,7 +200,9 @@ $(function() { // Wait jQuery to be ready
             padding:5px;\
             background:orange;\
             overflow:hidden;\
-            font:11px trebuchet,verdana;\
+            font-size:13px;\
+            line-height:13px;\
+            text-shadow:none;\
             color:darkblue;\
         }\
         div.twit img {\
@@ -218,23 +220,23 @@ $(function() { // Wait jQuery to be ready
         
         effect            : 'center',
         newAtTop          : 'random',
-        delay             : 1000,
+        delay             : 1600,
         maxSeeds          : 10,
         emitterRadius     : 0,
         emitterCenterLeft : '50%',
         emitterCenterTop  : '125%',
         
         styles            : {
-            width             : 320, 
+            width             : 340, 
             height            : 50, 
             opacity           : 0, 
             borderRadius      : '5px', 
-            transform         :  function(index) { return 'rotate('+(20 - (Math.random()*40))+'deg)'; }
+            transform         :  function(index) { return 'rotate('+(10 - (Math.random()*20))+'deg)'; }
         },
 
         transition        : {
-            duration          : '6500ms',
-            timingFunction    : $.cubicBeziers.easeInOutQuad,
+            duration          : '8000ms',
+            timingFunction    : $.cubicBeziers.easeOutQuad,
             stylesTo          : {opacity:1, transform:'rotate(0deg) translate(0,-480px)'}
         }
     };
