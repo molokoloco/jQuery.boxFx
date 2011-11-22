@@ -5,15 +5,14 @@ body {
     color:rgb(34, 117, 185);
     text-shadow:0 1px 0 rgba(255,255,255,1);
     text-align:center;
-background: rgb(147,206,222);
-background: -moz-linear-gradient(left,  rgb(147,206,222) 0%, rgb(117,189,209) 41%, rgb(73,165,191) 100%);
-background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgb(147,206,222)), color-stop(41%,rgb(117,189,209)), color-stop(100%,rgb(73,165,191)));
-background: -webkit-linear-gradient(left,  rgb(147,206,222) 0%,rgb(117,189,209) 41%,rgb(73,165,191) 100%);
-background: -o-linear-gradient(left,  rgb(147,206,222) 0%,rgb(117,189,209) 41%,rgb(73,165,191) 100%);
-background: -ms-linear-gradient(left,  rgb(147,206,222) 0%,rgb(117,189,209) 41%,rgb(73,165,191) 100%);
-background: linear-gradient(left,  rgb(147,206,222) 0%,rgb(117,189,209) 41%,rgb(73,165,191) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf',GradientType=1 );
-
+    background: rgb(147,206,222);
+    background: -moz-linear-gradient(left,  rgb(147,206,222) 0%, rgb(117,189,209) 41%, rgb(73,165,191) 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgb(147,206,222)), color-stop(41%,rgb(117,189,209)), color-stop(100%,rgb(73,165,191)));
+    background: -webkit-linear-gradient(left,  rgb(147,206,222) 0%,rgb(117,189,209) 41%,rgb(73,165,191) 100%);
+    background: -o-linear-gradient(left,  rgb(147,206,222) 0%,rgb(117,189,209) 41%,rgb(73,165,191) 100%);
+    background: -ms-linear-gradient(left,  rgb(147,206,222) 0%,rgb(117,189,209) 41%,rgb(73,165,191) 100%);
+    background: linear-gradient(left,  rgb(147,206,222) 0%,rgb(117,189,209) 41%,rgb(73,165,191) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf',GradientType=1 );
 }
 
 a {
@@ -36,32 +35,85 @@ a {
             background:rgba(255,255,255,0.5);
         }
 
-a.ribbon {
-    position:fixed;
-    top:0; right:0;
+    a.ribbon {
+        position:fixed;
+        top:0; right:0;
+    }
+
+h1, h2, h3, h4, h5 {
+    line-height:125%;
 }
 
-h2 {
-    font-size:16px;
-}
+    h1 {
+        font-size:20px;
+    }
+    h2 {
+        font-size:16px;
+    }
+    h3 {
+        font-size:14px;
+    }
+    h4 {
+        font-size:12px;
+    }
+    h5 {
+        font-size:10px;
+    }
 
 p {
     margin:5px 0;
     text-align:left;
+    line-height:125%;
 }
 
     p.tips, p.tips a {}
+
+pre {
+    margin: 20px 0;
+    padding:20px;
+    background: rgba(255,255,255,0.5);
+    border-radius:5px;
+}
+pre, code {
+    font:11px/100% "Droid Sans Mono", Consola, "Courier New", Courier, monospace;
+    color:rgb(34, 117, 185);
+    white-space: pre-wrap;
+    text-shadow:none;
+}
+
+li {
+    margin-left: 40px;
+}
+
+hr {
+    background:rgba(255,255,255,0.5);
+    height:2px;
+    border:none;
+    margin:10px 0;
+}
 
 .pageHeader {
     display:block;
     margin:30px auto 0 auto;
     width:600px;
     text-align:left;
-    background:rgba(255, 255, 255, 0.8);
     padding:30px 30px 10px 30px;
     border-radius:6px 6px 0 0;
     border:1px solid white;
     border-bottom:none;
+    
+    background:rgba(255, 255, 255, 0.8);
+    
+    background: rgb(135,224,253);
+    background: -moz-linear-gradient(top,  rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.5) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.9)), color-stop(100%,rgba(255,255,255,0.5)));
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,0.9) 0%,rgba(255,255,255,0.5) 100%);
+    background: -o-linear-gradient(top,  rgba(255,255,255,0.9) 0%,rgba(255,255,255,0.5) 100%);
+    background: -ms-linear-gradient(top,  rgba(255,255,255,0.9) 0%,rgba(255,255,255,0.5) 100%);
+    background: linear-gradient(top,  rgba(255,255,255,0.9) 0%,rgba(255,255,255,0.5) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#ffffff',GradientType=0 );
+
+
 }
 
 .page {
@@ -84,15 +136,34 @@ p {
 
 /* ---- Display readme.txt ---- */
 
-pre#readMe {
-    font:11px/100% "Droid Sans Mono", Consola, "Courier New", Courier, monospace;
-    color:#000066;
-    white-space: pre-wrap;
+div#readMe {
     margin:0 auto;
-    width:640px;
-    padding:20px 10px 30px 10px;
+    width: 620px;
+    padding: 20px 20px 30px 20px;
 }
-
+    div#readMe, div#readMe p {
+        /* font:11px/100% "Droid Sans Mono", Consola, "Courier New", Courier, monospace; */
+        color:#000066;
+        line-height:150%;
+    }
+    
+    div#readMe p {
+        margin:10px 0;
+        text-shadow:none;
+    }
+    
+    div#readMe h1, div#readMe h2, div#readMe h3, div#readMe h4, div#readMe h5 {
+        line-height:200%;
+        margin-top:5px;
+    }
+    
+    div#readMe a {
+        color:rgb(34, 117, 185);
+    }
+    div#readMe a:hover {
+        color:#3A3A66;
+    }
+    
 /* ---- Editor (Only for the demo) ---- */
 textarea#options {
     font:11px/100% "Droid Sans Mono", Consola, "Courier New", Courier, monospace;

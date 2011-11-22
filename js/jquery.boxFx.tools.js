@@ -51,13 +51,13 @@
         return (prefix ? prefix : 'id_') + uniqueId++;
     };
     
-    /*
     $.requireJs = function(jsPath) { // getJs('http://other.com/other.js'); // Native external link
         var s = document.createElement('script');
         s.setAttribute('type', 'text/javascript');
         s.setAttribute('src', jsPath);
         document.getElementsByTagName('head')[0].appendChild(s);
     };
+    
     $.callJs = function(src, async, callback) { // callJs('./other.js', function() { ok(); }); // On-demand same domain JS
         $.ajax({
             url:src, async:async || 0, dataType:'script', cache:1,
@@ -65,7 +65,6 @@
             success:function() { if (callback && typeof callback == 'function') callback(); }
         });
     };
-    */
 
     // Beziers equation approximations from Matthew Lein's Ceaser: http://matthewlein.com/ceaser/
     // Remixed for this use : "transition:'all 3000ms '+$.cubicBeziers.easeInOutQuad;"

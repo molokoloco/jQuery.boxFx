@@ -59,7 +59,7 @@ $(function() { // Wait jQuery to be ready
     };
     
     optionsEffects.deepSun = {
-        effect            : 'artifice',
+        effect            : 'center',
         newAtTop          : false,
         delay             : 420,
         maxSeeds          : 16,
@@ -72,7 +72,8 @@ $(function() { // Wait jQuery to be ready
             maxSize          : null,
             backgroundImage  : '-'+$.browserPrefix+'-radial-gradient(50% 50%, circle cover,rgba(0,0,0,0) 0%, rgba(250,250,36,1) 100%)',
             borderRadius     : '50%',
-            boxShadow        : '0 0 30px rgba(250,250,36,0)'
+            boxShadow        : '0 0 30px rgba(250,250,36,0)',
+            opacity          : 0
         },
         transition       : {
             duration         : '4000ms',
@@ -81,7 +82,7 @@ $(function() { // Wait jQuery to be ready
                 width          : 0,
                 borderRadius   : '50%',
                 boxShadow      : '0 0 30px rgba(250,250,36,1)',
-                opacity        : 0
+                opacity        : 1
             }
         }
     };

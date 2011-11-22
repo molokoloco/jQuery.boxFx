@@ -91,8 +91,8 @@
 <body>
 
     <div class="pageHeader">
-       <h2>Motion effects JS plugin powered with CSS3 animations and transitions</h2>
-       <h2><a href="https://github.com/molokoloco/jquery.boxFx" target="_blank" title="Fork me on GitHub">jQuery.boxFx.js</a> (Beta V0.92) is like a "DOM particles emitter factory"</h2>
+       <h2>Motion effects JS plugin, powered with CSS3 animations and transitions</h2>
+       <h2><a href="https://github.com/molokoloco/jquery.boxFx" target="_blank" title="Fork me on GitHub">jQuery.boxFx.js</a> is like a "DOM particles emitter factory"</h2>
        <p><em>Clash the DOM with the most optimized jQuery animations framework on earth</em> ^^<p>
     </div>
     
@@ -121,49 +121,58 @@
         </div>
         
         <div class="spacer"></div>
-        <p class="tips">
-            <strong>Tips :</strong> Add your properties, set unwanted existing ones to "null" (live editor constrain)<br />
-            <em>gradient</em>, <em>boxShadow</em>, <em>opacity</em>, <em>borderRadius</em>... are CPU consumming<br />
-            Some properties like functions doesn't appear in the JSON export you see above (Print only string value)<br />
-            <br />
-            Read the fucking <a href="./README.txt" id="pause">./README.txt</a> for (much) more infos ~=[,,_,,]:3<br />
-            <br />
-            There so much possibilities... help me if you found bug<br />
-            Fork it and get updated on GitHub : <a href="https://github.com/molokoloco/jquery.boxfx" target="_blank">https://github.com/molokoloco/jquery.boxfx</a><br />
-            Edit it in your <a href="http://cloud9ide.com" target="_blank">http://cloud9ide.com</a> editor and send me feedback ;)<br />
-            <br />
-            → Sugestions or effects to share ? Contact me : <a href="mailto:molokoloco@gmail.com">molokoloco@gmail.com</a>
-        </p>
+        <h2>Tips</h2>
+        
+        <div class="spacer"></div>
+        <p>Add your properties, set unwanted existing ones to "null" (live editor constrain)<br />
+        <em>gradient</em>, <em>boxShadow</em>, <em>opacity</em>, <em>borderRadius</em>... are CPU consumming<br />
+        Some properties like functions doesn't appear in the JSON export you see above (Print only string value)<br />
+        <br />
+        Read the fucking <a href="./README.txt" id="pause">./README.txt</a> for (much) more infos ~=[,,_,,]:3<br />
+        <br />
+        There so much possibilities... help me if you found bug<br />
+        Fork it and get updated on GitHub : <a href="https://github.com/molokoloco/jquery.boxfx" target="_blank">https://github.com/molokoloco/jquery.boxfx</a><br />
+        Edit it in your <a href="http://cloud9ide.com" target="_blank">http://cloud9ide.com</a> editor and send me feedback ;)<br />
+        <br />
+        → Sugestions or effects to share ? Contact me : <a href="mailto:molokoloco@gmail.com">molokoloco@gmail.com</a></p>
+        
+        <!-- Social APIs -->
+        <div class="spacer"></div>
+        <div id="sharing" class="fade">
+            <g:plusone size="medium" count="true"></g:plusone> <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="molokoloco">Tweet</a><br />
+    		<iframe id="facebook" src="javascript:void(0)" scrolling="no" frameborder="0" width="100%" height="20" allowtransparency="true"></iframe>
+    	</div>
     </div>
     
     <div class="pageHeader">
        <h2>./README.txt</h2>
     </div>
-    <pre id="readMe" class="page">
-    	<!--// inlusion of ./README.txt //-->
-    </pre>
+    <div id="readMe" class="page">
+    	<!--// inlusion of ./README.md //-->
+    </div>
 
     <div class="pageHeader">
        <h2>DISQUS</h2>
     </div>
     <div id="disqus_thread" class="page">
-         <script type="text/javascript">
-            /* var disqus_shortname = 'jqueryboxfx';
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })(); */
+        <script type="text/javascript">
+            // DISQUS comments system, must by global
+            var disqus_url    		= 'http://www.b2bweb.fr/framework/jquery.boxfx/', // This page URL
+            disqus_identifier		= 'jqueryboxfx', // I give this name...
+            disqus_domain			= 'disqus.com', // Don't touch
+            disqus_shortname		= 'jqueryboxfx', // Get it by creating a new forum under Discuss dashboard
+            disqus_title			= 'jquery.boxFx.js'; // Page title (Will be displayed in comments)
         </script>
         <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
     
     <div class="spacer"></div>
     
+    <!-- GitHub ribbon -->
     <a href="https://github.com/molokoloco/jquery.boxFx" target="_blank" title="Fork me on GitHub" class="ribbon">
         <img src="http://www.b2bweb.fr/bonus/jx/images/github-ribbon.png" alt="GitHub" width="100" height="100">
     </a>
-    
+
     <!-- Our friend jQuery -->
     <script src="./js/jquery-1.7.min.js"></script>
     
@@ -176,12 +185,16 @@
     <script src="./js/jquery.boxFx.presets-full-options.js" type="text/javascript"></script>
     <script src="./js/jquery.boxFx.presets-various.js" type="text/javascript"></script>
     
+    <!-- For the demo, displaying MarkDown README.md -->
+    <script type="text/javascript" src="./js/Markdown.Converter.js"></script>
+    <script type="text/javascript" src="./js/Markdown.Sanitizer.js"></script>
+    
     <script type="text/javascript">
 
 $(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
-
+    
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // jQuery boxFx demo presets configs
+    // jQuery boxFx demo presets
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Some "options presets" for the demo
@@ -226,9 +239,12 @@ $(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	$.ajax({
-        url: './README.txt',
-        success: function(text){        
-            $('pre#readMe').text(text); 
+        url: './README.md',
+        success: function(markdown){
+            // FROM : http://code.google.com/p/pagedown/
+            var converter1 = Markdown.getSanitizingConverter();
+            markdown = converter1.makeHtml(markdown);
+            $('div#readMe').html(markdown);
         }
     });
     
@@ -345,21 +361,42 @@ $(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
 	
     // optionsVarious
     for(var k in optionsVarious)
-        btnHtml.push('<a id="btn_'+k+'" href="javascript:void(0);" class="button">'+k+'</a>'); // 'a.button'
-    $presets.append('<p class="tips"><strong>Various options presets :</strong> '+btnHtml.join(', ')+'</p>');
+        btnHtml.push('<a id="btn_'+k+'" href="javascript:void(0);" class="button">'+k+'</a>');
+    $presets.append('<p><strong>Various options presets :</strong> '+btnHtml.join(', ')+'</p>');
     
 	// optionsEffects
     btnHtml = [];
     for(var k in optionsEffects)
-        btnHtml.push('<a id="btn_'+k+'" href="javascript:void(0);" class="button">'+k+'</a>'); // 'a.button'
-    $presets.append('<p class="tips"><strong>Effects with transitions :</strong> '+btnHtml.join(', ')+'</p>');
+        btnHtml.push('<a id="btn_'+k+'" href="javascript:void(0);" class="button">'+k+'</a>');
+    $presets.append('<p><strong>Effects with transitions :</strong> '+btnHtml.join(', ')+'</p>');
+    
+    // options3Danimations
+    btnHtml = [];
+    /*for(var k in optionsEffects)
+        btnHtml.push('<a id="btn_'+k+'" href="javascript:void(0);" class="button">'+k+'</a>'); */
+    $presets.append('<p><strong>3D animations :</strong> TODO '+btnHtml.join(', ')+'</p>');
     
 	// boxFxFullOptions
-    $presets.append('<p class="tips"><strong>Full plugin options :</strong> <a id="btn_boxFxFullOptions" href="javascript:void(0);" class="button">boxFxFullOptions</a></p>');
+    $presets.append('<p><strong>Full plugin options :</strong> <a id="btn_boxFxFullOptions" href="javascript:void(0);" class="button">boxFxFullOptions</a></p>');
 
     $presets.delegate('a.button', 'click', buttonsClickSetOptions);
     
     if (hash) $('a#btn_'+hash).addClass('selected');
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Social API
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    $(window).bind('load', function() { // Load plugins...
+    	$.callJs('http://'+disqus_shortname+'.disqus.com/embed.js', 1); // get mini forum
+		// "Social" APIs
+		$.callJs('https://apis.google.com/js/plusone.js', 1);
+		$.callJs('http://platform.twitter.com/widgets.js', 1);
+		$('iframe#facebook')
+			.load(function() { callJs('http://connect.facebook.net/en_US/all.js#appId=235087756512662&amp;xfbml=1', 1); })
+			.attr('src', 'http://www.facebook.com/plugins/like.php?app_id=235087756512662&amp;href&amp;send=false'+
+						'&amp;layout=button_count&amp;width=120&amp;height=20&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font');
+	});
     
 });
 </script>
