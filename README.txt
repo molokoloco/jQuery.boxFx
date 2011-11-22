@@ -58,11 +58,9 @@
         Implementation as shown here : http://jsfiddle.net/molokoloco/rf8zt/
     
         We can feed the seeds with some data provider. Example with websocket : to come ;)
-        For the moment, data are some content stored in a JSON object OR a dynamic JSONP function ^^
-        Dynamic provider can be a little tricky see current implementation here : 
-        http://jsfiddle.net/molokoloco/Ebc27/
-        This content is injected in a (simple) template you can set in seeds innerHTML :
-        http://jsfiddle.net/molokoloco/w8xSx/
+        For the moment, data are some content stored in a JSON object OR a dynamic $deferred function ^^ 
+        Dynamic provider can be a little tricky see current implementation here : http://jsfiddle.net/molokoloco/Ebc27/
+        This content is injected in a (simple) template you can set in seeds innerHTML (See below)
         
         And finaly, have to say : "Time Is What Prevents Everything From Happening At Once.." - John Wheeler (1911-2008)
         ...So take your time :)
@@ -189,14 +187,14 @@
             }
     
         We can "feed" the seed with the data provider we want.
-        Data are some content stored in a JSON object or a dynamic function.
-        This content is injected in a (simple) template you can set in seeds innerHTML :
-        Example : http://jsfiddle.net/molokoloco/w8xSx/
-    
+        Data are some content stored in a JSON object or a dynamic $.deferred function.
+        This content is injected in a (dead simple) template you can set in seeds innerHTML
+        Template example : http://jsfiddle.net/molokoloco/w8xSx/
+        
             options : {
-                seeds : '<div class="test">N°{id} - {title}</div>', // Template declaration inside seed fragment tag
+                seeds : '<div class="test">N°{id} - {title}</div>', // Template is inside seed fragment tag
                 data  : [
-                    {id:1, title:'toto'}, {id:2, title:'tutu'}, {id:3, title:'toto'}, {id:4, title:'tutu'}, // Some data...
+                    {id:1, title:'toto'}, {id:2, title:'tutu'}, {id:3, title:'toto'}, {id:4, title:'tutu'},
                     {id:5, title:'toto'}, {id:6, title:'tutu'}, {id:7, title:'toto'}, {id:8, title:'xoxo'}
                 ],
             }
