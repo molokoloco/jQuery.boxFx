@@ -21,7 +21,7 @@
         The idea behind boxFx was to give ten lines facilities for developper and designer 
         to animate HTML elements with polished CSS3. Dead simple and hard at the same time !
 
-        Basically, you can use the plugin in a lot of way :
+        Basically, you can use the plugin in a lot of ways :
 
             - Create elements or use existing collections
             - Manage simple transitions or keyframes or effects or all in the same time 
@@ -59,8 +59,10 @@
     
         We can feed the seeds with some data provider. Example with websocket : to come ;)
         For the moment, data are some content stored in a JSON object OR a dynamic JSONP function ^^
-        Dynamic provider can be a little tricky see current implementation here : http://jsfiddle.net/molokoloco/Ebc27/
-        This content is injected in a (simple) template you can set in seeds innerHTML : http://jsfiddle.net/molokoloco/w8xSx/
+        Dynamic provider can be a little tricky see current implementation here : 
+        http://jsfiddle.net/molokoloco/Ebc27/
+        This content is injected in a (simple) template you can set in seeds innerHTML :
+        http://jsfiddle.net/molokoloco/w8xSx/
         
         And finaly, have to say : "Time Is What Prevents Everything From Happening At Once.." - John Wheeler (1911-2008)
         ...So take your time :)
@@ -123,7 +125,7 @@
         We cannot support to old browsers. That not the purpose here. 
         -No animations for them, but they can not take the blame on the code- ;)
         
-        Next modernizr.js to come will certainly emulate a better cross-browser CSS3 full interface
+        The next modernizr.js will certainly emulate a better cross-browser CSS3 full interface
 
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -148,16 +150,19 @@
     //////////////////////////////////////////////////////////////////////////////////////
     
         JavaScripted properties have the advantage to be more customisable than plain CSS. 
-        For that, plugin add a lot of sugar on settings.
+        For that, plugin add a lot of sugar on settings :
+
             - Every properties is correctly "CSS3-browsers-prefixed"
-            - They can be setted as plain string or as a function that take an index as argument
+            - They can be setted as plain string or as a function that take an 'index' as argument
             - CSS sizes units can be set as : 10, '10px' or '50%' (plugin internally work with "px")
     
-        options.styles : {
-            width        : '25%', // Will be internally converted in "px"
-            borderRadius : 10,    // CSS3 : Camel case ("camelCase") declaration, 10 will be converted to '"10px"
-            transform    :  function(index) { return 'rotate('+(10 * index)+'deg)'; } // Each element increment with an index
-        },
+        Example :
+
+            options.styles : {
+                width        : '25%', // Will be internally converted in "px"
+                borderRadius : 10,    // CSS3 : Camel case ("camelCase") declaration, 10 will be converted to '"10px"
+                transform    :  function(index) { return 'rotate('+(10 * index)+'deg)'; } // Each element increment with an index
+            },
     
         Plugin fix and apply styles on element with correct browsers prefix, based on Modernizer.js :
         https://github.com/Modernizr/Modernizr/blob/master/modernizr.js
@@ -169,32 +174,32 @@
         Plugin only handle CSS3 "properties" not the "values".
         For example, in some particular case, where the CSS property value also take a browser prefix, you should use :
     
-        options.styles : {
-            backgroundImage : '-'+$.browserPrefix+'-radial-gradient(33% 33%, circle cover,rgba(230,230,0,1) 25%,rgba(50,50,0,1) 80%)'
-        },
+            options.styles : {
+                backgroundImage : '-'+$.browserPrefix+'-radial-gradient(33% 33%, circle cover,rgba(230,230,0,1) 25%,rgba(50,50,0,1) 80%)'
+            },
     
         Within all the animations/transitions you can use "ms" (Milliseconds) or "s" (Seconds) units.
         Some tools for "timingFunction" are also provided. After the famous "linear" and "ease-in" you can now use more advanced modes.
         Cf. "easeInOutQuad", "snap", "easeInSine", etc... : look at "./jquery.boxFx.tools.js" for easing listing.
     
-        options.transition : {
-            duration         : '6500ms',
-            timingFunction   : $.cubicBeziers.easeInOutQuad,
-            stylesTo         : {opacity:1, transform:'translate(0,-480px)'}
-        }
+            options.transition : {
+                duration         : '6500ms',
+                timingFunction   : $.cubicBeziers.easeInOutQuad,
+                stylesTo         : {opacity:1, transform:'translate(0,-480px)'}
+            }
     
         We can "feed" the seed with the data provider we want.
         Data are some content stored in a JSON object or a dynamic function.
-        This content is injected in a (simple) template you can set in seeds innerHTML : http://jsfiddle.net/molokoloco/w8xSx/
-        Example :
+        This content is injected in a (simple) template you can set in seeds innerHTML :
+        Example : http://jsfiddle.net/molokoloco/w8xSx/
     
-        options : {
-            seeds : '<div class="test">N°{id} - {title}</div>', // Template declaration inside seed fragment tag
-            data  : [
-                {id:1, title:'toto'}, {id:2, title:'tutu'}, {id:3, title:'toto'}, {id:4, title:'tutu'}, // Some data...
-                {id:5, title:'toto'}, {id:6, title:'tutu'}, {id:7, title:'toto'}, {id:8, title:'xoxo'}
-            ],
-        }
+            options : {
+                seeds : '<div class="test">N°{id} - {title}</div>', // Template declaration inside seed fragment tag
+                data  : [
+                    {id:1, title:'toto'}, {id:2, title:'tutu'}, {id:3, title:'toto'}, {id:4, title:'tutu'}, // Some data...
+                    {id:5, title:'toto'}, {id:6, title:'tutu'}, {id:7, title:'toto'}, {id:8, title:'xoxo'}
+                ],
+            }
     
         Maybe you also want to give a external JSONP webservice as provider for your animated content.
         You can then give a function as data provider, see the concept here : http://jsfiddle.net/molokoloco/Ebc27/
