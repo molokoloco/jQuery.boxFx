@@ -58,7 +58,7 @@ $(function() { // Wait jQuery to be ready
         }
     };
     
-    optionsEffects.deepSun = {
+    optionsEffects.deepSuns = {
         effect            : 'center',
         newAtTop          : false,
         delay             : 420,
@@ -114,7 +114,7 @@ $(function() { // Wait jQuery to be ready
         }
     };
     
-    optionsEffects.rainbowArrow = {
+    optionsEffects.rainbowArrows = {
         effect            : 'artifice',
         newAtTop          : 'random',
         delay             : 500,
@@ -230,7 +230,7 @@ $(function() { // Wait jQuery to be ready
         }
     };
     
-    optionsEffects.lolCat = {
+    optionsEffects.lolCatz = {
         seeds             : '<img src="http://www.b2bweb.fr/bonus/nian-cat.png" width="772" heigh="93"/>',
         effect            : 'nebula',
         newAtTop          : true,
@@ -288,7 +288,7 @@ $(function() { // Wait jQuery to be ready
         }
     };
     
-    optionsEffects.starParty = {
+    optionsEffects.starsParty = {
         seeds             : '<div>★</div>',
         effect            : 'artifice',
         newAtTop          : 'random',

@@ -166,11 +166,11 @@
     <div id="disqus_thread" class="page">
         <script type="text/javascript">
             // DISQUS comments system, must by global
-            var disqus_url       = 'http://www.b2bweb.fr/framework/jquery.boxfx/', // This page URL
-            disqus_identifier    = 'jqueryboxfx', // I give this name...
-            disqus_domain        = 'disqus.com', // Don't touch
-            disqus_shortname     = 'jqueryboxfx', // Get it by creating a new forum under Discuss dashboard
-            disqus_title         = 'jquery.boxFx.js'; // Page title (Will be displayed in comments)
+            var disqus_url    = 'http://www.b2bweb.fr/framework/jquery.boxfx/', // This page URL
+            disqus_identifier = 'jqueryboxfx', // I give this name...
+            disqus_domain     = 'disqus.com', // Don't touch
+            disqus_shortname  = 'jqueryboxfx', // Get it by creating a new forum under Discuss dashboard
+            disqus_title      = 'jquery.boxFx.js'; // Page title (Will be displayed in comments)
         </script>
         <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
@@ -204,7 +204,7 @@
 $(document).ready(function() { // JS and PAGE DOM READY, custom code example
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // jQuery boxFx demo presets
+    // jQuery boxFx (demo) presets
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Some "options presets" for the demo
@@ -227,6 +227,7 @@ $(document).ready(function() { // JS and PAGE DOM READY, custom code example
         else if (hash in optionsEffects)     effect = optionsEffects[hash];
         else if (hash == 'boxFxFullOptions') effect = boxFxFullOptions;
     }
+    else hash = 'simpleTransition'; // Default hightlighted links
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // APPLY effect !
@@ -368,7 +369,7 @@ $(document).ready(function() { // JS and PAGE DOM READY, custom code example
     btnHtml = [];
     /*for(var k in optionsEffects)
         btnHtml.push('<a id="btn_'+k+'" href="javascript:void(0);" class="button">'+k+'</a>'); */
-    $presets.append('<p><strong>3D animations :</strong> TODO '+btnHtml.join(', ')+'</p>');
+    $presets.append('<p><strong>3D animations :</strong> Examples TODO '+btnHtml.join(', ')+'</p>');
     
     // boxFxFullOptions
     $presets.append('<p><strong>Full plugin options :</strong> <a id="btn_boxFxFullOptions" href="javascript:void(0);" class="button">boxFxFullOptions</a></p>');

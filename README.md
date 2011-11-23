@@ -7,12 +7,10 @@ GPL/MIT/Copyleft - Beta V0.92 - [@molokoloco](https://twitter.com/#!/molokoloco/
 
 ---
 
-- Infos         : <http://goo.gl/P18db>
-- Plain demo    : <http://www.b2bweb.fr/framework/jquery.boxfx/>
-- Live example  : <http://jsfiddle.net/molokoloco/sBqWq/>
-- Cloud9Ide     : <http://cloud9ide.com/molokoloco/jquery_boxfx/>
-- Sources       : <https://github.com/molokoloco/jQuery.boxFx/>
-- Download      : <https://github.com/molokoloco/jQuery.boxFx/downloads/>
+- Infos (on my blog)  : <http://goo.gl/P18db>
+- Plain demo          : <http://www.b2bweb.fr/framework/jquery.boxfx/>
+- Fiddle live example : <http://jsfiddle.net/molokoloco/sBqWq/>
+- Sources & download  : <https://github.com/molokoloco/jQuery.boxFx/>
 
 ---
 
@@ -37,7 +35,7 @@ to animate HTML elements with polished CSS3. Dead simple and hard at the same ti
 PARADIGMS
 ================
 
-With JavaScript, we dynamically animate HTML elements based on CSS3, like a proxy  
+With JavaScript, we dynamically **animate HTML elements based on CSS3**, like a proxy  
 We take avantage of the both world, GPU acceleration and interactivity
 
 We work on a set of HTML  &lt;elements&gt; ("Seeds") inside a "box".  
@@ -45,22 +43,23 @@ A "Box" and a "Seed" can be ether the &lt;body&gt;, a &lt;div&gt;, or whatever j
 
 The seeds are generated one after other in the "box".  
 A "*options.delay*" parameters tell the plugin the time to wait before (re)generate a new seed.  
-If "0" is used, plugin create as fast as possible a new one with "*requestAnimationFrame*" otherwise it use a "*setTimeout()*"...
+If "0" is used, plugin create as fast as possible a new one with "*requestAnimationFrame*"  
+otherwise it use a "*setTimeout()*"...
 
-The seeds are created with a starting styles OBJ and/or a starting class ("*options.styles*").  
-If "*options.transition*" is set, plugin also apply the "ending" styles ("*options.transition.stylesTo*")  
+**Transition** : seeds are created with a starting styles ("*options.styles*") and/or a starting  
+class ("*options.clss*"). If "*options.transition*" is set, plugin also apply the "ending" styles ("*options.transition.stylesTo*").  
 The "*options.transition.duration*" you've set determine the time to morph properties from one(s) to the other(s).
 
-Effect can also be used for applying individual settings to each seed, in opposite to values for the entire set.  
+**Effects** can also be used to apply individual settings to each seed, in opposite to values for the entire set.  
 For example, "*options.effect = 'nebula'*" will manage left positioning and margin for each seed.  
 Effect can overwrite defaults seeds styles values at start and end.
 
 If you need a lot of granularity and parameters for your animation, you can even use "*options.keyframes*".  
-Keyframes are a way of giving multiple sets of animations for one element.  
+**Keyframes** are a way of giving multiple sets of animations to elements.  
 For example you can set a first keyframe with infinite rotation and a second keyframe with a one time fadeIn opacity.  
 Implementation as shown here : <http://jsfiddle.net/molokoloco/rf8zt/>
 
-We can feed the seeds with some data provider. For the moment, data are some content stored in  
+We can feed the seeds with some **data provider**. For the moment, data are some content stored in  
 a JSON object OR a dynamic *$deferred* function ^^ Example with websocket, to come ;)  
 Asynchronous "*jsonp*" provider can be a little tricky, see current implementation here :  
 <http://jsfiddle.net/molokoloco/Ebc27/>  
@@ -72,8 +71,8 @@ And finaly, have to say : "*Time Is What Prevents Everything From Happening At O
 EXAMPLE(S) SETTINGS 
 ================
 
-See the BoxFx (full) options properties list here : "*./js/jquery.boxFx.presets-full-options.js*"
-All is *heavily* commented, check also "*./js/jquery.boxFx.presets-XXX.js*"
+See the BoxFx (full) options properties list here : "***./js/jquery.boxFx.presets-full-options.js***"  
+All is *heavily* commented, check also "*./js/jquery.boxFx.presets-XXX.js*"  
 Here a code example for your site :
 
     $emitter1 = $('div#emitterZone1').emitter({
@@ -116,7 +115,7 @@ The plugin is like a proxy for the CSS3 model, you can setup hundreds of propert
 I recommend to only use few of them each time. Some CSS3 properties are good  
 speed killer : gradient, boxShadow, opacity, borderRadius...
 
-CSS Animations keyframes and CSS Transitions styles properties can be in conflict.  
+CSS animations keyframes and CSS transition styles properties can be in conflict.  
 We cannot animate the same CSS property in "options.transition.stylesTo.XXX" and  
 in "*options.keyframes[0].steps.XXX*" (The same apply between two keyframes :  
 "*options.keyframes[0].steps.XXX*" and "*options.keyframes[1].steps.XXX*").  
@@ -180,8 +179,8 @@ For example, in some particular case, where the CSS property value also take a b
     },
 
 Within all the animations/transitions you can use "*ms*" (Milliseconds) or "*s*" (Seconds) units.  
-Some tools for "timingFunction" are also provided. After the famous "*linear*" and "*ease-in*" 
-you can now use more advanced modes : "*easeInOutQuad*", "*snap*", "*easeInSine*", etc...
+Some tools for "timingFunction" are also provided. After the famous "*linear*" and "*ease-in*"  
+you can now use more advanced modes : "*easeInOutQuad*", "*snap*", "*easeInSine*", etc...  
 Look at "*./js/jquery.boxFx.tools.js*" for easing listing.
 
     options.transition : {
@@ -222,10 +221,10 @@ For example :
         $sprite.html('Ok'); 
     });
 
-RESSOURCES AND DEPENDANCIES
+RESSOURCES AND DEPENDENCIES
 ================
 
-The project is build with jQuery 1.7 from <http://jquery.com/>, but i though 1.5 can work too  
+The project is build with **jQuery 1.7** from <http://jquery.com/>, but i though 1.5 can work too  
 We also use jQuery Color for some fancy rainbow <https://github.com/jquery/jquery-color>
 
     $("#block").css({
@@ -236,7 +235,7 @@ HTML5/CSS3 compatibility mode is managed with <https://github.com/Modernizr/Mode
 For the demo, MarkDown "*README.md*" it displayed as HTML with <http://code.google.com/p/pagedown/>
 
 Also, i would make a lot of kiss to <https://github.com> and <http://cloud9ide.com> :)  
-without forgeting <http://stackoverflow.com>. How can we have done without them !
+without forgeting <http://stackoverflow.com>. How can i have done before ?!
 
 Further READING about CSS3 and animations ? (You would ;)
 ================

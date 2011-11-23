@@ -1,13 +1,12 @@
-/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
 // jQuery.boxFx.js (Beta V0.92) is like a "DOM particles emitter" factory
 // "Clash the DOM with the most optimized jQuery animations framework on earth" ^^           
 // GPL/MIT/Copyleft @molokoloco 28/10/2011 - http://b2bweb.fr
 // Sources : https://github.com/molokoloco/jQuery.boxFx/
 // Download : https://github.com/molokoloco/jQuery.boxFx/downloads/
-//////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
 
-
-// Ok, i use this for debuging ^^
+// I use this for debuging ^^
 ;var db  = function() { 'console' in window && console.log.call(console, arguments); },
      die = function(mess) { throw(( mess ? mess : "Oh my god, moonWalker is down...")); };
 
@@ -16,18 +15,18 @@
 (function ($, window) {
     
     // JS Dependancy ?
-    if (typeof(Modernizr) != 'object')       alert('$.fn.boxFx require "./js/modernizr(.min).js"');    // Moderniz for Cross browser CSS-Prefix support
-    if (!$.toolsLoaded)                      alert('$.fn.boxFx require "./js/jquery.tools.js"');       // $tools... Finally moved to independant file
+    if (typeof(Modernizr) != 'object')       alert('$.fn.boxFx require "./js/modernizr(.min).js"'); // Moderniz for Cross browser CSS-Prefix support
+    if (!$.toolsLoaded)                      alert('$.fn.boxFx require "./js/jquery.tools.js"'); // $tools... Finally moved to independant file
 
     // Does the current browser support CSS Transitions ? We silently fall back ?
     if (!Modernizr.csstransitions)           db('Sad, your old browser don\'t support CSS transition ^^');
     //if (!(Modernizr.prefixed('transition'))) alert('$.fn.boxFx require a (modern) browser, sorry...'); // Don't you play ?
-    if (!Modernizr.csstransforms3d)          db('Sad, your old computer don\'t support CSS 3D... as mine ^^');
+    if (!Modernizr.csstransforms3d)          db('Sad, your old computer don\'t support CSS 3D (as mine... ^^)');
 
     ///////////////////////////////////////////////////////////////////////////////
     // PUBLIC : default plugin properties
     ///////////////////////////////////////////////////////////////////////////////
-    // See ./js/jquery.boxFx.presets.js for FULL options arguments list
+    // See "./js/jquery.boxFx.presets-full-options.js" for FULL options arguments list
     // Options above a setted to the minimal, they makes things works when no values are provided
     // Particules seeds are 'options.seeds' or 'options.targets'...
     
@@ -139,13 +138,19 @@
                     if (_db_) db('$.boxFx.trigger.newSeed()');
                     addSeed();               // Call factory
                 },
+                pause:function() {           // TODO !
+                    if (_db_) db('$.boxFx.trigger.pause()');
+                    // $.each(window[FX.id]) ...css({animationPlayState: 'paused'});
+                    // animation-play-state: running;
+                },
+                // Stop emitter
                 stop:function() {
                     if (_db_) db('$.boxFx.trigger.stop()');
                     FX.render = false;       // if requestAnimFrame
                     if (FX.timer) clearTimeout(FX.timer); // if setTimeout Kill factory
                     FX.timer = null;
                 },
-                // Stop & clear elements stack
+                // Stop & clear elements stack & options
                 reset:function() {
                     if (_db_) db('$.boxFx.trigger.reset()'); 
                     publicMethods.stop();
@@ -186,7 +191,7 @@
             var privateMethods = {
                 
                 ///////////////////////////////////////////////////////////////////////////////
-                // Some "logics" for DEFAULT SETUP and cleannup of the configurable values...
+                // Some "logics" for DEFAULT SETUP and CLEANNUP of the settings values...
                 // I know this part of the code i weird. But i don't know 1000 solutions to do "smarts settings"
                 configSetupFix: function() {
                     if (_db_) db('configSetupFix() start', options);
