@@ -1,8 +1,20 @@
-<!--// //////////////////////////////////////////////////////////////////////////////
-// Guess what ? that a Work In Progress ! Amazing W0oT ? by @molokoloco - 2011
-// All sources on GitHub : https://github.com/molokoloco/ Take it, smash it ;)
-/////////////////////////////////////////////////////////////////////////////// //-->
 <!DOCTYPE html>
+<!--//
+           _               _     _      _              _     _      _                      _        _
+          / /\            /\ \ /_/\    /\ \           /\ \ /_/\    /\ \                   /\ \     / /\
+         / /  \          /  \ \\ \ \   \ \_\         /  \ \\ \ \   \ \_\                  \ \ \   / /  \
+        / / /\ \        / /\ \ \\ \ \__/ / /        / /\ \ \\ \ \__/ / /                  /\ \_\ / / /\ \__
+       / / /\ \ \      / / /\ \ \\ \__ \/_/        / / /\ \_\\ \__ \/_/                  / /\/_// / /\ \___\
+      / / /\ \_\ \    / / /  \ \_\\/_/\__/\       / /_/_ \/_/ \/_/\__/\         _       / / /   \ \ \ \/___/
+     / / /\ \ \___\  / / /   / / / _/\/__\ \     / /____/\     _/\/__\ \       /\ \    / / /     \ \ \
+    / / /  \ \ \__/ / / /   / / / / _/_/\ \ \   / /\____\/    / _/_/\ \ \      \ \_\  / / /  _    \ \ \
+   / / /____\_\ \  / / /___/ / / / / /   \ \ \ / / /         / / /   \ \ \ _   / / /_/ / /  /_/\__/ / /
+  / / /__________\/ / /____\/ / / / /    /_/ // / /         / / /    /_/ //\_\/ / /__\/ /   \ \/___/ /
+  \/_____________/\/_________/  \/_/     \_\/ \/_/          \/_/     \_\/ \/_/\/_______/     \_____\/
+
+    Work in Progress - 2011 - Sources on GitHub : https://github.com/molokoloco/ - Take it, smash it ;)
+    
+//-->
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -28,7 +40,7 @@
         margin-left: 50px; /* centered in our page div */
     }
     
-    /* You can also choose to apply plain CSS to seeds, but in this case you must set browser-prefix */
+    /* You can also choose to apply plain CSS to seeds, but in this case you must set browsers-prefix */
     /*
         div.seed {
             border:1px solid rgba(0,0,0,0.3);
@@ -137,15 +149,15 @@
         <div class="spacer"></div>
         <div id="sharing" class="fade">
             <g:plusone size="medium" count="true"></g:plusone> <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="molokoloco">Tweet</a><br />
-    		<iframe id="facebook" src="javascript:void(0)" scrolling="no" frameborder="0" width="100%" height="20" allowtransparency="true"></iframe>
-    	</div>
+            <iframe id="facebook" src="javascript:void(0)" scrolling="no" frameborder="0" width="100%" height="20" allowtransparency="true"></iframe>
+        </div>
     </div>
     
     <div class="pageHeader">
        <h2>./README.txt</h2>
     </div>
     <div id="readMe" class="page">
-    	<!--// inlusion of ./README.md //-->
+        <!--// inlusion of ./README.md //-->
     </div>
 
     <div class="pageHeader">
@@ -154,11 +166,11 @@
     <div id="disqus_thread" class="page">
         <script type="text/javascript">
             // DISQUS comments system, must by global
-            var disqus_url    		= 'http://www.b2bweb.fr/framework/jquery.boxfx/', // This page URL
-            disqus_identifier		= 'jqueryboxfx', // I give this name...
-            disqus_domain			= 'disqus.com', // Don't touch
-            disqus_shortname		= 'jqueryboxfx', // Get it by creating a new forum under Discuss dashboard
-            disqus_title			= 'jquery.boxFx.js'; // Page title (Will be displayed in comments)
+            var disqus_url       = 'http://www.b2bweb.fr/framework/jquery.boxfx/', // This page URL
+            disqus_identifier    = 'jqueryboxfx', // I give this name...
+            disqus_domain        = 'disqus.com', // Don't touch
+            disqus_shortname     = 'jqueryboxfx', // Get it by creating a new forum under Discuss dashboard
+            disqus_title         = 'jquery.boxFx.js'; // Page title (Will be displayed in comments)
         </script>
         <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
@@ -172,6 +184,7 @@
 
     <!-- Our friend jQuery -->
     <script src="./js/jquery-1.7.min.js"></script>
+    <script src="./js/jquery.color.min.js"></script>
     
     <!-- BoxFx Plugin + tools dependancy : ".min.js" for minimified version -->
     <script src="./js/jquery.boxFx.tools.js" type="text/javascript"></script>
@@ -182,13 +195,13 @@
     <script src="./js/jquery.boxFx.presets-full-options.js" type="text/javascript"></script>
     <script src="./js/jquery.boxFx.presets-various.js" type="text/javascript"></script>
     
-    <!-- For the demo, displaying MarkDown README.md -->
+    <!-- For the demo, displaying MarkDown README.md with http://code.google.com/p/pagedown/ -->
     <script type="text/javascript" src="./js/Markdown.Converter.js"></script>
     <script type="text/javascript" src="./js/Markdown.Sanitizer.js"></script>
     
     <script type="text/javascript">
 
-$(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
+$(document).ready(function() { // JS and PAGE DOM READY, custom code example
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // jQuery boxFx demo presets
@@ -200,7 +213,7 @@ $(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
         boxFxFullOptions   = window.boxFxFullOptions || {}; // boxFxFullOptions contain only one (full) options config
     
     if (!optionsVarious.simpleTransition)
-        return alert('For the demo you must include presets files');
+        return alert('For the demo you must include presets files "./js/jquery.boxFx.presets-various.js"...');
 
     // Take a default simple effect
     var effect = optionsVarious.simpleTransition;
@@ -208,21 +221,18 @@ $(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
     // We have a reference to effect in current page anchor ?
     // cf. buttonsClickSetOptions() below
     var hash = window.location.hash || null;
-    if (hash) {
+    if (hash) { // Effect exist in our presets ?
         hash = hash.substr(1); // Strip #
-        if (hash in optionsVarious) // Effect exist in our presets ?
-            effect = optionsVarious[hash]; 
-        else if (hash in optionsEffects)
-            effect = optionsEffects[hash];
-        else if (hash == 'boxFxFullOptions')
-            effect = boxFxFullOptions;
+        if (hash in optionsVarious)          effect = optionsVarious[hash];
+        else if (hash in optionsEffects)     effect = optionsEffects[hash];
+        else if (hash == 'boxFxFullOptions') effect = boxFxFullOptions;
     }
     
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // APPLY effect !
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	var $boxFx1 = $('div#boxFxZone1').boxFx(effect);
+    
+    var $boxFx1 = $('div#boxFxZone1').boxFx(effect);
 
     // Links to control boxFx
     $('a#start,a#stop,a#reset').click(function() {
@@ -231,26 +241,12 @@ $(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
 
     // Et voilà :)
     
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Include ./README.txt for more infos !!!
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	$.ajax({
-        url: './README.md',
-        success: function(markdown){
-            // FROM : http://code.google.com/p/pagedown/
-            var converter1 = Markdown.getSanitizingConverter();
-            markdown = converter1.makeHtml(markdown);
-            $('div#readMe').html(markdown);
-        }
-    });
-    
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Catch new Seed emit event and display stats (only for the demo)
     // Inspired from https://github.com/mrdoob/stats.js
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	var now = Date.now(),
+    
+    var now = Date.now(),
         T = {frames:0, time:now, timeLastSecond:now, fps:0},
         $stats = $('<div id="sps" title="Seeds/Seconds"></div>').appendTo($boxFx1);
 
@@ -268,9 +264,9 @@ $(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Example : Move the boxFxCenter, when mouse is over
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-	var offset = $boxFx1.offset(),
+    var offset = $boxFx1.offset(),
         mouseIsMove = function(evt) {
             $boxFx1.trigger('update', [{ // Pass data through event callback
                 emitterCenterLeft : evt.pageX - offset.left,
@@ -296,8 +292,8 @@ $(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // EMITTER LIVE EDITOR (only for the demo)
     // JSON.parse - http://jsfiddle.net/molokoloco/rSMLU/
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     var getQ = function(o) { return (o && typeof o == 'string' ? '\'' : ''); }, // Get Quotes '
         obj2Json = function(_options) { // Convert "options" js Object to string
             var txt = '';
@@ -329,39 +325,40 @@ $(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
     $editor = $('<textarea id="options" spellcheck="false">'+obj2Json(effect)+'</textarea>')
         .bind('keyup', textareaUpdateBoxFx)
         .appendTo('div#edit');
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Create buttons for all our PRESETS
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	var buttonsClickSetOptions = function(event) {
-		event.preventDefault();
-		var effect  = this.id.substr(4), // 'btn_' + name
-			options = '';
-		if (effect in optionsVarious)
-			options = optionsVarious[effect];
-		else if (effect in optionsEffects)
-			options = optionsEffects[effect];
-		else if (effect == 'boxFxFullOptions')
-			options = boxFxFullOptions;
-		if (options) {
-			$('a.button.selected').removeClass('selected');
-			$(this).addClass('selected');
-			$editor.val(obj2Json(options));
-			$boxFx1.trigger('setOptions', [options]);
-			window.location.hash = effect; // Update browser, give link for the effect
-		}
-		return false;
-	};
-		
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    var buttonsClickSetOptions = function(event) {
+        event.preventDefault();
+        var effect  = this.id.substr(4), // 'btn_' + name
+            options = '';
+        if (effect in optionsVarious)
+            options = optionsVarious[effect];
+        else if (effect in optionsEffects)
+            options = optionsEffects[effect];
+        else if (effect == 'boxFxFullOptions')
+            options = boxFxFullOptions;
+        if (options) {
+            $('a.button.selected').removeClass('selected');
+            $(this).addClass('selected');
+            $editor.val(obj2Json(options));
+            $boxFx1.trigger('setOptions', [options]);
+            window.location.hash = effect; // Update browser, give link for the effect
+        }
+        return false;
+    };
+        
     var $presets = $('div#presets'),
         btnHtml = [];
-	
+    
     // optionsVarious
     for(var k in optionsVarious)
         btnHtml.push('<a id="btn_'+k+'" href="javascript:void(0);" class="button">'+k+'</a>');
     $presets.append('<p><strong>Various options presets :</strong> '+btnHtml.join(', ')+'</p>');
     
-	// optionsEffects
+    // optionsEffects
     btnHtml = [];
     for(var k in optionsEffects)
         btnHtml.push('<a id="btn_'+k+'" href="javascript:void(0);" class="button">'+k+'</a>');
@@ -373,28 +370,42 @@ $(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
         btnHtml.push('<a id="btn_'+k+'" href="javascript:void(0);" class="button">'+k+'</a>'); */
     $presets.append('<p><strong>3D animations :</strong> TODO '+btnHtml.join(', ')+'</p>');
     
-	// boxFxFullOptions
+    // boxFxFullOptions
     $presets.append('<p><strong>Full plugin options :</strong> <a id="btn_boxFxFullOptions" href="javascript:void(0);" class="button">boxFxFullOptions</a></p>');
 
     $presets.delegate('a.button', 'click', buttonsClickSetOptions);
     
-    if (hash) $('a#btn_'+hash).addClass('selected');
+    if (hash) $('a#btn_'+hash).addClass('selected'); // Auto-select current effect link ?
+         
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Include ./README.txt for more infos !!!
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    $.ajax({
+        url: './README.md',
+        success: function(markdown){
+            var converter1 = Markdown.getSanitizingConverter(); // http://code.google.com/p/pagedown/
+            markdown = converter1.makeHtml(markdown);
+            $('div#readMe').html(markdown);
+        }
+    });
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Social API
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    $(window).bind('load', function() { // Load plugins...
-    	$.callJs('http://'+disqus_shortname+'.disqus.com/embed.js', 1); // get mini forum
-		// "Social" APIs
-		$.callJs('https://apis.google.com/js/plusone.js', 1);
-		$.callJs('http://platform.twitter.com/widgets.js', 1);
-		$('iframe#facebook')
-			.load(function() { callJs('http://connect.facebook.net/en_US/all.js#appId=235087756512662&amp;xfbml=1', 1); })
-			.attr('src', 'http://www.facebook.com/plugins/like.php?app_id=235087756512662&amp;href&amp;send=false'+
-						'&amp;layout=button_count&amp;width=120&amp;height=20&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font');
-	});
     
+    if (/b2bweb\.fr/.test(document.location)) {
+        $(window).bind('load', function() { // Load social plugins when all is done...
+            $.callJs('http://'+disqus_shortname+'.disqus.com/embed.js', 1); // get mini forum
+            $.callJs('https://apis.google.com/js/plusone.js', 1);
+            $.callJs('http://platform.twitter.com/widgets.js', 1);
+            $('iframe#facebook')
+                .load(function() { callJs('http://connect.facebook.net/en_US/all.js#appId=235087756512662&amp;xfbml=1', 1); })
+                .attr('src', 'http://www.facebook.com/plugins/like.php?app_id=235087756512662&amp;href&amp;send=false'+
+                             '&amp;layout=button_count&amp;width=120&amp;height=20&amp;show_faces=false&amp;action=like&amp;colorscheme=light');
+        });
+    }
 });
 </script>
 </body>
+</html>

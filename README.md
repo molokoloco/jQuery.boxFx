@@ -1,17 +1,23 @@
-**jQuery.boxFx.js is like a "DOM particles emitter" factory**  
-"*Clash the DOM with the most optimized jQuery animations framework on earth*" ^^  
+jQuery.boxFx.js
+================
+
+**BoxFx JS is like a "DOM particles emitter" factory**  
+"*Clash the DOM with the most optimized jQuery animations framework on earth*" ^^   
 GPL/MIT/Copyleft - Beta V0.92 - [@molokoloco](https://twitter.com/#!/molokoloco/) 2011 - <http://b2bweb.fr>
 
 ---
 
-- Infos            : <http://goo.gl/P18db>
-- Plain demo       : <http://www.b2bweb.fr/framework/jquery.boxfx/>
-- Live example     : <http://jsfiddle.net/molokoloco/sBqWq/>
-- Cloud9Ide        : <http://cloud9ide.com/molokoloco/jquery_boxfx/>
-- Sources          : <https://github.com/molokoloco/jQuery.boxFx/>
-- Download         : <https://github.com/molokoloco/jQuery.boxFx/downloads/>
+- Infos         : <http://goo.gl/P18db>
+- Plain demo    : <http://www.b2bweb.fr/framework/jquery.boxfx/>
+- Live example  : <http://jsfiddle.net/molokoloco/sBqWq/>
+- Cloud9Ide     : <http://cloud9ide.com/molokoloco/jquery_boxfx/>
+- Sources       : <https://github.com/molokoloco/jQuery.boxFx/>
+- Download      : <https://github.com/molokoloco/jQuery.boxFx/downloads/>
 
 ---
+
+***[ANNOUNCEMENT] Project to be released in the nexts days***  
+***"Work in Progress" For the moment i commit a lot...***
 
 WHAT are we talking about ?
 ================
@@ -23,10 +29,10 @@ to animate HTML elements with polished CSS3. Dead simple and hard at the same ti
 
 - Create elements or use existing collections
 - Manage simple transitions or keyframes or effects or all in the same time 
-- Create pure animations, full of graphics or only automatise DOM inserting
+- Create pure animations, full of graphics or only automatize DOM inserting
 - Mass handle CSS and animations properties, or fine tune based on element index
 - Apply some "effects" on all the elements and manage them in the time
-- If you use a data provider (JSON), you can deal with a template foreach elements
+- If you use a data provider (JSON), you can deal with a template for each elements
 
 PARADIGMS
 ================
@@ -54,35 +60,37 @@ Keyframes are a way of giving multiple sets of animations for one element.
 For example you can set a first keyframe with infinite rotation and a second keyframe with a one time fadeIn opacity.  
 Implementation as shown here : <http://jsfiddle.net/molokoloco/rf8zt/>
 
-We can feed the seeds with some data provider. Example with websocket : to come ;)  
-For the moment, data are some content stored in a JSON object OR a dynamic *$deferred* function ^^  
-Dynamic provider can be a little tricky see current implementation here :  
+We can feed the seeds with some data provider. For the moment, data are some content stored in  
+a JSON object OR a dynamic *$deferred* function ^^ Example with websocket, to come ;)  
+Asynchronous "*jsonp*" provider can be a little tricky, see current implementation here :  
 <http://jsfiddle.net/molokoloco/Ebc27/>  
 This content is injected in a (simple) template you can set in seeds *innerHTML* (See below)
 
 And finaly, have to say : "*Time Is What Prevents Everything From Happening At Once...*" - John Wheeler (1911-2008)  
 ...So take your time :)
 
-EXAMPLE SETTINGS 
+EXAMPLE(S) SETTINGS 
 ================
-(see more presets examples in "*./js/jquery.boxFx.presets-XXX.js*")
 
+See the BoxFx (full) options properties list here : "*./js/jquery.boxFx.presets-full-options.js*"
+All is *heavily* commented, check also "*./js/jquery.boxFx.presets-XXX.js*"
+Here a code example for your site :
 
     $emitter1 = $('div#emitterZone1').emitter({
-        seeds          : '<div class="test">N°{id} - {title}</div>',
-        data           : [
+        delay       : 500,
+        seeds       : '<div class="test">N°{id} - {title}</div>',
+        data        : [
             {id:1, title:'toto'}, {id:2, title:'tutu'}, {id:3, title:'toto'}, {id:4, title:'tutu'},
             {id:5, title:'toto'}, {id:6, title:'tutu'}, {id:7, title:'toto'}, {id:8, title:'tutu'}
         ],
-        delay          : 500, // Emit every 500ms
-        styles         : {
+        styles      : {
             position       : 'absolute',
             width          : 150,
             opacity        : 0,
             background     : 'white',
             transform      : 'rotate(-20deg) translate(200px, 300px)'
         },
-        transition     : {
+        transition  : {
             duration       : '3000ms',
             timingFunction : $.cubicBeziers.easeInOutQuad,
             stylesTo       : {
@@ -104,8 +112,8 @@ LIMITATIONS
 We cannot animate more than a certain number of DOM elements.  
 In one of the effect i have tested 800... This is already to much ^^  
 The purpose is to animate few HTML elements, otherwise it's better to use Canvas or SVG  
-The plugin is like a proxy of the CSS3 model, you can setup hundreds of properties.  
-I recommand to only use few of them each time. Some CSS3 properties are good  
+The plugin is like a proxy for the CSS3 model, you can setup hundreds of properties.  
+I recommend to only use few of them each time. Some CSS3 properties are good  
 speed killer : gradient, boxShadow, opacity, borderRadius...
 
 CSS Animations keyframes and CSS Transitions styles properties can be in conflict.  
@@ -142,11 +150,11 @@ The best is to go in the source, as i have tried to comment a much as possible.
 HOW-TO / TIPS
 ================
 
-JavaScripted properties have the advantage to be more customisable than plain CSS.  
+JavaScripted properties have the advantage to be more customizable than plain CSS.  
 For that, plugin add a lot of sugar on settings :
 
 * Every properties is correctly "CSS3-browsers-prefixed"
-* They can be setted as plain string or as a function that take an 'index' as argument
+* They can be set as plain string or as a function that take an 'index' as argument
 * CSS sizes units can be set as : 10, '10px' or '50%' (plugin internally work with "px")
 
 Example :
@@ -172,8 +180,9 @@ For example, in some particular case, where the CSS property value also take a b
     },
 
 Within all the animations/transitions you can use "*ms*" (Milliseconds) or "*s*" (Seconds) units.  
-Some tools for "timingFunction" are also provided. After the famous "*linear*" and "*ease-in*" you can now use more advanced modes.  
-Cf. "*easeInOutQuad*", "*snap*", "*easeInSine*", etc... : look at "*./js/jquery.boxFx.tools.js*" for easing listing.
+Some tools for "timingFunction" are also provided. After the famous "*linear*" and "*ease-in*" 
+you can now use more advanced modes : "*easeInOutQuad*", "*snap*", "*easeInSine*", etc...
+Look at "*./js/jquery.boxFx.tools.js*" for easing listing.
 
     options.transition : {
         duration         : '6500ms',
@@ -197,15 +206,15 @@ Template example : <http://jsfiddle.net/molokoloco/w8xSx/>
 Maybe you also want to give a external JSONP webservice as provider for your animated content.  
 You can then give a function as data provider, see the concept here :  
 <http://jsfiddle.net/molokoloco/Ebc27/>  
-An implementation of this can be found in the presets example file "*./js/jquery.boxFx.presets.XXX.js*"
+An implementation of this can be found in the presets examples files "*./js/jquery.boxFx.presets.XXX.js*"
 
-The plugin is listenning various events, so you can dynamicly interact with him.  
+The plugin is listening various events, so you can dynamically interact with him.  
 Example :
 
     // To update the properties you want during the runtime...
     $emitter1.trigger('update', [{emitterRadius:16, rate:0}]);
 
-The plugin send events on witch you can bind listeners  
+The plugin send events on witch you can bind listeners.  
 For example :
 
     // Bind a new sprite creation
@@ -213,8 +222,23 @@ For example :
         $sprite.html('Ok'); 
     });
 
+RESSOURCES AND DEPENDANCIES
+================
 
-Further READING about CSS3 and animations ? You should ;)
+The project is build with jQuery 1.7 from <http://jquery.com/>, but i though 1.5 can work too  
+We also use jQuery Color for some fancy rainbow <https://github.com/jquery/jquery-color>
+
+    $("#block").css({
+        backgroundColor: $.Color({ saturation: 0 })
+    }, 1500 );
+
+HTML5/CSS3 compatibility mode is managed with <https://github.com/Modernizr/Modernizr/blob/master/modernizr.js>  
+For the demo, MarkDown "*README.md*" it displayed as HTML with <http://code.google.com/p/pagedown/>
+
+Also, i would make a lot of kiss to <https://github.com> and <http://cloud9ide.com> :)  
+without forgeting <http://stackoverflow.com>. How can we have done without them !
+
+Further READING about CSS3 and animations ? (You would ;)
 ================
 
 * <https://developer.mozilla.org/en/CSS/CSS_animations>

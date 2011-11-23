@@ -5,13 +5,49 @@
 */
 
 (function ($, window) {
-
+    
     $.toolsLoaded = true; // Declare tools.js as loaded...
     
-    String.prototype.toCamel = function(){
+    // Beziers equation approximations from Matthew Lein's Ceaser: http://matthewlein.com/ceaser/
+    // Remixed for this use : "transition:'all 3000ms '+$.cubicBeziers.easeInOutQuad;"
+    // If values outside range 0>=X=<1 can produce a bug, in chrome for example
+    var qbo = 'cubic-bezier(', qbc = ')';
+    $.cubicBeziers = {
+        bounce:         qbo+'0.000,0.350,0.500,1.300'+qbc, // !
+        snap:           qbo+'0.000,1.000,0.500,1.000'+qbc,
+        easeInQuad:     qbo+'0.550,0.085,0.680,0.530'+qbc,
+        easeInCubic:    qbo+'0.550,0.055,0.675,0.190'+qbc,
+        easeInQuart:    qbo+'0.895,0.030,0.685,0.220'+qbc,
+        easeInQuint:    qbo+'0.755,0.050,0.855,0.060'+qbc,
+        easeInSine:     qbo+'0.470,0.000,0.745,0.715'+qbc,
+        easeInExpo:     qbo+'0.950,0.050,0.795,0.035'+qbc,
+        easeInCirc:     qbo+'0.600,0.040,0.980,0.335'+qbc,
+        easeOutQuad:    qbo+'0.250,0.460,0.450,0.940'+qbc,
+        easeOutCubic:   qbo+'0.215,0.610,0.355,1.000'+qbc,
+        easeOutQuart:   qbo+'0.165,0.840,0.440,1.000'+qbc,
+        easeOutQuint:   qbo+'0.230,1.000,0.320,1.000'+qbc,
+        easeOutSine:    qbo+'0.390,0.575,0.565,1.000'+qbc,
+        easeOutExpo:    qbo+'0.190,1.000,0.220,1.000'+qbc,
+        easeOutCirc:    qbo+'0.075,0.820,0.165,1.000'+qbc,
+        easeInOutQuad:  qbo+'0.455,0.030,0.515,0.955'+qbc,
+        easeInOutCubic: qbo+'0.645,0.045,0.355,1.000'+qbc,
+        easeInOutQuart: qbo+'0.770,0.000,0.175,1.000'+qbc,
+        easeInOutQuint: qbo+'0.860,0.000,0.070,1.000'+qbc,
+        easeInOutSine:  qbo+'0.445,0.050,0.550,0.950'+qbc,
+        easeInOutExpo:  qbo+'1.000,0.000,0.000,1.000'+qbc,
+        easeInOutCirc:  qbo+'0.785,0.135,0.150,0.860'+qbc
+    };
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Somes prototyping utilities...
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    // "border-radius" -> "borderRadius"
+    String.prototype.toCamel = function() {
         return this.replace(/(\-[a-z])/g, function($1){return $1.toUpperCase().replace('-','');});
     };
     
+    // "borderRadius" -> "border-radius"
     String.prototype.toDash = function(){
         return this.replace(/([A-Z])/g, function($1){return '-'+$1.toLowerCase();});
     };
@@ -51,49 +87,27 @@
         return (prefix ? prefix : 'id_') + uniqueId++;
     };
     
-    $.requireJs = function(jsPath) { // getJs('http://other.com/other.js'); // Native external link
-        var s = document.createElement('script');
+    // Deep clean obj keys when set with "null" or empty values (config/CSS/...)
+    $.removeObjEmptyValue = function(obj) {
+        $.each(obj, function(i, val) {
+            if (!val && val !== 0 && val !== false) delete obj[i];
+            else if (typeof obj[i] == 'object')     $.removeObjEmptyValue(obj[i]);
+        });
+    };
+    
+    $.requireJs = function(jsPath) { // getJs('http://other.com/new.js'); // External link
+        var s = document.createElement('script'); // Native JS DOM creation
         s.setAttribute('type', 'text/javascript');
         s.setAttribute('src', jsPath);
         document.getElementsByTagName('head')[0].appendChild(s);
     };
     
-    $.callJs = function(src, async, callback) { // callJs('./other.js', function() { ok(); }); // On-demand same domain JS
+    $.callJs = function(src, async, callback) { // callJs('./new.js', function() { ok(); }); // On-demand same domain JS
         $.ajax({
             url:src, async:async || 0, dataType:'script', cache:1,
             error:function(){ alert('Sorry, some JS file not found : '+src); },
             success:function() { if (callback && typeof callback == 'function') callback(); }
         });
-    };
-
-    // Beziers equation approximations from Matthew Lein's Ceaser: http://matthewlein.com/ceaser/
-    // Remixed for this use : "transition:'all 3000ms '+$.cubicBeziers.easeInOutQuad;"
-    // If values outside range 0>=X=<1 can produce a bug, in chrome for example
-    var qbo = 'cubic-bezier(', qbc = ')';
-    $.cubicBeziers = {
-        bounce:         qbo+'0.000,0.350,0.500,1.300'+qbc, // !
-        snap:           qbo+'0.000,1.000,0.500,1.000'+qbc,
-        easeInQuad:     qbo+'0.550,0.085,0.680,0.530'+qbc,
-        easeInCubic:    qbo+'0.550,0.055,0.675,0.190'+qbc,
-        easeInQuart:    qbo+'0.895,0.030,0.685,0.220'+qbc,
-        easeInQuint:    qbo+'0.755,0.050,0.855,0.060'+qbc,
-        easeInSine:     qbo+'0.470,0.000,0.745,0.715'+qbc,
-        easeInExpo:     qbo+'0.950,0.050,0.795,0.035'+qbc,
-        easeInCirc:     qbo+'0.600,0.040,0.980,0.335'+qbc,
-        easeOutQuad:    qbo+'0.250,0.460,0.450,0.940'+qbc,
-        easeOutCubic:   qbo+'0.215,0.610,0.355,1.000'+qbc,
-        easeOutQuart:   qbo+'0.165,0.840,0.440,1.000'+qbc,
-        easeOutQuint:   qbo+'0.230,1.000,0.320,1.000'+qbc,
-        easeOutSine:    qbo+'0.390,0.575,0.565,1.000'+qbc,
-        easeOutExpo:    qbo+'0.190,1.000,0.220,1.000'+qbc,
-        easeOutCirc:    qbo+'0.075,0.820,0.165,1.000'+qbc,
-        easeInOutQuad:  qbo+'0.455,0.030,0.515,0.955'+qbc,
-        easeInOutCubic: qbo+'0.645,0.045,0.355,1.000'+qbc,
-        easeInOutQuart: qbo+'0.770,0.000,0.175,1.000'+qbc,
-        easeInOutQuint: qbo+'0.860,0.000,0.070,1.000'+qbc,
-        easeInOutSine:  qbo+'0.445,0.050,0.550,0.950'+qbc,
-        easeInOutExpo:  qbo+'1.000,0.000,0.000,1.000'+qbc,
-        easeInOutCirc:  qbo+'0.785,0.135,0.150,0.860'+qbc
     };
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -119,11 +133,10 @@
             'transition'       :'transitionEnd'
         };
         return eventEnd[Modernizr.prefixed('transition')];
-
     })(Modernizr);
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //  some CSS element manipulations
+    // boxFx config and CSS manipulations
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Here somes (css) properties units that can be related to a % of parent box
@@ -154,14 +167,6 @@
         });
         $.each(cssHeightPropsWithPix, function(i, key) {
             if (key in css && css[key] && typeof css[key] == 'number') css[key] = css[key]+'px';
-        });
-    };
-    
-    // Clean CSS obj when setted with "null" properties...
-    $.removeObjEmptyValue = function(obj) {
-        $.each(obj, function(i, val) {
-            if (!val && val !== 0) delete obj[i];
-            else if (typeof obj[i] == 'object') $.removeObjEmptyValue(obj[i]);
         });
     };
     
