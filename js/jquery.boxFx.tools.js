@@ -74,7 +74,7 @@
         return parseInt(miin + (Math.random() * (maax - miin)), 10);
     };
     
-    // Lightest TPL // $.getTpl('<div>N�{id} - {title}</div>', {id:1, title:'toto'}) == '<div>N�1 - toto</div>'
+    // Lightest TPL // $.getTpl('<div>{title}</div>', {title:'toto'}) // '<div>toto</div>'
     $.getTpl = function(tpl, val) {
         for (var p in val)
             tpl = tpl.replace(new RegExp('({'+p+'})', 'g'), val[p] || '');
@@ -103,7 +103,7 @@
     };
     
     $.callJs = function(src, async, callback) { // callJs('./new.js', function() { ok(); }); // On-demand same domain JS
-        $.ajax({
+        return $.ajax({
             url:src, async:async || 0, dataType:'script', cache:1,
             error:function(){ alert('Sorry, some JS file not found : '+src); },
             success:function() { if (callback && typeof callback == 'function') callback(); }

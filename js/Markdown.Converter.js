@@ -37,7 +37,7 @@ else
             if (original === identity)
                 this[hookname] = func;
             else
-                this[hookname] = function (x) { return func(original(x)); }
+                this[hookname] = function (x) { return func(original(x)); };
         },
         set: function (hookname, func) {
             if (!this[hookname])

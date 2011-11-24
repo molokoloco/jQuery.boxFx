@@ -32,41 +32,6 @@ to animate HTML elements with polished CSS3. Dead simple and hard at the same ti
 - Apply some "effects" on all the elements and manage them in the time
 - If you use a data provider (JSON), you can deal with a template for each elements
 
-PARADIGMS
-================
-
-With JavaScript, we dynamically **animate HTML elements based on CSS3**, like a proxy  
-We take avantage of the both world, GPU acceleration and interactivity
-
-We work on a set of HTML  &lt;elements&gt; ("Seeds") inside a "box".  
-A "Box" and a "Seed" can be ether the &lt;body&gt;, a &lt;div&gt;, or whatever jQuery element we want.
-
-The seeds are generated one after other in the "box".  
-A "*options.delay*" parameters tell the plugin the time to wait before (re)generate a new seed.  
-If "0" is used, plugin create as fast as possible a new one with "*requestAnimationFrame*"  
-otherwise it use a "*setTimeout()*"...
-
-**Transition** : seeds are created with a starting styles ("*options.styles*") and/or a starting  
-class ("*options.clss*"). If "*options.transition*" is set, plugin also apply the "ending" styles ("*options.transition.stylesTo*").  
-The "*options.transition.duration*" you've set determine the time to morph properties from one(s) to the other(s).
-
-**Effects** can also be used to apply individual settings to each seed, in opposite to values for the entire set.  
-For example, "*options.effect = 'nebula'*" will manage left positioning and margin for each seed.  
-Effect can overwrite defaults seeds styles values at start and end.
-
-If you need a lot of granularity and parameters for your animation, you can even use "*options.keyframes*".  
-**Keyframes** are a way of giving multiple sets of animations to elements.  
-For example you can set a first keyframe with infinite rotation and a second keyframe with a one time fadeIn opacity.  
-Implementation as shown here : <http://jsfiddle.net/molokoloco/rf8zt/>
-
-We can feed the seeds with some **data provider**. For the moment, data are some content stored in  
-a JSON object OR a dynamic *$deferred* function ^^ Example with websocket, to come ;)  
-Asynchronous "*jsonp*" provider can be a little tricky, see current implementation here :  
-<http://jsfiddle.net/molokoloco/Ebc27/>  
-This content is injected in a (simple) template you can set in seeds *innerHTML* (See below)
-
-And finaly, have to say : "*Time Is What Prevents Everything From Happening At Once...*" - John Wheeler (1911-2008)  
-...So take your time :)
 
 EXAMPLE(S) SETTINGS 
 ================
@@ -103,6 +68,43 @@ Here a code example for your site :
     });
 
     $('a#stop').click(function() { $emitter1.trigger('stop'); });
+
+
+PARADIGMS
+================
+
+With JavaScript, we dynamically **animate HTML elements based on CSS3**, like a proxy  
+We take avantage of the both world, GPU acceleration and interactivity
+
+We work on a set of HTML  &lt;elements&gt; ("Seeds") inside a "box".  
+A "Box" and a "Seed" can be ether the &lt;body&gt;, a &lt;div&gt;, or whatever jQuery element we want.
+
+The seeds are generated one after other in the "box".  
+A "*options.delay*" parameters tell the plugin the time to wait before (re)generate a new seed.  
+If "0" is used, plugin create as fast as possible a new one with "*requestAnimationFrame*"  
+otherwise it use a "*setTimeout()*"...
+
+**Transition** : seeds are created with a starting styles ("*options.styles*") and/or a starting  
+class ("*options.clss*"). If "*options.transition*" is set, plugin also apply the "ending" styles ("*options.transition.stylesTo*").  
+The "*options.transition.duration*" you've set determine the time to morph properties from one(s) to the other(s).
+
+**Effects** can also be used to apply individual settings to each seed, in opposite to values for the entire set.  
+For example, "*options.effect = 'nebula'*" will manage left positioning and margin for each seed.  
+Effect can overwrite defaults seeds styles values at start and end.
+
+If you need a lot of granularity and parameters for your animation, you can even use "*options.keyframes*".  
+**Keyframes** are a way of giving multiple sets of animations to elements.  
+For example you can set a first keyframe with infinite rotation and a second keyframe with a one time fadeIn opacity.  
+Implementation as shown here : <http://jsfiddle.net/molokoloco/rf8zt/>
+
+We can feed the seeds with some **data provider**. For the moment, data are some content stored in  
+a JSON object OR a dynamic *$deferred* function ^^ Example with websocket, to come ;)  
+Asynchronous "*jsonp*" provider can be a little tricky, see current implementation here :  
+<http://jsfiddle.net/molokoloco/Ebc27/>  
+This content is injected in a (simple) template you can set in seeds *innerHTML* (See below)
+
+And finaly, have to say : "*Time Is What Prevents Everything From Happening At Once...*" - John Wheeler (1911-2008)  
+...So take your time :)
 
 
 LIMITATIONS
@@ -252,4 +254,5 @@ Further READING about CSS3 and animations ? (You would ;)
 * <http://jsfiddle.net/leaverou/7rnQP/light/>
 * <http://jsfiddle.net/molokoloco/rf8zt/> (Building CSS animation(s) from 'options.keyframes' OBJ)
 * <http://jsfiddle.net/molokoloco/7rV7a/> (CSS 3D animations via sources)
+* <http://coding.smashingmagazine.com/2011/11/21/create-web-animations-with-paperjs/>
 * <http://lesscss.org/>
