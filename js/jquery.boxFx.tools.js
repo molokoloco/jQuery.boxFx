@@ -4,6 +4,10 @@
     // Dependancy to moderniz.js for $.fn.crossCss
 */
 
+// I use this for debuging ^^
+var db  = function() { 'console' in window && console.log.call(console, arguments); },
+    die = function(mess) { throw(( mess ? mess : "Oh my god, moonWalker is down...")); };
+
 (function ($, window) {
     
     $.toolsLoaded = true; // Declare tools.js as loaded...
@@ -95,14 +99,15 @@
         });
     };
     
-    $.requireJs = function(jsPath) { // getJs('http://other.com/new.js'); // External link
-        var s = document.createElement('script'); // Native JS DOM creation
-        s.setAttribute('type', 'text/javascript');
-        s.setAttribute('src', jsPath);
-        document.getElementsByTagName('head')[0].appendChild(s);
+    $.getJs = function(jsPath, async) { // getJS('http://other.com/new.js'); // External link
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = jsPath;
+        if (async) script.async = true;
+        document.getElementsByTagName('head')[0].appendChild(script);
     };
     
-    $.callJs = function(src, async, callback) { // callJs('./new.js', function() { ok(); }); // On-demand same domain JS
+    $.loadJs = function(src, async, callback) { // callJs('./new.js', function() { ok(); }); // On-demand same domain JS
         return $.ajax({
             url:src, async:async || 0, dataType:'script', cache:1,
             error:function(){ alert('Sorry, some JS file not found : '+src); },
@@ -189,7 +194,7 @@
         var cssKeyframes = [], cssAnimations = [], cssAnimationsFillMode = [];
         $.each(keyframes, function(i, animation) {
             if (!animation.name) animation.name = $.getUniqueName('boxFxAnim');
-            if (!animation.delay) animation.delay = 0;
+            if (!animation.delay || parseInt(animation.delay, 10) < 1) animation.delay = '';
             cssAnimations.push(animation.name+' '+animation.duration+' '+animation.timingFunction+' '+animation.delay+' '+animation.iterationCount+' '+animation.direction);
             cssAnimationsFillMode.push(animation.fillMode); // http://www.w3.org/TR/css3-animations/#the-animation-shorthand-property-   
             var cssSteps = [];

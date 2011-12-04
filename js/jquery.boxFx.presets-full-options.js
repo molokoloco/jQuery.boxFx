@@ -45,11 +45,11 @@ $(function() { // Wait jQuery to be ready
     };
 
     ///////////////////////////////////////////////////////////////////////////////
-    // Element (Starting) CSS, some relevants examples properties
+    // Elements (Starting) CSS, some relevants examples properties
     // ANY CSS/1/2/3 you want... 
     //     - Except "transition, transitionName, transitionDuration..." (it's in options.transition)
     //     - Except "animation, animationName, animationDelay..." (it's in options.keyframes)
-    // Cross-browser compatibility added when possible with modernizr.js
+    // Cross-browsers compatibility added when possible with modernizr.js
     // Can be overriden by options.effect && options.transition.stylesTo
 
     // Not Full (but interresting) properties list
@@ -57,7 +57,7 @@ $(function() { // Wait jQuery to be ready
     
     boxFxFullOptions.styles = {
 
-        // Some default properties, not animatable... --------------------------------
+        // Some default properties, not animatables... --------------------------------
         position              : 'absolute',  // 'absolute' | 'fixed' | 'relative' | ''
         display               : 'block',     // 'block' | 'inline' // default null (div already 'block')
         float                 : '',          // 'left' | 'right' | ''
@@ -68,8 +68,10 @@ $(function() { // Wait jQuery to be ready
         textOverflow          : null,        // 'ellipsis', ...
         cursor                : 'pointer',   // 'pointer',
         textAlign             : 'center',    // 'nowrap',
-
-        maskImage             : null,        // 'gradient()' | 'url()' // Text effect
+        
+        // Animatables with CSS gradients not with images --------------------------------
+        
+        maskImage             : null,        // 'gradient()' | 'url()' // Text effect (Mostly webkit) // better with background-clip:text && display:inline-block
         backgroundImage       : '-'+$.browserPrefix+'-radial-gradient(33% 33%, circle cover,rgba(230,230,0,1) 25%,rgba(180,180,0,1) 80%)', // 'url()' | '-BROWSER-radial-gradient()'
                                              // TODO : Add advanced background-image: linear-gradient() https://github.com/codler/jQuery-Css3-Finalize/
         
@@ -79,9 +81,9 @@ $(function() { // Wait jQuery to be ready
         marginTop             : null,        // ... and auto-centered with negatives 'margins', by 'options.effect'
         marginLeft            : null,
 
-        // Some properties, ANIMATABLE ! --------------------------------
+        // Some properties, ANIMATABLES ! --------------------------------
 
-        width                 : 160,         // '10', '10px' or '50%' // Radius of a seed, minimalist settings // Can also be use by 'options.effect'
+        width                 : 160,         // '10', '10px' or '50%' // Radius of a seed, minimalist settings : If 'options.effect' MUST be SET
         height                : 30,          // Default == width
 
                                              // translate(10px, 0px), translate3d, translateX, translateY, translateZ, scale(5), scale3d(x,y,z), scaleX, scaleY, scaleZ,
@@ -114,7 +116,7 @@ $(function() { // Wait jQuery to be ready
 
         boxSizing             : null,        //  border-box | padding-box  ...
         boxShadow             : '1px 1px 3px rgba(30,30,0,0.8)', // '' || '0 0 10px rgba(0,0,0,1)', // OFFSET_X OFFSET_Y SPREAD COLOR
-        boxReflect            : null,        // 'below 5px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.5, transparent), to(white))'
+        boxReflect            : null,        // (Mostly webkit) // 'below 5px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.5, transparent), to(white))'
 
         border                : '1px solid white', // '1px dashed rgb(0,0,0)', // buggus with rgba() alpha
         borderImage           : null,        // 'url(border-image.jpg) 45 20 45 30 repeat'
@@ -125,7 +127,7 @@ $(function() { // Wait jQuery to be ready
         
         color                 : 'navy',
         
-        textShadow            : null, // '0 0 30px rgba(255,255,255,1)'
+        textShadow            : null,        // '0 0 30px rgba(255,255,255,1)' // Heavy !
         textStroke            : null,        // '2px #006600'
         fontSize              : '25px',
         letterSpacing         : null,

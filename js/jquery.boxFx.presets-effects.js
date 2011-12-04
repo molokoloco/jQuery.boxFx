@@ -4,9 +4,9 @@ $(function() { // Wait jQuery to be ready
     ///////////////////////////////////////////////////////////////////////////////
     // Object to stock some options presets...
     var optionsEffects = window.optionsEffects = {};
-    
+
     // optionsEffects can be used like a JSON "Editable" object for LIVE Textarea editing purpose
-    
+
     optionsEffects.html5Ize = {
         seeds             : '<img src="http://www.w3.org/html/logo/downloads/HTML5_Badge_32.png" width="32" heigh="32"/>',
         effect            : 'nebula',
@@ -31,7 +31,7 @@ $(function() { // Wait jQuery to be ready
             }
         }
     };
-    
+
     optionsEffects.hyperSpace = {
         effect            : 'nebula',
         newAtTop          : true,
@@ -57,7 +57,7 @@ $(function() { // Wait jQuery to be ready
             }
         }
     };
-    
+
     optionsEffects.deepSuns = {
         effect            : 'center',
         newAtTop          : false,
@@ -86,7 +86,7 @@ $(function() { // Wait jQuery to be ready
             }
         }
     };
-    
+
     optionsEffects.whiteHole = {
         effect            : 'center',
         newAtTop          : false,
@@ -113,7 +113,7 @@ $(function() { // Wait jQuery to be ready
             }
         }
     };
-    
+
     optionsEffects.rainbowArrows = {
         effect            : 'artifice',
         newAtTop          : 'random',
@@ -174,7 +174,7 @@ $(function() { // Wait jQuery to be ready
     }
 }
 */
-    
+
     optionsEffects.sunnyClouds = {
         effect            : 'artifice',
         newAtTop          : true,
@@ -204,6 +204,27 @@ $(function() { // Wait jQuery to be ready
         }
     };
 
+    optionsEffects.videosWall = {
+        seeds             : '<video preload="auto" autoplay="true" width="160" src="http://videos.mozilla.org/serv/mozhacks/demos/resources/plztouchme/burritttoooo.webm"></video>',
+        stopAtEnd         : true,
+        delay             : 900,
+        maxSeeds          : 9,
+        styles            : {
+            float            : 'left',
+            display          : 'block',
+            width            : 160,
+            height           : 90,
+            borderRadius     : 0
+        },
+        transition        : {
+            duration         : '3000ms',
+            timingFunction   : 'linear',
+            stylesTo         : {
+                transform      : 'scale(0.2)'
+            }
+        }
+    };
+
     optionsEffects.acidSquares = {
         effect            : 'artifice',
         newAtTop          : true,
@@ -229,7 +250,7 @@ $(function() { // Wait jQuery to be ready
             }
         }
     };
-    
+
     optionsEffects.lolCatz = {
         seeds             : '<img src="http://www.b2bweb.fr/bonus/nian-cat.png" width="772" heigh="93"/>',
         effect            : 'nebula',
@@ -255,7 +276,7 @@ $(function() { // Wait jQuery to be ready
             }
         }
     };
-    
+
     optionsEffects.typoGraphe = {
         seeds             : '<span>DOM<br />is alive</span>',
         effect            : 'artifice',
@@ -271,23 +292,31 @@ $(function() { // Wait jQuery to be ready
             height           : 100,
             transform        : 'scale(0.1)',
             font             : 'bold 35px Trebuchet,Verdana',
-            color            : 'transparent',
-			textAlign        : 'center',
-            textShadow       : '0 0 30px rgba(255,255,255,1)',
+            color            : 'grey',
+            textAlign        : 'center',
+            textShadow       : '0 0 1px grey, 0 0 20px black',
+
+            // http://goo.gl/5KhFZ // Bug // TODO
+            //maskImage       : 'url(http://d3pr5r64n04s3o.cloudfront.net/articles/042_css_animation_intro/tut.html/images/axis-5.jpg)',
+            maskImage        : '-'+$.browserPrefix+'-gradient(linear, left top, left bottom, from(rgba(0,0,0,0)), color-stop(50%, rgba(0,0,0,1)), to(rgba(0,0,0,0)))',
+            maskOrigin       : 'content',
+            textFillColor    : 'transparent',
+            backgroundClip   : 'text',
+
             borderRadius     : 0
         },
         transition        : {
             duration         : '2500ms',
             timingFunction   : 'ease',
             stylesTo         : {
-                transform        : 'scale(1)',
-                color            : 'transparent',
-                textShadow       : '0 0 1px rgba(255,255,255,1)',
-                textStroke       : '1px rgba(0,0,0,.33)'
+                transform        : 'scale(1)'//,
+                //color            : 'transparent',
+                //textShadow       : '0 0 1px rgba(255,255,255,1)',
+                //textStroke       : '1px rgba(0,0,0,.33)'
             }
         }
     };
-    
+
     optionsEffects.starsParty = {
         seeds             : '<div>★</div>',
         effect            : 'artifice',
@@ -314,8 +343,7 @@ $(function() { // Wait jQuery to be ready
             }
         }
     };
-    
-    
+
     optionsEffects.hypnoWork = {
         effect            : 'artifice',
         newAtTop          : 'random',
@@ -345,7 +373,7 @@ $(function() { // Wait jQuery to be ready
             }
         }
     };
-    
+
     optionsEffects.tunneLize = {
         effect            : 'center',
         newAtTop          : 1,
@@ -371,7 +399,7 @@ $(function() { // Wait jQuery to be ready
             stylesTo         : {
                 width            : '150%',
                 maxSize          : '160%',
-				backgroundSize   : '1px 1px',
+                backgroundSize   : '1px 1px',
                 border           : '8px solid #FFFD69',
                 borderRadius     : '50%',
                 transform        : 'rotate(-300deg)',
@@ -379,10 +407,10 @@ $(function() { // Wait jQuery to be ready
             }
         }
     };
-	
-	optionsEffects.masterMind = {
-		seeds             : '<div>✖</div>',
-		stopAtEnd         : false, // Continous animation even without effect
+
+    optionsEffects.masterMind = {
+        seeds             : '<div>✖</div>',
+        stopAtEnd         : false, // Continous animation even without effect
         newAtTop          : 1,
         delay             : 0,
         maxSeeds          : 300,
@@ -391,7 +419,7 @@ $(function() { // Wait jQuery to be ready
         emitterCenterTop  : 0,
         styles            : {
             float            : 'left',
-			display          : 'block',
+            display          : 'block',
             width            : 25,
             textAlign        : 'center',
             color            : 'orange',
@@ -404,38 +432,38 @@ $(function() { // Wait jQuery to be ready
             timingFunction   : 'linear',
             stylesTo         : {
                 fontSize         : '20px',
-				textShadow       : '2px 2px 4px black',
-				backgroundColor  : 'yellow',
+                textShadow       : '2px 2px 4px black',
+                backgroundColor  : 'yellow',
                 opacity          : 1
             }
         }
     };
-	
+
     optionsEffects.subWoofer = {
         effect            : 'center',
         newAtTop          : 1,
         delay             : 580,
         maxSeeds          : 25,
         emitterRadius     : 0,
-		emitterCenterLeft : '50%',
+        emitterCenterLeft : '50%',
         emitterCenterTop  : '50%',
         styles            : {
-			position         : 'absolute',
+            position         : 'absolute',
             width            : '25%',
             backgroundImage  : '-'+$.browserPrefix+'-radial-gradient(10% 30%, circle cover,rgba(230,230,230,1) 0%,rgba(230,230,230,1) 35%,rgba(50,50,50,1) 90%,rgba(50,50,50,1) 100%)',
             boxShadow        : 'inset 0 0 30px rgba(50,50,50,1)',
-			borderRadius     : '50%'
+            borderRadius     : '50%'
         },
         transition        : {
             duration         : '9000ms',
             timingFunction   : 'cubic-bezier(.2,.8,.8,.2)',
             stylesTo         : {
                 width            : '75%',
-            	boxShadow        : 'inset 0 0 5px rgba(250,250,250,1)',
-				borderRadius     : '50%',
+                boxShadow        : 'inset 0 0 5px rgba(250,250,250,1)',
+                borderRadius     : '50%',
                 opacity          : 0
             }
         }
     };
-     
+
 });

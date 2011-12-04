@@ -1,16 +1,11 @@
 //////////////////////////////////////////////////////////////////////////////////////////
-// jQuery.boxFx.js (Beta V0.92) is like a "DOM particles emitter" factory
+// jQuery.boxFx.js (Beta V0.94) is like a "DOM particles emitter" factory
 // "Clash the DOM with the most optimized jQuery animations framework on earth" ^^
 // GPL/MIT/Copyleft @molokoloco 28/10/2011 - http://b2bweb.fr
 // Sources : https://github.com/molokoloco/jQuery.boxFx/
 // Download : https://github.com/molokoloco/jQuery.boxFx/downloads/
 /////////////////////////////////////////////////////////////////////////////////////////
 
-// I use this for debuging ^^
-;var db  = function() { 'console' in window && console.log.call(console, arguments); },
-     die = function(mess) { throw(( mess ? mess : "Oh my god, moonWalker is down...")); };
-
-///////////////////////////////////////////////////////////////////////////////
 // And here we go !
 (function ($, window) {
 
@@ -21,7 +16,7 @@
     // Does the current browser support CSS Transitions ? We silently fall back ?
     if (!Modernizr.csstransitions)           db('Sad, your old browser don\'t support CSS transition ^^');
     //if (!(Modernizr.prefixed('transition'))) alert('$.fn.boxFx require a (modern) browser, sorry...'); // Don't you play ?
-    if (!Modernizr.csstransforms3d)          db('Sad, your old computer don\'t support CSS 3D (as mine... ^^)');
+    if (!Modernizr.csstransforms3d)          db('Sad, your old computer don\'t support CSS 3D');
 
     ///////////////////////////////////////////////////////////////////////////////
     // PUBLIC : default plugin properties
@@ -36,7 +31,7 @@
         seeds                 : '<div/>',    // '<tag/>' OR '<div class="test">N°{id} - {title}</div>' // Generated DOM element with or without template...
         targets               : null,        // 'img.thumb' // ... OR existing elements inside this container
                                              // options.seeds OR options.targets can have (dynamic) innerHtml template : {mapped} with some datas
-        data                  : null,        // [{id:1, title:'toto'}, {id:2, title:'tutu'}, {}] OR 'callback' : callback(currentIndex) OR $.getJSON('./movies.json')
+        data                  : null,        // [{id:1, title:'toto'}, {}] OR 'callback' : callback(currentIndex) (Check JSONP example preset)
         styles2Class          : true,        // Convert styles to 'class' in <head> instead of dealing in the DOM, for each elements : Cannot be "live" edited
         clss                  : null,        // Custom CSS static (starting) class, default : null (Cf. $.boxFxOptions.styles)
         //perspective         : null,        // 500px // if seeds 'options.styles.webktiTransformStyle' == 'preserve-3d', apply perspective to seeds container
@@ -93,7 +88,7 @@
     }];
 
     ///////////////////////////////////////////////////////////////////////////////
-    // $.boxFx() jQuery plugin - Each time you read... YOU CAN ENHANCE ^^
+    // $.boxFx() jQuery plugin !!! Each time you read... YOU CAN ENHANCE ^^
     ///////////////////////////////////////////////////////////////////////////////
 
     $.fn.boxFx = function(options) {
@@ -109,24 +104,45 @@
                 S           = {};            // Seeds properties
 
             ///////////////////////////////////////////////////////////////////////////////
-            // boxFx jQuery plugin externals methods
+            // Externals methods // $canvas.bind(publicMethods) : $canvas.trigger('play')
+            ///////////////////////////////////////////////////////////////////////////////
+
             var publicMethods = {
                 start:function() {
                     if (_db_) db('$.boxFx.trigger.start()');
+                    privateMethods.initFx();
+                    privateMethods.configSetupFix();
+                    publicMethods.play();
+                },
+                play:function() {
+                    if (_db_) db('$.boxFx.trigger.play()');
                     setTimeout(function() {  // Be sure all dom manip is over...
+                        if (options.keyframes) { // Un-pause
+                            var i = window[FX.id].length;
+                            while(i--) {
+                                if (window[FX.id][i] && window[FX.id][i].length > 0)
+                                    window[FX.id][i].crossCss({animationPlayState:'running'}); // Continue
+                            }
+                        }
                         FX.render = true;
                         publicMethods.newSeed();
                     }, 0);
                 },
-                // Call it to emit one seed at a time (must stop it before)
+                // Call it to emit one seed at a time (must stop all before)
                 newSeed:function() {
                     if (_db_) db('$.boxFx.trigger.newSeed()');
                     addSeed();               // Call factory
                 },
-                pause:function() {           // TODO !
+                // Pause : for animations keyframes
+                pause:function() {
                     if (_db_) db('$.boxFx.trigger.pause()');
-                    // $.each(window[FX.id]) ...css({animationPlayState: 'paused'});
-                    // animation-play-state: running;
+                    if (options.keyframes) {
+                        var i = window[FX.id].length;
+                        while(i--) {
+                            if (window[FX.id][i] && window[FX.id][i].length > 0)
+                                window[FX.id][i].crossCss({animationPlayState:'paused'});
+                        }
+                    }
                 },
                 // Stop emitter
                 stop:function() {
@@ -134,21 +150,30 @@
                     FX.render = false;       // if requestAnimFrame
                     if (FX.timer) clearTimeout(FX.timer); // if setTimeout Kill factory
                     FX.timer = null;
+                    publicMethods.pause();
                 },
                 // Stop & clear elements stack & options
                 reset:function() {
                     if (_db_) db('$.boxFx.trigger.reset()');
                     publicMethods.stop();
-                    setTimeout(function() {
-                        var i = window[FX.id].length;
-                        while(i--) {
-                            if (window[FX.id][i] && window[FX.id][i].length > 0)
-                                window[FX.id][i].empty().remove(); // Clean DOM
-                            delete window[FX.id][i]; // Clean Obj
+                    var i = window[FX.id].length;
+                    while(i--) {
+                        if (options.targets) { // Existing elements ?
+                            window[FX.id][i]
+                                .html($.data(window[FX.id][i], 'template')) // Refill
+                                .removeData();
+                            if (!($.contains(window[FX.id][i], $canvas))) { // re-attach()
+                                 window[FX.id][i].appendTo($canvas);
+                            }
                         }
-                        delete window[FX.id];
-                        privateMethods.initFx();
-                    }, 0);
+                        else { // Generated elements ?
+                            if (window[FX.id][i] && window[FX.id][i].length > 0) {
+                                window[FX.id][i].empty().remove(); // Clean DOM
+                            }
+                        }
+                        delete window[FX.id][i]; // Clean Obj
+                    }
+                    delete window[FX.id];
                 },
                 // Update somes values in the current options
                 update:function(event, newOptions) { // $boxFx1.trigger('update', [{prop:val,...}]);
@@ -171,9 +196,11 @@
             };
 
             ///////////////////////////////////////////////////////////////////////////////
-            // PRIVATES
+            // PRIVATES...
             ///////////////////////////////////////////////////////////////////////////////
+
             var privateMethods = {
+                ///////////////////////////////////////////////////////////////////////////////
                 // Internals boxFX mains properties
                 initFx: function() {
                     FX                    = {};
@@ -186,12 +213,22 @@
                     FX.transitionDuration = 0;
                     FX.keyframesDuration  = 0;
                     window[FX.id]         = [];  // Global unique nameSpace to stock all seeds $element
+
+                    // Existing elements ? detach() from DOM before working on it
+                    if (options.targets) {
+                        $(options.targets).each(function(index) {
+                            window[FX.id][index] = $(this).detach();
+                            if (!options.template && options.data) {
+                                 $.data(window[FX.id][index], 'template', window[FX.id][index].html());
+                                 window[FX.id][index].html(''); // Reset
+                            }
+                        });
+                    }
                 },
                 ///////////////////////////////////////////////////////////////////////////////
                 // Some "logics" for DEFAULT SETUP and CLEANNUP of the settings values...
                 // I know this part of the code i weird. But i don't know 1000 solutions to do "smarts settings"
                 configSetupFix: function() {
-                    if (_db_) db('configSetupFix() start', options);
 
                     FX.canvasW = parseInt($canvas.width(), 10);
                     FX.canvasH = parseInt($canvas.height(), 10);
@@ -212,6 +249,12 @@
                         // Get css "obj" with 'animation' et 'animationFillMode'
                         // All properties are inserted in STATIC CSS class, inside <head>
                         options.animationsClss = $.buildKeyframeClass(options.keyframes);
+                    }
+
+                    // Extract template ?
+                    if (options.seeds && !options.template && options.data) {
+                        options.template = $(options.seeds).html();
+                        $(options.seeds).html(''); // Reset
                     }
 
                     // Default styles ? if nothing (no style, no class)
@@ -301,7 +344,7 @@
                          options.emitterCenterTop  = FX.canvasH / 2;
                     else options.emitterCenterTop  = $.getSize(options.emitterCenterTop, FX.canvasH);
 
-                    if (_db_) db('configSetupFix() - end', options);
+                    if (_db_) db('configSetupFix()', options);
                 },
                 ///////////////////////////////////////////////////////////////////////////////
                 // Generate default starting CSS obj
@@ -398,7 +441,7 @@
                 // Apply ending CSS (Apply transition at this moment)
                 applyCssEnd: function(name_, index_, cssEnd_) {
                     // if (_db_) db('applyCssEnd()');
-                    if (!name_ || !name_ in window || !index_ in window[name_]) return; // When killing app, some events can end after (timeout)
+                    if (!name_ || !(name_ in window) || !(index_ in window[name_])) return; // When killing app, some events can end after (timeout)
 
                     if (options.clssTo)
                         window[name_][index_].addClass(options.clssTo); //.removeClass(options.clss)
@@ -411,14 +454,15 @@
                     // if (!options.transition) return; // ???????????????????????????????????????????
 
                     // Wait the end event of CSS transition : transitionend || webkitTransitionEnd ...
-                    window[name_][index_].bind($.transitionEnd, function animationEnd(e) { // // Whom is the end event for transition ?
+                    window[name_][index_].bind($.transitionEnd, function animationEnd(event) { // // Whom is the end event for transition ?
                         // if (_db_) db($.transitionEnd, e.elapsedTime, name_, index_, options.stopAtEnd);
                         if (!name_ || !name_ in window || !index_ in window[name_]) return;
                         window[name_][index_].unbind($.transitionEnd); // $(this) is not the element
 
                         if (!options.stopAtEnd) {// Hide element until re-use ?
                             $.data(window[name_][index_], 'animated', 0); // Release element
-                            window[name_][index_].attr('style', 'display:none;'); // Reset all styles (& transition)
+                            window[name_][index_].detach(); // Remove from DOM
+                            window[name_][index_].attr('style', ''); // Reset all styles (& transition)
                             if (options.clss)           window[name_][index_].removeClass(options.clss);
                             if (options.clssTo)         window[name_][index_].removeClass(options.clssTo);
                             if (options.animationsClss) window[name_][index_].removeClass(options.animationsClss);
@@ -443,7 +487,8 @@
                     }
                 }
 
-                if (_db_ && options.maxSeeds < 10) db('addSeed() - S.index', S.index); // ! Flood ? ;)
+                if (_db_ && options.maxSeeds < 10 && options.delay > 0) // ! Flood ? ;)
+                    db('addSeed() - S.index', S.index);
 
                 if (S.index >= 0) {          // Create or manage a seed
 
@@ -526,35 +571,42 @@
                             }
                         break;
 
-                        // Rotate ? http://jsfiddle.net/molokoloco/EG8m7/
+                        case 'rotate': // TODO http://jsfiddle.net/molokoloco/EG8m7/
+                        break;
 
-                                             // Do yours !!! plenty of  properties...
-                        default:
-                                             // If used with position:relative;/display:inline we just let elements push others, without any positions...
+                        // Do yours !!! plenty of  properties...
+
+                        default: // If used with position:relative or display:inline/block we can
+                                 // just let elements push others, without any effects/positions...
                         break;
                     }
 
                     ///////////////////////////////////////////////////////////////////////////////
                     // SEED creation
 
-                    // CREATE a new seed element // window['boxFx78589996'][0] is a $() element ?
-                    if (!window[FX.id][S.index] || window[FX.id][S.index].length < 1) {
+                    // CREATE a new seed element ? window['boxFx78589996'][0] is a $() element ?
+                   /*  if (!window[FX.id][S.index] || window[FX.id][S.index].length < 1) {
                         if (options.targets) window[FX.id][S.index] = $(options.targets).eq(S.index); // Catch existing DOM element
                         else                 window[FX.id][S.index] = $(options.seeds).appendTo($canvas); // .prependTo($canvas);
-                        // Cache init each targets html ? It can be a template, done one time
+                        // Cache each targets innerHtml ? It can be a template, done one time
                         if (!options.template && options.data) {
                              $.data(window[FX.id][S.index], 'template', window[FX.id][S.index].html());
                              window[FX.id][S.index].html('');
                         }
-                    }
+                    } */
 
-                    // FIll HTML ?
-                    S.template = (options.template ? options.template : $.data(window[FX.id][S.index], 'template') );
+                    // CREATE a new seed element ? window['boxFx78589996'][0] is a $() element
+                    if (!window[FX.id][S.index] || window[FX.id][S.index].length < 1)
+                        window[FX.id][S.index] = $(options.seeds); // First time init
+
+                    // (RE)FIll HTML with DATA ? (options.targets previously stocked innerHTML)
+                    S.template = (options.template ? options.template : $.data(window[FX.id][S.index], 'template') ); //
                     if (S.template) {
                         if (typeof options.data == 'function') {
                             // Call callback 'options.data' with current index (index is not ordened)
                             // Ex. : http://jsfiddle.net/molokoloco/Ebc27/ and here ./js/jquery.boxFx.presets.js
                             var self = {seed:window[FX.id][S.index], template:S.template};
+                            // "done()" can be call some seconds after, so we must pass argument to keep context
                             $.when(options.data(self)).done(function updateElement(_self, data) { // Call and wait deferred
                                 _self.seed.html($.getTpl(_self.template, data));
                             });
@@ -571,17 +623,22 @@
                         }
                     }
 
+                    /*
+                    $.proxy(function(e) {}, this)
+                    */
+
                     // SET STYLES a CLASS
                     privateMethods.applyCssStart(FX.id, S.index, S.cssStart);
 
-                    // Wait DOM init with Timeout (even 0), move the element to final location
-                    // and wait the magical GPU transition from CSS before removing element
-                    setTimeout(privateMethods.applyCssEnd, 0, FX.id, S.index, S.cssEnd); // Pass new css + apply trans
-
+                    // (re)attach to DOM
+                    window[FX.id][S.index].appendTo($canvas);
 
                     // In use now !
                     $.data(window[FX.id][S.index], 'animated', 1);
 
+                    // Wait DOM init with Timeout (even 0), move the element to final location
+                    // and wait the magical GPU transition from CSS before removing element
+                    setTimeout(privateMethods.applyCssEnd, 0, FX.id, S.index, S.cssEnd); // Pass new css + apply trans
 
                     // If someone outside want to catch our event particule before it move...
                     $canvas.trigger('emit', [window[FX.id][S.index]]); //> $canvas.bind('emit', function(e, $seed) {});
@@ -589,27 +646,23 @@
                     // Debug Styles ?
                     // db('FX', FX, 'S', S); db('S.cssStart', S.cssStart, 'S.cssEnd', S.cssEnd); return;
 
-                } // End if
-
-                // Stoping after reaching the end of the seeds stack ?
-                if (options.stopAtEnd && S.index == (options.maxSeeds - 1)) {
-                    return; // Stop ?
-                }
+                } // End if "S.index"
 
                 S = {}; // Reset this seed properties
 
-                // And do it again ?
-                if (options.delay) FX.timer = setTimeout(addSeed, options.delay);
-                else               window.requestAnimFrame(addSeed); // As fast as possible -> Waiting a "maxSpeed" param :-?
+                // Stoping after reaching the end of the seeds stack ?
+                if (!(options.stopAtEnd && S.index == (options.maxSeeds - 1))) {  // Don't stop ?
+                    // Or do it again ?
+                    if (options.delay) FX.timer = setTimeout(addSeed, options.delay);
+                    else               window.requestAnimFrame(addSeed); // As fast as possible -> Waiting a "maxSpeed" param :-?
+                }
 
             }; // End addSeed
 
             ///////////////////////////////////////////////////////////////////////////////
             // INIT
-            privateMethods.initFx();         // Init variables...
-            privateMethods.configSetupFix(); // Set default and clean somes values
             $canvas.bind(publicMethods);     // Map our methods to the element
-            $canvas.trigger('start');        // Init factory
+            $canvas.trigger('start');        // Call init factory through communication gate ^^
 
             return $canvas;                  // $this
 

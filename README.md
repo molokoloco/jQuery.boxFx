@@ -1,9 +1,14 @@
+***[ANNOUNCEMENT] Project to be released in the nexts days***  
+***"Work in Progress" For the moment i commit a lot...***
+
+---
+
 jQuery.boxFx.js
 ================
 
 **BoxFx JS is like a "DOM particles emitter" factory**  
 "*Clash the DOM with the most optimized jQuery animations framework on earth*" ^^   
-GPL/MIT/Copyleft - Beta V0.92 - [@molokoloco](https://twitter.com/#!/molokoloco/) 2011 - <http://b2bweb.fr>
+GPL/MIT/Copyleft - Beta V0.94 - [@molokoloco](https://twitter.com/#!/molokoloco/) 2011 - <http://b2bweb.fr>
 
 ---
 
@@ -14,8 +19,6 @@ GPL/MIT/Copyleft - Beta V0.92 - [@molokoloco](https://twitter.com/#!/molokoloco/
 
 ---
 
-***[ANNOUNCEMENT] Project to be released in the nexts days***  
-***"Work in Progress" For the moment i commit a lot...***
 
 WHAT are we talking about ?
 ================
@@ -227,11 +230,38 @@ RESSOURCES AND DEPENDENCIES
 ================
 
 The project is build with **jQuery 1.7** from <http://jquery.com/>, but i though 1.5 can work too  
-We also use jQuery Color for some fancy rainbow <https://github.com/jquery/jquery-color>
+I also use jQuery Color for some fancy rainbow <https://github.com/jquery/jquery-color>
 
     $("#block").css({
         backgroundColor: $.Color({ saturation: 0 })
-    }, 1500 );
+    }, 1500);
+
+Some stunning **CSS animations presets** with <https://github.com/daneden/animate.css>
+Check <http://daneden.me/animate> for more infos
+
+* Attention seekers
+    * flash bounce shake tada swing wobble pulse
+* Flippers (currently Webkit & IE10 only)
+    * flip flipInX flipOutX flipInY flipOutY
+* Fading entrances
+    * fadeIn fadeInUp fadeInDown fadeInLeft fadeInRight fadeInUpBig fadeInDownBig fadeInLeftBig fadeInRightBig
+* Fading exits
+    * fadeOut fadeOutUp fadeOutDown fadeOutLeft fadeOutRight fadeOutUpBig fadeOutDownBig fadeOutLeftBig fadeOutRightBig
+* Bouncing entrances
+    * bounceIn bounceInDown bounceInUp bounceInLeft bounceInRight
+* Bouncing exits
+    * bounceOut bounceOutDown bounceOutUp bounceOutLeft bounceOutRight
+* Rotating entrances
+    * rotateIn rotateInDownLeft rotateInDownRight rotateInUpLeft rotateInUpRight
+* Rotating exits
+    * rotateOut rotateOutDownLeft rotateOutDownRight rotateOutUpLeft rotateOutUpRight
+* Specials
+    * hinge rollIn rollOut
+
+    $("#banniere").boxFx({
+        clss: 'fadeInLeft'
+        transition: {clssTo:'bounceOutDown'}
+    });
 
 HTML5/CSS3 compatibility mode is managed with <https://github.com/Modernizr/Modernizr/blob/master/modernizr.js>  
 For the demo, MarkDown "*README.md*" it displayed as HTML with <http://code.google.com/p/pagedown/>
@@ -239,20 +269,31 @@ For the demo, MarkDown "*README.md*" it displayed as HTML with <http://code.goog
 Also, i would make a lot of kiss to <https://github.com> and <http://cloud9ide.com> :)  
 without forgeting <http://stackoverflow.com>. How can i have done before ?!
 
+
 Further READING about CSS3 and animations ? (You would ;)
 ================
 
-* <https://developer.mozilla.org/en/CSS/CSS_animations>
-* <http://www.w3.org/TR/css3-3d-transforms/#transform-functions>
-* <http://lea.verou.me/2011/10/animatable-a-css-transitions-gallery/>
-* <https://github.com/codler/jQuery-Css3-Finalize>
-* <http://ricostacruz.com/jquery.transit/>
-* <https://github.com/benbarnett/jQuery-Animate-Enhanced>
-* <https://gist.github.com/984039>
-* <http://lea.verou.me/2011/09/a-better-tool-for-cubic-bezier-easing/>
-* <http://lea.verou.me/2011/09/pure-css3-typing-animation-with-steps/>
-* <http://jsfiddle.net/leaverou/7rnQP/light/>
-* <http://jsfiddle.net/molokoloco/rf8zt/> (Building CSS animation(s) from 'options.keyframes' OBJ)
-* <http://jsfiddle.net/molokoloco/7rV7a/> (CSS 3D animations via sources)
-* <http://coding.smashingmagazine.com/2011/11/21/create-web-animations-with-paperjs/>
-* <http://lesscss.org/>
+* **Docs**
+    * <https://developer.mozilla.org/en/CSS/CSS_animations>
+    * <http://www.w3.org/TR/css3-3d-transforms/#transform-functions>
+    * <http://lea.verou.me/2011/10/animatable-a-css-transitions-gallery/>
+    * <http://instacss.com/>
+    * <http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/css3-transitions-and-transforms-from-scratch/>
+* **Plugins**
+    * <https://github.com/codler/jQuery-Css3-Finalize>
+    * <http://ricostacruz.com/jquery.transit/>
+    * <https://github.com/benbarnett/jQuery-Animate-Enhanced>
+    * <http://coding.smashingmagazine.com/2011/11/21/create-web-animations-with-paperjs/>
+    * <http://marcinignac.com/blog/timeline-js/>
+    * <http://lesscss.org/>
+    * <http://www.queness.com/post/9999/10-css-and-javascript-animation-plugins-frameworks-and-libraries>
+* **Examples**
+    * <https://gist.github.com/984039>
+    * <http://lea.verou.me/2011/09/a-better-tool-for-cubic-bezier-easing/>
+    * <http://lea.verou.me/2011/09/pure-css3-typing-animation-with-steps/>
+    * <http://jsfiddle.net/leaverou/7rnQP/light/>
+    * <http://jsperf.com/class-vs-style>
+    * <http://jsfiddle.net/molokoloco/rf8zt/> (CSS animation(s) with 'options.keyframes' OBJ)
+    * <http://jsfiddle.net/molokoloco/7rV7a/> (CSS 3D animations via sources)
+
+![CSS Transform] (http://d3pr5r64n04s3o.cloudfront.net/articles/042_css_animation_intro/tut.html/images/axis-5.jpg)
