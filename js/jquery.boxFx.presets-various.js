@@ -11,7 +11,6 @@ $(function() { // Wait jQuery to be ready
     
     // Here you can find various plugin declaration examples
     // At the bottom you can find the full options examples
-
     
     ///////////////////////////////////////////////////////////////////////////////
     // Simplest transition

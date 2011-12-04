@@ -107,13 +107,16 @@ var db  = function() { 'console' in window && console.log.call(console, argument
         document.getElementsByTagName('head')[0].appendChild(script);
     };
     
-    $.loadJs = function(src, async, callback) { // callJs('./new.js', function() { ok(); }); // On-demand same domain JS
+    // jQuery come with :
+    // $.getScript('./test.js', function(data, textStatus){});
+    // But i need something more flexy
+    /* $.loadJs = function(src, async, callback) { // loadJs('./new.js', function() { ok(); }); // On-demand same domain JS
         return $.ajax({
             url:src, async:async || 0, dataType:'script', cache:1,
             error:function(){ alert('Sorry, some JS file not found : '+src); },
             success:function() { if (callback && typeof callback == 'function') callback(); }
         });
-    };
+    }; */ // Commented : Already in index.html
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // CROSS-BROWSERS
