@@ -455,7 +455,7 @@
 
                     // Wait the end event of CSS transition : transitionend || webkitTransitionEnd ...
                     window[name_][index_].bind($.transitionEnd, function animationEnd(event) { // // Whom is the end event for transition ?
-                        // if (_db_) db($.transitionEnd, e.elapsedTime, name_, index_, options.stopAtEnd);
+                        // if (_db_) db($.transitionEnd, event.elapsedTime, name_, index_, options.stopAtEnd);
                         if (!name_ || !name_ in window || !index_ in window[name_]) return;
                         window[name_][index_].unbind($.transitionEnd); // $(this) is not the element
 

@@ -13,8 +13,8 @@ GPL/MIT/Copyleft - Beta V0.94 - [@molokoloco](https://twitter.com/#!/molokoloco/
 ---
 
 - Infos (on my blog)  : <http://goo.gl/P18db>
-- Plain demo          : <http://www.b2bweb.fr/framework/jquery.boxfx/>
 - Fiddle live example : <http://jsfiddle.net/molokoloco/sBqWq/>
+- Plain demo          : <http://molokoloco.github.com/jQuery.boxFx/>
 - Sources & download  : <https://github.com/molokoloco/jQuery.boxFx/>
 
 ---
@@ -276,6 +276,7 @@ Further READING about CSS3 and animations ? (You would ;)
 * **Docs**
     * <https://developer.mozilla.org/en/CSS/CSS_animations>
     * <http://www.w3.org/TR/css3-3d-transforms/#transform-functions>
+    * <http://www.w3schools.com/css3/css3_animations.asp>
     * <http://lea.verou.me/2011/10/animatable-a-css-transitions-gallery/>
     * <http://instacss.com/>
     * <http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/css3-transitions-and-transforms-from-scratch/>
