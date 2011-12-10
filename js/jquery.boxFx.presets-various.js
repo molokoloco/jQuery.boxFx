@@ -115,13 +115,14 @@ $(function() { // Wait jQuery to be ready
         styles2Class      : false, ////////////////////////////////////////////////////////////////////////////
 
         effect            : 'nebula',
+        stopAtEnd         : true,
         newAtTop          : 'random',
-        delay             : 500,
-        maxSeeds          : 100,
+        delay             : 0,
+        maxSeeds          : 180,
         maxSeedSize       : '50%',
-        emitterRadius       : '20px',
-        emitterCenterLeft   : '50%',
-        emitterCenterTop    : '50%',
+        emitterRadius     : 0,
+        emitterCenterLeft : '50%',
+        emitterCenterTop  : '50%',
 
         perspective       : '500px',
         keyframes         : [{ // Translate forever from left to right
@@ -133,10 +134,10 @@ $(function() { // Wait jQuery to be ready
             steps: [{
                     step            : '0%, 100%',
                     timingFunction  : $.cubicBeziers.easeInOutQuad,
-                    transform       : 'translate(0,0)'
+                    transform       : 'rotate(-60deg)'
                 }, {
                     step            : '50%',
-                    transform       : 'translate(150px,50px)'
+                    transform       : 'rotate(60deg)'
             }]
         }]
     };

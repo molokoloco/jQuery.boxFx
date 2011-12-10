@@ -279,40 +279,40 @@ $(function() { // Wait jQuery to be ready
 
     optionsEffects.typoGraphe = {
         seeds             : '<span>DOM<br />is alive</span>',
-        effect            : 'artifice',
+        effect            : 'center',
         newAtTop          : false,
-        delay             : 190,
-        maxSeeds          : 33,
-        emitterRadius     : '33%',
+        stopAtEnd         : true,
+        delay             : 50,
+        maxSeeds          : 7,
+        emitterRadius     : '0%',
         emitterCenterLeft : '50%',
-        emitterCenterTop  : '130%',
+        emitterCenterTop  : '80%',
         styles            : {
             position         : 'absolute',
-            width            : 180,
-            height           : 100,
-            transform        : 'scale(0.1)',
-            font             : 'bold 35px Trebuchet,Verdana',
-            color            : 'grey',
+            width            : 500,
+            height           : 300,
+            transform        : 'scale(0.01) translate(0, -300px)',
+            font             : 'bold 110px Trebuchet,Verdana',
+            color            : 'yellow',
             textAlign        : 'center',
-            textShadow       : '0 0 1px grey, 0 0 20px black',
+            textShadow       : '0 0 10px yellow',
 
             // http://goo.gl/5KhFZ // Bug // TODO
             //maskImage       : 'url(http://d3pr5r64n04s3o.cloudfront.net/articles/042_css_animation_intro/tut.html/images/axis-5.jpg)',
             maskImage        : '-'+$.browserPrefix+'-gradient(linear, left top, left bottom, from(rgba(0,0,0,0)), color-stop(50%, rgba(0,0,0,1)), to(rgba(0,0,0,0)))',
             maskOrigin       : 'content',
-            textFillColor    : 'transparent',
+            textFillColor    : 'orange',
             backgroundClip   : 'text',
 
             borderRadius     : 0
         },
         transition        : {
-            duration         : '2500ms',
-            timingFunction   : 'ease',
+            duration         : '2000ms',
+            timingFunction   : 'ease-in-out',
             stylesTo         : {
-                transform        : 'scale(1)'//,
-                //color            : 'transparent',
-                //textShadow       : '0 0 1px rgba(255,255,255,1)',
-                //textStroke       : '1px rgba(0,0,0,.33)'
+                transform        : 'scale(1) translate(0, -70px)',
+                textShadow       : '0 0 1px yellow',
+                textFillColor    : 'yellow'
             }
         }
     };

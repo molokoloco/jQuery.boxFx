@@ -44,7 +44,7 @@
         delay                 : null,        // 1500, 0, null // time (ms) interval between seeds // 0 use requestAnimationFrame (as fast as possible) // 'null' : defaut to slowest anim
         maxSeeds              : null,        // Max "seeds" at one moment // Overrided by 'options.targets.length' if setted // else by default == 'options.transition.duration / options.delays'
         newAtTop              : 'random',    // 'random' OR bolean // New element appear in top of others ?
-        stopAtEnd             : null,        // Regenerate elements forever or not, after transitionEnd
+        stopAtEnd             : false,       // Regenerate elements forever or not, after transitionEnd
 
         // Pure CSS3 styles, cross-browser compatibility added when possible with modernizr.js
         // Can be overriden by options.effect && options.transition.stylesTo
@@ -294,10 +294,10 @@
                          // Convert options.transition config to true style definition
                          options.transition.stylesTo.transition = options.transition.properties+' '+options.transition.duration+' '+options.transition.timingFunction;
                     }
-
-                    if (options.transition && !options.effect && options.stopAtEnd !== false) // With transition want to stop at the end, with effect or keyframes, forever...
+                    
+                    // With transition want to stop at the end, with effect or keyframes, forever...
+                    if (options.transition && !options.effect && !options.maxSeeds)
                         options.stopAtEnd = true;
-                    else options.stopAtEnd = false;
 
                     //if (options.styles && options.styles2Class)
                         //options.stylesClss = $.buildStyleClass(options.styles);
@@ -435,8 +435,7 @@
                 ///////////////////////////////////////////////////////////////////////////////
                 // Apply CSS on the element
                 applyCssStart: function(name_, index_, cssStart_) {
-                    // if (_db_) 
-                    db('applyCssStart()');
+                    // if (_db_) db('applyCssStart()');
                     if (cssStart_) {
                         $.addCssUnit(cssStart_); // Set back 'px' units // Sometimes does not need a REDOO ???
                         window[name_][index_].crossCss(cssStart_); // Custom style // Cross-browsers CSS+
@@ -451,8 +450,7 @@
                 ///////////////////////////////////////////////////////////////////////////////
                 // Apply ending CSS styles (Apply transition at this moment)
                 applyCssEnd: function(name_, index_, cssEnd_) {
-                    // if (_db_) 
-                    db('applyCssEnd()');
+                    // if (_db_) db('applyCssEnd()');
                     if (!name_ || !(name_ in window) || !(index_ in window[name_]))
                         return; // When killing app, in case some events end after (timeout)
                     if (cssEnd_) {
@@ -463,8 +461,7 @@
                 ///////////////////////////////////////////////////////////////////////////////
                 // Apply ending CSS class
                 applyClssEnd: function(name_, index_) {
-                    // if (_db_) 
-                    db('applyClssEnd()');
+                    // if (_db_) db('applyClssEnd()');
                     if (!name_ || !(name_ in window) || !(index_ in window[name_]))
                         return; // When killing app, in case some events end after (timeout)
                     if (options.clss)
@@ -624,8 +621,7 @@
                     };
 
                     window[FX.id][S.index].bind($.animationStart, eventObjContext, function animStart(event) { // // Whom is the end event for transition ?
-                        // if (_db_) 
-db($.animationStart);
+                        // if (_db_) db($.animationStart);
                         if (!event.data.name || !(event.data.name in window) || !(event.data.index in window[event.data.name]))
                             return;
                         var Se = window[event.data.name][event.data.index]; // $(this) is not the element
@@ -636,8 +632,7 @@ db($.animationStart);
 
                     // Todo add support for animation iterations ! We cut at the end of the first loop
                     window[FX.id][S.index].bind($.animationEnd, eventObjContext, function animEnd(event) { // // Whom is the end event for transition ?
-                        // if (_db_) 
-db($.animationEnd);
+                        // if (_db_) db($.animationEnd);
                         if (!event.data.name || !(event.data.name in window) || !(event.data.index in window[event.data.name]))
                             return;
                         var Se = window[event.data.name][event.data.index];
@@ -747,6 +742,7 @@ db($.animationEnd);
                 } // End if "S.index"
 
                 // Stoping after reaching the end of the seeds stack ?
+                
                 if (!(options.stopAtEnd && S.index == (options.maxSeeds - 1))) {  // Don't stop ?
                     S = {}; // Reset this seed properties
                     // ...or Do it again ?
