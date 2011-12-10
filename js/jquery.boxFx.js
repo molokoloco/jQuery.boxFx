@@ -25,7 +25,7 @@
     // Options above a setted to the minimal, they makes things works when no values are provided
     // Particules seeds are 'options.seeds' or 'options.targets'...
 
-    var _db_ = true; // Activate boxFx debug logs ?
+    var _db_ = false; // Activate boxFx debug logs ?
 
     $.boxFxOptions = {                       // $.emitter() defaults params Object
         seeds                 : '<div/>',    // '<tag/>' OR '<div class="test">N°{id} - {title}</div>' // Generated DOM element with or without template...
