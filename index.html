@@ -1,18 +1,36 @@
-<!--// //////////////////////////////////////////////////////////////////////////////
-// Guess what ? that a Work In Progress ! Amazing W0oT ? by @molokoloco - 2011
-// All sources on GitHub : https://github.com/molokoloco/ Take it, smash it ;)
-/////////////////////////////////////////////////////////////////////////////// //-->
 <!DOCTYPE html>
+<!--//
+           _               _     _      _              _     _      _                      _        _
+          / /\            /\ \ /_/\    /\ \           /\ \ /_/\    /\ \                   /\ \     / /\
+         / /  \          /  \ \\ \ \   \ \_\         /  \ \\ \ \   \ \_\                  \ \ \   / /  \
+        / / /\ \        / /\ \ \\ \ \__/ / /        / /\ \ \\ \ \__/ / /                  /\ \_\ / / /\ \__
+       / / /\ \ \      / / /\ \ \\ \__ \/_/        / / /\ \_\\ \__ \/_/                  / /\/_// / /\ \___\
+      / / /\ \_\ \    / / /  \ \_\\/_/\__/\       / /_/_ \/_/ \/_/\__/\         _       / / /   \ \ \ \/___/
+     / / /\ \ \___\  / / /   / / / _/\/__\ \     / /____/\     _/\/__\ \       /\ \    / / /     \ \ \
+    / / /  \ \ \__/ / / /   / / / / _/_/\ \ \   / /\____\/    / _/_/\ \ \      \ \_\  / / /  _    \ \ \
+   / / /____\_\ \  / / /___/ / / / / /   \ \ \ / / /         / / /   \ \ \ _   / / /_/ / /  /_/\__/ / /
+  / / /__________\/ / /____\/ / / / /    /_/ // / /         / / /    /_/ //\_\/ / /__\/ /   \ \/___/ /
+  \/_____________/\/_________/  \/_/     \_\/ \/_/          \/_/     \_\/ \/_/\/_______/     \_____\/
+
+    Work in Progress - 2011 - Sources on GitHub : https://github.com/molokoloco/ - Take it, smash it
+
+//-->
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="content-language" content="fr"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>jQuery.boxFx.js demo</title>
-    <meta name="description" content="" />
     <meta name="author" content="Remixed by @molokoloco 2011 - http://b2bweb.fr" />
     <meta name="viewport" content="width=720" />
+
+    <!--// Stylesheets for the demo here //-->
+    <link href="http://fonts.googleapis.com/css?family=Droid+Sans+Mono|Droid+Sans" rel="stylesheet" type="text/css">
     <link href="./css/index.css" rel="stylesheet" type="text/css">
+
+    <!--// Stylesheets that provide a lot of animations presets - can be used with the plugin //-->
+    <link href="./css/animates.css" rel="stylesheet" type="text/css">
+
     <style type="text/css">
 
     /* ---- BoxFx #1 ---- */
@@ -26,8 +44,11 @@
         overflow:hidden; /* Crop particule visibility inside box ? */
         margin-left: 50px; /* centered in our page div */
     }
-    
-    /* You can also choose to apply plain CSS to seeds, but in this case you must set browser-prefix */
+
+    /*
+        You can also choose to apply plain CSS to seeds, but in this case you must set browsers-prefix
+        Depending on your settings, plugin will generate some statics CSS class to (Appended in head)
+    */
     /*
         div.seed {
             border:1px solid rgba(0,0,0,0.3);
@@ -79,81 +100,110 @@
     */
 
     </style>
-    
-    <!-- modernizr first JS to load -->
-    <script src="./js/modernizr.min.js" type="text/javascript"></script>
 
-    <!--[if IE]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <!-- modernizr - first JS to load -->
+    <script src="./js/modernizr.min.js" type="text/javascript"></script>
+    <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 <body>
 
-    <div id="page">
-        <p>
-           <strong>Motion effects JS plugin powered with CSS3 animations and transitions</strong><br />
-           <strong><a href="https://github.com/molokoloco/jquery.boxFx" target="_blank" title="Fork me on GitHub">jQuery.boxFx.js</a> (Beta V0.92) is like a "DOM particles emitter factory"</strong><br />
-           <br />
-           <em>Clash the DOM with the most optimized jQuery animations framework on earth</em> ^^
-        </p>
-        
-        <div class="spacer"></div>
+    <div class="pageHeader">
+       <h2>Motion effects JS plugin, powered with CSS3 animations and transitions</h2>
+       <h2><a href="https://github.com/molokoloco/jquery.boxFx" target="_blank" title="Fork me on GitHub">jQuery.boxFx.js</a> is like a "DOM particles emitter factory" [Beta]</h2>
+       <p><em>Clash the DOM with the most optimized jQuery animations framework on earth</em> ^^<p>
+    </div>
+
+    <div class="page">
         <div id="presets" title="Some examples you can play with :)">
             <!--// Here come the demo effects presets (cf. bottom of this page) //-->
         </div>
-        
+
         <div class="spacer"></div>
         <div id="boxFxZone1">
             <!--// Here come the Seeds //-->
         </div>
 
         <p style="text-align:center">
-            <a href="javascript:void(0);" id="start">Start</a> |
+            <a href="javascript:void(0);" id="play">Play</a> |
             <a href="javascript:void(0);" id="stop">Stop</a> |
             <a href="javascript:void(0);" id="reset" title="Clear elements cache">Reset</a>
         </p>
-        
+
         <div class="spacer"></div>
-        <p>Live edit funny boxFx plugin properties !<p>
-        
-        <div class="spacer"></div> 
+        <h2>Live edit funny boxFx plugin properties !</h2>
+
+        <div class="spacer"></div>
         <div id="edit">
             <!--// Here come the Editor (demo) //-->
         </div>
+
+        <div class="spacer"></div>
+        <h2>Tips</h2>
+
+        <div class="spacer"></div>
+        <ul>
+            <li>Add your properties, set unwanted existing ones to "null" (live editor constrain)</li>
+            <li><em>gradient</em>, <em>boxShadow</em>, <em>opacity</em>, <em>borderRadius</em>... are CPU consumming</li>
+            <li>Some properties like functions doesn't appear in the JSON export you see above (Print only string value)</li>
+            <li>Read the lovely <a href="./README.md" id="pause">./README.md</a> for (much) more infos ~=[,,_,,]:3</li>
+        </ul>
         
         <div class="spacer"></div>
-        <p class="tips">
-            <strong>Tips :</strong> Add your properties, set unwanted existing ones to "null" (live editor constrain)<br />
-            <em>gradient</em>, <em>boxShadow</em>, <em>pacity</em>, <em>borderRadius</em>... are CPU consumming<br />
-            <br />
-            Read the fucking <a href="./README.txt" id="pause">./README.txt</a> for (much) more infos ~=[,,_,,]:3<br />
-            <br />
-            There so much possibilities... help me if you found bug
-            Fork it and get updated on GitHub : <a href="https://github.com/molokoloco/jquery.boxfx" target="_blank">https://github.com/molokoloco/jquery.boxfx</a><br />
-            Edit it in your <a href="http://cloud9ide.com" target="_blank">http://cloud9ide.com</a> editor and send me feedback ;)<br />
-            <br />
-            → Sugestions or effects to share ? Contact me : <a href="mailto:molokoloco@gmail.com">molokoloco@gmail.com</a>
+        <p>There so much possibilities... help me if you found bug or enhancements<br />
+        → Sugestions or effects to share ? Contact me : <a href="mailto:molokoloco@gmail.com">molokoloco@gmail.com</p>
+        <div class="spacer"></div>
+        <ul>
+            <li>Fork it and get updated on GitHub : <a href="https://github.com/molokoloco/jquery.boxfx" target="_blank">https://github.com/molokoloco/jquery.boxfx</a></li>
+            <li>Edit it in your <a href="http://cloud9ide.com" target="_blank">http://cloud9ide.com</a> editor and send me feedback ;)</li>
+            <li>Check <a href="http://molokoloco.github.com/jQuery.boxFx/boxfx-minimalist.html" target="_blank">./boxfx-minimalist.html</a> source code for minimalists settings</li>
+        </ul>
+        
+        <div class="spacer"></div>
+        <p style="text-align:center;">
+            <a href="https://github.com/molokoloco/jQuery.boxFx/zipball/master" target="_blank"><img width="45" src="https://github.com/images/modules/download/zip.png"></a> 
+            <a href="https://github.com/molokoloco/jQuery.boxFx/tarball/master" target="_blank"><img width="45" src="https://github.com/images/modules/download/tar.png"></a>
         </p>
+        
+        <!-- Social APIs -->
+        <div class="spacer"></div>
+        <div id="sharing" class="fade">
+            <g:plusone size="medium" count="true"></g:plusone> <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="molokoloco">Tweet</a><br />
+            <iframe id="facebook" src="javascript:void(0)" scrolling="no" frameborder="0" width="100%" height="20" allowtransparency="true"></iframe>
+        </div>
     </div>
-    
-    <div class="spacer"></div>
-    
-    <pre id="readMe">
-    	<!--// inlusion of ./README.txt //-->
-    </pre>
+
+    <div class="pageHeader">
+       <h2>./README.txt</h2>
+    </div>
+    <div id="readMe" class="page">
+        <!--// inlusion of ./README.md //-->
+    </div>
+
+    <div class="pageHeader">
+       <h2>DISQUS</h2>
+    </div>
+    <div id="disqus_thread" class="page">
+        <script type="text/javascript">
+            // DISQUS comments system, must by global
+            var disqus_url    = 'http://molokoloco.github.com/jQuery.boxFx/', // This page URL
+            disqus_identifier = 'jqueryboxfx', // I give this name...
+            disqus_domain     = 'disqus.com', // Don't touch
+            disqus_shortname  = 'jqueryboxfx', // Get it by creating a new forum under Discuss dashboard
+            disqus_title      = 'jquery.boxFx.js'; // Page title (Will be displayed in comments)
+        </script>
+        <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
 
     <div class="spacer"></div>
-    
-    <!--// Here come the DISCUSS ? Forum //-->
-    
-    <div class="spacer"></div>
-    
+
+    <!-- GitHub ribbon -->
     <a href="https://github.com/molokoloco/jquery.boxFx" target="_blank" title="Fork me on GitHub" class="ribbon">
         <img src="http://www.b2bweb.fr/bonus/jx/images/github-ribbon.png" alt="GitHub" width="100" height="100">
     </a>
     
     <!-- Our friend jQuery -->
-    <script src="./js/jquery-1.7.min.js"></script>
+    <script src="./js/jquery-1.7.js"></script>
+    <script src="./js/jquery.color.min.js"></script>
     
     <!-- BoxFx Plugin + tools dependancy : ".min.js" for minimified version -->
     <script src="./js/jquery.boxFx.tools.js" type="text/javascript"></script>
@@ -164,21 +214,25 @@
     <script src="./js/jquery.boxFx.presets-full-options.js" type="text/javascript"></script>
     <script src="./js/jquery.boxFx.presets-various.js" type="text/javascript"></script>
     
+    <!-- For the demo, displaying MarkDown README.md with http://code.google.com/p/pagedown/ -->
+    <script src="./js/Markdown.Converter.js" type="text/javascript"></script>
+    <script src="./js/Markdown.Sanitizer.js" type="text/javascript"></script>
+    
+    
     <script type="text/javascript">
 
-$(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
-
+var initDemoPage = function() {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // jQuery boxFx demo presets configs
+    // jQuery boxFx (demo) presets
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Some "options presets" for the demo
-    var optionsVarious     = window.optionsVarious || {},   // optionsVarious object contain a list of various options
-        optionsEffects     = window.optionsEffects || {},
-        boxFxFullOptions   = window.boxFxFullOptions || {}; // boxFxFullOptions contain only one (big) config
-    
+    var optionsVarious     = window.optionsVarious   || {}, // optionsVarious object contain a list of various options
+        optionsEffects     = window.optionsEffects   || {}, // Some effects with transitions
+        boxFxFullOptions   = window.boxFxFullOptions || {}; // boxFxFullOptions contain only one (full) options config
+
     if (!optionsVarious.simpleTransition)
-        return alert('For the demo you must include presets files');
+        return alert('For the demo you must include presets files "./js/jquery.boxFx.presets-various.js"...');
 
     // Take a default simple effect
     var effect = optionsVarious.simpleTransition;
@@ -186,46 +240,36 @@ $(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
     // We have a reference to effect in current page anchor ?
     // cf. buttonsClickSetOptions() below
     var hash = window.location.hash || null;
-    if (hash) {
+    if (hash) { // Effect exist in our presets ?
         hash = hash.substr(1); // Strip #
-        if (hash in optionsVarious) // Effect exist in our presets ?
-            effect = optionsVarious[hash]; 
-        else if (hash in optionsEffects)
-            effect = optionsEffects[hash];
-        else if (hash == 'boxFxFullOptions')
-            effect = boxFxFullOptions;
+        if (hash in optionsVarious)          effect = optionsVarious[hash];
+        else if (hash in optionsEffects)     effect = optionsEffects[hash];
+        else if (hash == 'boxFxFullOptions') effect = boxFxFullOptions;
     }
-    
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    else hash = 'simpleTransition'; // Default hightlighted links
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // APPLY effect !
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	var $boxFx1 = $('div#boxFxZone1').boxFx(effect);
+
+    var $boxFx1 = $('div#boxFxZone1').boxFx(effect);
 
     // Links to control boxFx
-    $('a#start,a#stop,a#reset').click(function() {
-        $boxFx1.trigger(this.id); // Send orders to plugin : start/stop/reset...
+    $('a#play,a#stop,a#reset').click(function() {
+        $boxFx1.trigger(this.id); // Send orders to plugin : play/stop/reset...
+        if (this.id == 'reset') $boxFx1.trigger('start'); // Auto reload, because only "play" won't work without re-init
     });
 
     // Et voilà :)
-    
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Include ./README.txt for more infos !!!
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	$.ajax({
-        url: './README.txt',
-        success: function(text){        
-            $('pre#readMe').text(text); 
-        }
-    });
-    
+
+    // Here below, you can find examples on how to interact in live with emitter and seeds
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Catch new Seed emit event and display stats (only for the demo)
     // Inspired from https://github.com/mrdoob/stats.js
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	var now = Date.now(),
+
+    var now = Date.now(),
         T = {frames:0, time:now, timeLastSecond:now, fps:0},
         $stats = $('<div id="sps" title="Seeds/Seconds"></div>').appendTo($boxFx1);
 
@@ -243,9 +287,9 @@ $(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Example : Move the boxFxCenter, when mouse is over
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-	var offset = $boxFx1.offset(),
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    var offset = $boxFx1.offset(),
         mouseIsMove = function(evt) {
             $boxFx1.trigger('update', [{ // Pass data through event callback
                 emitterCenterLeft : evt.pageX - offset.left,
@@ -271,8 +315,8 @@ $(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // EMITTER LIVE EDITOR (only for the demo)
     // JSON.parse - http://jsfiddle.net/molokoloco/rSMLU/
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     var getQ = function(o) { return (o && typeof o == 'string' ? '\'' : ''); }, // Get Quotes '
         obj2Json = function(_options) { // Convert "options" js Object to string
             var txt = '';
@@ -295,8 +339,9 @@ $(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
         textareaUpdateBoxFx = function(event) {
             var val = $.trim($(this).val());
             if (!val) return;
-            var liveOptions = $.parseJSON(val); // prefer jQUery instead of window.JSON.parse()
-            if (!liveOptions) db('Parsing error', e);
+            try { var liveOptions = $.parseJSON(val); } // prefer jQuery instead of window.JSON.parse()
+            catch(e) { db('JSON Parse error'); }
+            if (!liveOptions) db('JSON Parsing error');
             else $boxFx1.trigger('update', [liveOptions]);
         };
 
@@ -304,49 +349,134 @@ $(document).ready(function(){ // PAGE DOM READY, CUSTOM SCRIPT EXAMPLE
     $editor = $('<textarea id="options" spellcheck="false">'+obj2Json(effect)+'</textarea>')
         .bind('keyup', textareaUpdateBoxFx)
         .appendTo('div#edit');
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Create buttons for all our PRESETS
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	var buttonsClickSetOptions = function(event) {
-		event.preventDefault();
-		var effect  = this.id.substr(4), // 'btn_' + name
-			options = '';
-		if (effect in optionsVarious)
-			options = optionsVarious[effect];
-		else if (effect in optionsEffects)
-			options = optionsEffects[effect];
-		else if (effect == 'boxFxFullOptions')
-			options = boxFxFullOptions;
-		if (options) {
-			$('a.button.selected').removeClass('selected');
-			$(this).addClass('selected');
-			$editor.val(obj2Json(options));
-			$boxFx1.trigger('setOptions', [options]);
-			window.location.hash = effect; // Update browser, give link for the effect
-		}
-		return false;
-	};
-		
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    var buttonsClickSetOptions = function(event) {
+        event.preventDefault();
+        var effect  = this.id.substr(4), // 'btn_' + name
+            options = '';
+        if (effect in optionsVarious)
+            options = optionsVarious[effect];
+        else if (effect in optionsEffects)
+            options = optionsEffects[effect];
+        else if (effect == 'boxFxFullOptions')
+            options = boxFxFullOptions;
+        if (options) {
+            $('a.button.selected').removeClass('selected');
+            $(this).addClass('selected');
+            $editor.val(obj2Json(options));
+            $boxFx1.trigger('setOptions', [options]);
+            window.location.hash = effect; // Update browser, give link for the effect
+        }
+        return false;
+    };
+
     var $presets = $('div#presets'),
         btnHtml = [];
-	
+
     // optionsVarious
     for(var k in optionsVarious)
-        btnHtml.push('<a id="btn_'+k+'" href="javascript:void(0);" class="button">'+k+'</a>'); // 'a.button'
-    $presets.append('<p class="tips"><strong>Various options presets :</strong><br />'+btnHtml.join(', ')+'</p>');
-    
-	// optionsEffects
+        btnHtml.push('<a id="btn_'+k+'" href="javascript:void(0);" class="button">'+k+'</a>');
+    $presets.append('<p><strong>Various options presets :</strong> '+btnHtml.join(', ')+'</p>');
+
+    // optionsEffects
     btnHtml = [];
     for(var k in optionsEffects)
-        btnHtml.push('<a id="btn_'+k+'" href="javascript:void(0);" class="button">'+k+'</a>'); // 'a.button'
-    $presets.append('<p class="tips"><strong>Effects with transitions :</strong><br />'+btnHtml.join(', ')+'</p>');
-    
-	// boxFxFullOptions
-    $presets.append('<p class="tips"><strong>Full plugin options :</strong><br /><a id="btn_boxFxFullOptions" href="javascript:void(0);" class="button">boxFxFullOptions</a></p>');
+        btnHtml.push('<a id="btn_'+k+'" href="javascript:void(0);" class="button">'+k+'</a>');
+    $presets.append('<p><strong>Effects with transitions :</strong> '+btnHtml.join(', ')+'</p>');
+
+    // options3Danimations // TODO :)
+    btnHtml = [];
+    /*for(var k in optionsEffects)
+        btnHtml.push('<a id="btn_'+k+'" href="javascript:void(0);" class="button">'+k+'</a>'); */
+    $presets.append('<p><strong>3D animations :</strong> Examples TODO '+btnHtml.join(', ')+'</p>');
+
+    // boxFxFullOptions
+    $presets.append('<p><strong>Full plugin options :</strong> <a id="btn_boxFxFullOptions" href="javascript:void(0);" class="button">boxFxFullOptions</a></p>');
 
     $presets.delegate('a.button', 'click', buttonsClickSetOptions);
-    
+
+    if (hash) $('a#btn_'+hash).addClass('selected'); // Auto-select current effect link ?
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Include ./README.txt for more infos !!!
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    $.ajax({
+        url: './README.md',
+        success: function(markdown){
+            var converter1 = Markdown.getSanitizingConverter(); // http://code.google.com/p/pagedown/
+            markdown = converter1.makeHtml(markdown);
+            $('div#readMe').html(markdown);
+        }
+    });
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Social API
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    if (/molokoloco\.github\.com/.test(document.location)) {
+        $(window).bind('load', function() { // Load social plugins when all is done...
+            $.getJs('http://'+disqus_shortname+'.disqus.com/embed.js', 1); // get mini forum
+            $.getJs('https://apis.google.com/js/plusone.js', 1);
+            $.getJs('http://platform.twitter.com/widgets.js', 1);
+            $('iframe#facebook')
+                .load(function() { getJs('http://connect.facebook.net/en_US/all.js#appId=235087756512662&amp;xfbml=1', 1); })
+                .attr('src', 'http://www.facebook.com/plugins/like.php?app_id=235087756512662&amp;href&amp;send=false'+
+                             '&amp;layout=button_count&amp;width=120&amp;height=20&amp;show_faces=false&amp;action=like&amp;colorscheme=light');
+        });
+    }
+};
+
+
+$(document).ready(function() {
+    initDemoPage();
 });
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// OK we're ready
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+
+    // jQuery come with : $.getScript('./test.js', function(data, textStatus){});
+    // But i need something more flexy
+    $.loadJs = function(src, async, callback) { // loadJs('./new.js', function() { ok(); }); // On-demand same domain JS
+        return $.ajax({
+            url:src, async:async || 0, dataType:'script', cache:1,
+            error:function(){ alert('Sorry, some JS file not found : '+src); },
+            success:function() { if (callback && typeof callback == 'function') callback(); }
+        });
+    };
+
+
+    // Smooth ? load JS files dependancies
+    $.when(
+        // Helpers for colors
+        $.loadJs('./js/jquery.color.min.js'),
+        // BoxFx Plugin + tools dependancy : ".min.js" for minimified version
+        $.loadJs('./js/jquery.boxFx.tools.js'),
+        $.loadJs('./js/jquery.boxFx.js'),
+        // Only for the demo, somes effects presets
+        $.loadJs('./js/jquery.boxFx.presets-effects.js'),
+        $.loadJs('./js/jquery.boxFx.presets-full-options.js'),
+        $.loadJs('./js/jquery.boxFx.presets-various.js'),
+        // For the demo, displaying MarkDown README.md with http://code.google.com/p/pagedown/
+        $.loadJs('./js/Markdown.Converter.js'),
+        $.loadJs('./js/Markdown.Sanitizer.js')
+    ).done(function(){
+        $(document).ready(function() {
+        //setTimeout(function() { // Loaded... and parsed 
+            initDemoPage();
+        //}, 0);
+        });
+    });
+*/
+
 </script>
 </body>
+</html>

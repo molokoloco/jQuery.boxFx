@@ -4,69 +4,13 @@
     // Dependancy to moderniz.js for $.fn.crossCss
 */
 
-(function ($, window) {
+// I use this for debuging ^^
+var db  = function() { 'console' in window && console.log.call(console, arguments); };
 
+(function ($, window) {
+    
     $.toolsLoaded = true; // Declare tools.js as loaded...
     
-    String.prototype.toCamel = function(){
-        return this.replace(/(\-[a-z])/g, function($1){return $1.toUpperCase().replace('-','');});
-    };
-    
-    String.prototype.toDash = function(){
-        return this.replace(/([A-Z])/g, function($1){return '-'+$1.toLowerCase();});
-    };
-    
-    // Cross-browsers requestAnimationFrame
-    window.requestAnimFrame = (function() {
-      return  window.requestAnimationFrame       ||
-              window.webkitRequestAnimationFrame ||
-              window.mozRequestAnimationFrame    ||
-              window.oRequestAnimationFrame      ||
-              window.msRequestAnimationFrame     ||
-              function(/* function */ callback, /* DOMElement */ element){
-                  window.setTimeout(callback, 1000 / 60);
-              };
-    })();
-    
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Somes utilities, setted as public through the jQuery obj
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    // Generate random numbers...
-    $.getRand = function(miin, maax) {
-        return parseInt(miin + (Math.random() * (maax - miin)), 10);
-    };
-    
-    // Lightest TPL // $.getTpl('<div>N°{id} - {title}</div>', {id:1, title:'toto'}) == '<div>N°1 - toto</div>'
-    $.getTpl = function(tpl, val) {
-        for (var p in val)
-            tpl = tpl.replace(new RegExp('({'+p+'})', 'g'), val[p] || '');
-        return tpl;
-    };
-    
-    var uniqueId = null;
-    $.getUniqueName = function(prefix) {
-        if (!uniqueId) uniqueId = (new Date()).getTime();
-        return prefix + (uniqueId++);
-    };
-    
-    /*
-    $.requireJs = function(jsPath) { // getJs('http://other.com/other.js'); // Native external link
-        var s = document.createElement('script');
-        s.setAttribute('type', 'text/javascript');
-        s.setAttribute('src', jsPath);
-        document.getElementsByTagName('head')[0].appendChild(s);
-    };
-
-    $.callJs = function(src, async, callback) { // callJs('./other.js', function() { ok(); }); // On-demand same domain JS
-        $.ajax({
-            url:src, async:async || 0, dataType:'script', cache:1,
-            error:function(){ alert('Sorry, some JS file not found : '+src); },
-            success:function(response) { if (callback && typeof callback == 'function') callback(); }
-        });
-    };
-    */
-
     // Beziers equation approximations from Matthew Lein's Ceaser: http://matthewlein.com/ceaser/
     // Remixed for this use : "transition:'all 3000ms '+$.cubicBeziers.easeInOutQuad;"
     // If values outside range 0>=X=<1 can produce a bug, in chrome for example
@@ -98,6 +42,82 @@
     };
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Somes prototyping utilities...
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    // "border-radius" -> "borderRadius"
+    String.prototype.toCamel = function() {
+        return this.replace(/(\-[a-z])/g, function($1){return $1.toUpperCase().replace('-','');});
+    };
+    
+    // "borderRadius" -> "border-radius"
+    String.prototype.toDash = function(){
+        return this.replace(/([A-Z])/g, function($1){return '-'+$1.toLowerCase();});
+    };
+    
+    // Cross-browsers requestAnimationFrame
+    // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+    window.requestAnimFrame = (function() {
+      return  window.requestAnimationFrame       ||
+              window.webkitRequestAnimationFrame ||
+              window.mozRequestAnimationFrame    ||
+              window.oRequestAnimationFrame      ||
+              window.msRequestAnimationFrame     ||
+              function(/* function */ callback, /* DOMElement */ element){
+                  window.setTimeout(callback, 1000 / 60);
+              };
+    })();
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Somes utilities, setted as public through the jQuery obj
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    // Generate random numbers...
+    $.getRand = function(miin, maax) {
+        return parseInt(miin + (Math.random() * (maax - miin)), 10);
+    };
+    
+    // Lightest TPL // $.getTpl('<div>{title}</div>', {title:'toto'}) // '<div>toto</div>'
+    $.getTpl = function(tpl, val) {
+        for (var p in val)
+            tpl = tpl.replace(new RegExp('({'+p+'})', 'g'), val[p] || '');
+        return tpl;
+    };
+    
+    var uniqueId = null;
+    $.getUniqueName = function(prefix) {
+        if (!uniqueId) uniqueId = (new Date()).getTime();
+        return (prefix ? prefix : 'id_') + uniqueId++;
+    };
+    
+    // Deep clean obj keys when set with "null" or empty values (config/CSS/...)
+    $.removeObjEmptyValue = function(obj) {
+        $.each(obj, function(i, val) {
+            if (!val && val !== 0 && val !== false) delete obj[i];
+            else if (typeof obj[i] == 'object')     $.removeObjEmptyValue(obj[i]);
+        });
+    };
+    
+    $.getJs = function(jsPath, async) { // getJS('http://other.com/new.js'); // External link
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = jsPath;
+        if (async) script.async = true;
+        document.getElementsByTagName('head')[0].appendChild(script);
+    };
+    
+    // jQuery come with :
+    // $.getScript('./test.js', function(data, textStatus){});
+    // But i need something more flexy
+    /* $.loadJs = function(src, async, callback) { // loadJs('./new.js', function() { ok(); }); // On-demand same domain JS
+        return $.ajax({
+            url:src, async:async || 0, dataType:'script', cache:1,
+            error:function(){ alert('Sorry, some JS file not found : '+src); },
+            success:function() { if (callback && typeof callback == 'function') callback(); }
+        });
+    }; */ // Commented : Already in index.html
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // CROSS-BROWSERS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -109,7 +129,10 @@
                 return browsers[p];
         return false;
     })(navigator.userAgent.toLowerCase());
-
+    
+    //////////////// TODO : OPTIMIZE THIS ! ///////////////
+    // Waiting some crazy guy to implements this //////////
+    
     // Cf Modernizr doc // "Static" fct
     $.transitionEnd = (function(Modernizr) { // Todo : add support for animationstart, animationend, animationiteration
         var eventEnd = {
@@ -120,11 +143,34 @@
             'transition'       :'transitionEnd'
         };
         return eventEnd[Modernizr.prefixed('transition')];
-
     })(Modernizr);
     
+    // AS THEY SAYS, this is experimental ^^
+    $.animationStart = (function(Modernizr) { 
+        var eventEnd = {
+            'WebkitAnimation' :'webkitAnimationStart',
+            'MozAnimation'    :'animationstart',
+            'OAnimation'      :'oAnimationStart',
+            'msAnimation'     :'msAnimationStart',
+            'animation'       :'animationStart'
+        };
+        return eventEnd[Modernizr.prefixed('animation')];
+    })(Modernizr);
+    
+    $.animationEnd = (function(Modernizr) { 
+        var eventEnd = {
+            'WebkitAnimation' :'webkitAnimationEnd',
+            'MozAnimation'    :'animationend',
+            'OAnimation'      :'oAnimationEnd',
+            'msAnimation'     :'msAnimationEnd',
+            'animation'       :'animationEnd'
+        };
+        return eventEnd[Modernizr.prefixed('animation')];
+    })(Modernizr);     
+    
+    
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //  some CSS element manipulations
+    // boxFx config and CSS manipulations
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Here somes (css) properties units that can be related to a % of parent box
@@ -158,30 +204,14 @@
         });
     };
     
-    // Clean CSS obj when setted with "null" properties...
-    $.removeObjEmptyValue = function(obj) {
-        $.each(obj, function(i, val) {
-            if (!val && val !== 0) delete obj[i];
-            else if (typeof obj[i] == 'object') $.removeObjEmptyValue(obj[i]);
-        });
-    };
-    
-    // Set (overwritte) a new style
+    // Set or update a new CSS style in <head> // TODO - BETTER !!!
     var $cssAnimation = $('style#cssAnimation');
     $.setCssClass = function(clss) {
         if (!$cssAnimation || $cssAnimation.length < 1)
             $cssAnimation = $('<style type="text/css" id="cssAnimation"></style>').appendTo('head');
-        $cssAnimation.html(clss);
-    };
-    
-    // Update or set a new style // TODO - BETTER !!!
-    var $cssOveride = $('style#cssOveride');
-    $.addCssClass = function(clss, name) {
-        if (!$cssOveride || $cssOveride.length < 1)
-            $cssOveride = $('<style type="text/css" id="cssOveride"></style>').appendTo('head');
-        // var currentStyle = ($cssOveride.html()).replace(new RegExp('('+clss+'{'+p+'})', 'g'), val[p] || '');
+        // var currentStyle = ($cssOveride.html()).replace(new RegExp('('+clss+'{'+p+'})', 'g'), val[p] || ''); // TODO
         // div#sprite > div { background-color:'+value+'; }\
-        $cssOveride.html($cssOveride.html() + clss); // TODO
+        $cssAnimation.html($cssAnimation.html() + clss);
     };
     
     // Building CSS animation(s) from 'options.keyframes' OBJ (cf. ./jquery.boxFx.presets.js)
@@ -193,14 +223,14 @@
         var cssKeyframes = [], cssAnimations = [], cssAnimationsFillMode = [];
         $.each(keyframes, function(i, animation) {
             if (!animation.name) animation.name = $.getUniqueName('boxFxAnim');
-            if (!animation.delay) animation.delay = 0;
+            if (!animation.delay || parseInt(animation.delay, 10) < 1) animation.delay = '';
             cssAnimations.push(animation.name+' '+animation.duration+' '+animation.timingFunction+' '+animation.delay+' '+animation.iterationCount+' '+animation.direction);
             cssAnimationsFillMode.push(animation.fillMode); // http://www.w3.org/TR/css3-animations/#the-animation-shorthand-property-   
             var cssSteps = [];
             $.each(animation.steps, function(j, stepObj) {
                 var stepObjPropsString = (typeof stepObj.step == 'number' ? stepObj.step+'%' : stepObj.step)+' { '; // stepObj.step == 0 | '0%' | '0%, 100%'
                 $.each(stepObj, function(k, step) {
-                    if (k == 'step') return; // continue
+                    if (k == 'step') return; // continue : only non CSS properties
                         stepObjPropsString += String(Modernizr.prefixed(k) || k).toDash()+': '+step+'; ';
                 });
                 stepObjPropsString += ' } ';

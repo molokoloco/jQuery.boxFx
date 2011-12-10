@@ -4,34 +4,34 @@ $(function() { // Wait jQuery to be ready
     ///////////////////////////////////////////////////////////////////////////////
     // Object to stock some options presets...
     var optionsEffects = window.optionsEffects = {};
-    
+
     // optionsEffects can be used like a JSON "Editable" object for LIVE Textarea editing purpose
-    
+
     optionsEffects.html5Ize = {
         seeds             : '<img src="http://www.w3.org/html/logo/downloads/HTML5_Badge_32.png" width="32" heigh="32"/>',
-        effect            : 'nebula',
-        newAtTop          : true,
+        effect            : 'artifice',
+        newAtTop          : 'random',
         delay             : 0,
         maxSeeds          : 280,
         emitterRadius     : 150,
         emitterCenterLeft : '50%',
         emitterCenterTop  : '50%',
+        clss              : 'rollIn animated',
         styles            : {
             position         : 'absolute',
             width            : 32,
-            height           : 32,
-            borderRadius     : 0
+            height           : 32
         },
         transition        : {
             duration         : '2000ms',
             timingFunction   : 'linear',
+            clssTo           : 'bounceOut animated',
             stylesTo         : {
-                opacity        : 0,
-                transform      : 'rotateY(-260deg)'
+                opacity         : 0
             }
         }
     };
-    
+
     optionsEffects.hyperSpace = {
         effect            : 'nebula',
         newAtTop          : true,
@@ -57,9 +57,9 @@ $(function() { // Wait jQuery to be ready
             }
         }
     };
-    
-    optionsEffects.deepSun = {
-        effect            : 'artifice',
+
+    optionsEffects.deepSuns = {
+        effect            : 'center',
         newAtTop          : false,
         delay             : 420,
         maxSeeds          : 16,
@@ -72,7 +72,8 @@ $(function() { // Wait jQuery to be ready
             maxSize          : null,
             backgroundImage  : '-'+$.browserPrefix+'-radial-gradient(50% 50%, circle cover,rgba(0,0,0,0) 0%, rgba(250,250,36,1) 100%)',
             borderRadius     : '50%',
-            boxShadow        : '0 0 30px rgba(250,250,36,0)'
+            boxShadow        : '0 0 30px rgba(250,250,36,0)',
+            opacity          : 0
         },
         transition       : {
             duration         : '4000ms',
@@ -81,11 +82,11 @@ $(function() { // Wait jQuery to be ready
                 width          : 0,
                 borderRadius   : '50%',
                 boxShadow      : '0 0 30px rgba(250,250,36,1)',
-                opacity        : 0
+                opacity        : 1
             }
         }
     };
-    
+
     optionsEffects.whiteHole = {
         effect            : 'center',
         newAtTop          : false,
@@ -112,21 +113,21 @@ $(function() { // Wait jQuery to be ready
             }
         }
     };
-    
-    optionsEffects.rainbowArrow = {
+
+    optionsEffects.rainbowArrows = {
         effect            : 'artifice',
         newAtTop          : 'random',
         delay             : 500,
         maxSeeds          : 16,
         emitterRadius     : 60,
         emitterCenterLeft : '50%',
-        emitterCenterTop  : '120%',
+        emitterCenterTop  : '140%',
         styles            : {
             position         : 'absolute',
             width            : 50,
             height           : 100,
             backgroundColor  : 'rgba(219,20,80,1)',
-            borderRadius     : 1000,
+            borderRadius     : '50px / 100px',
             boxShadow        : '0 0 50px rgba(219,20,80,1)'
         },
         transition         : {
@@ -134,16 +135,46 @@ $(function() { // Wait jQuery to be ready
             timingFunction   : 'cubic-bezier(1, 1, 0, 0)',
             stylesTo         : {
                 width          : 1,
-                height         : 500,
-                maxSize        : 200,
-                borderRadius   : 1000, // '1px / 250px'
+                height         : 600,
+                borderRadius   : '1px / 600px',
                 backgroundColor: 'rgba(255,255,5,1)',
                 boxShadow      : '0 0 50px rgba(255,255,5,1)',
                 opacity        : 0
             }
         }
     };
-    
+    /*
+    {
+    "effect": "artifice",
+    "newAtTop": "random",
+    "delay": 500,
+    "maxSeeds": 16,
+    "emitterRadius": 60,
+    "emitterCenterLeft": "50%",
+    "emitterCenterTop": "140%",
+    "styles": {
+        "position": "absolute",
+        "width": 30,
+        "height": 200,
+        "backgroundColor": "rgba(219,20,80,1)",
+        "borderRadius": 1000,
+        "boxShadow": "0 0 50px rgba(219,20,80,1)"
+    },
+    "transition": {
+        "duration": "7000ms",
+        "timingFunction": "cubic-bezier(1, 1, 0, 0)",
+        "stylesTo": {
+            "width": 1,
+            "height": 600,
+            "borderRadius": 1000,
+            "backgroundColor": "rgba(255,255,5,1)",
+            "boxShadow": "0 0 50px rgba(255,255,5,1)",
+            "opacity": 0
+        }
+    }
+}
+*/
+
     optionsEffects.sunnyClouds = {
         effect            : 'artifice',
         newAtTop          : true,
@@ -173,6 +204,27 @@ $(function() { // Wait jQuery to be ready
         }
     };
 
+    optionsEffects.videosWall = {
+        seeds             : '<video preload="auto" autoplay="true" width="160" src="http://videos.mozilla.org/serv/mozhacks/demos/resources/plztouchme/burritttoooo.webm"></video>',
+        stopAtEnd         : true,
+        delay             : 900,
+        maxSeeds          : 9,
+        styles            : {
+            float            : 'left',
+            display          : 'block',
+            width            : 160,
+            height           : 90,
+            borderRadius     : 0
+        },
+        transition        : {
+            duration         : '3000ms',
+            timingFunction   : 'linear',
+            stylesTo         : {
+                transform      : 'scale(0.2)'
+            }
+        }
+    };
+
     optionsEffects.acidSquares = {
         effect            : 'artifice',
         newAtTop          : true,
@@ -198,8 +250,8 @@ $(function() { // Wait jQuery to be ready
             }
         }
     };
-    
-    optionsEffects.lolCat = {
+
+    optionsEffects.lolCatz = {
         seeds             : '<img src="http://www.b2bweb.fr/bonus/nian-cat.png" width="772" heigh="93"/>',
         effect            : 'nebula',
         newAtTop          : true,
@@ -224,40 +276,48 @@ $(function() { // Wait jQuery to be ready
             }
         }
     };
-    
+
     optionsEffects.typoGraphe = {
         seeds             : '<span>DOM<br />is alive</span>',
-        effect            : 'artifice',
+        effect            : 'center',
         newAtTop          : false,
-        delay             : 190,
-        maxSeeds          : 33,
-        emitterRadius     : '33%',
+        stopAtEnd         : true,
+        delay             : 50,
+        maxSeeds          : 7,
+        emitterRadius     : '0%',
         emitterCenterLeft : '50%',
-        emitterCenterTop  : '130%',
+        emitterCenterTop  : '80%',
         styles            : {
             position         : 'absolute',
-            width            : 180,
-            height           : 100,
-            transform        : 'scale(0.1)',
-            font             : 'bold 35px Trebuchet,Verdana',
-            color            : 'transparent',
-			textAlign        : 'center',
-            textShadow       : '0 0 30px rgba(255,255,255,1)',
+            width            : 500,
+            height           : 300,
+            transform        : 'scale(0.01) translate(0, -300px)',
+            font             : 'bold 110px Trebuchet,Verdana',
+            color            : 'yellow',
+            textAlign        : 'center',
+            textShadow       : '0 0 10px yellow',
+
+            // http://goo.gl/5KhFZ // Bug // TODO
+            //maskImage       : 'url(http://d3pr5r64n04s3o.cloudfront.net/articles/042_css_animation_intro/tut.html/images/axis-5.jpg)',
+            maskImage        : '-'+$.browserPrefix+'-gradient(linear, left top, left bottom, from(rgba(0,0,0,0)), color-stop(50%, rgba(0,0,0,1)), to(rgba(0,0,0,0)))',
+            maskOrigin       : 'content',
+            textFillColor    : 'orange',
+            backgroundClip   : 'text',
+
             borderRadius     : 0
         },
         transition        : {
-            duration         : '2500ms',
-            timingFunction   : 'ease',
+            duration         : '2000ms',
+            timingFunction   : 'ease-in-out',
             stylesTo         : {
-                transform        : 'scale(1)',
-                color            : 'transparent',
-                textShadow       : '0 0 1px rgba(255,255,255,1)',
-                textStroke       : '1px rgba(0,0,0,.33)'
+                transform        : 'scale(1) translate(0, -70px)',
+                textShadow       : '0 0 1px yellow',
+                textFillColor    : 'yellow'
             }
         }
     };
-    
-    optionsEffects.starParty = {
+
+    optionsEffects.starsParty = {
         seeds             : '<div>★</div>',
         effect            : 'artifice',
         newAtTop          : 'random',
@@ -283,8 +343,7 @@ $(function() { // Wait jQuery to be ready
             }
         }
     };
-    
-    
+
     optionsEffects.hypnoWork = {
         effect            : 'artifice',
         newAtTop          : 'random',
@@ -314,7 +373,7 @@ $(function() { // Wait jQuery to be ready
             }
         }
     };
-    
+
     optionsEffects.tunneLize = {
         effect            : 'center',
         newAtTop          : 1,
@@ -327,10 +386,11 @@ $(function() { // Wait jQuery to be ready
             position         : 'absolute',
             width            : 5,
             maxSize          : 12,
-            backgroundImage  : '-'+$.browserPrefix+'-radial-gradient(33% 33%, circle cover,#FFFD69 30%,white 70%,#FFFD69 100%)',
+            backgroundImage  : '-'+$.browserPrefix+'-radial-gradient(50% 50%, circle cover,#FFFD69 30%,violet 70%,#FFFD69 100%)',
             backgroundSize   : '150px 150px',
-            border           : '8px solid #FFFD69',
-            opacity          : 0,
+            backgroundPosition: 'center center',
+            border           : '1px solid violet ',
+            opacity          : 0.1,
             borderRadius     : '50%'
         },
         transition        : {
@@ -339,18 +399,18 @@ $(function() { // Wait jQuery to be ready
             stylesTo         : {
                 width            : '150%',
                 maxSize          : '160%',
-				backgroundSize   : '1px 1px',
-                border           : '1px solid #FFFD69',
+                backgroundSize   : '1px 1px',
+                border           : '8px solid #FFFD69',
                 borderRadius     : '50%',
-                transform        : 'rotate(-500deg)',
+                transform        : 'rotate(-300deg)',
                 opacity          : 1
             }
         }
     };
-	
-	optionsEffects.masterMind = {
-		seeds             : '<div>✖</div>',
-		stopAtEnd         : false, // Continous animation even without effect
+
+    optionsEffects.masterMind = {
+        seeds             : '<div>✖</div>',
+        stopAtEnd         : false, // Continous animation even without effect
         newAtTop          : 1,
         delay             : 0,
         maxSeeds          : 300,
@@ -359,7 +419,7 @@ $(function() { // Wait jQuery to be ready
         emitterCenterTop  : 0,
         styles            : {
             float            : 'left',
-			display          : 'block',
+            display          : 'block',
             width            : 25,
             textAlign        : 'center',
             color            : 'orange',
@@ -372,38 +432,38 @@ $(function() { // Wait jQuery to be ready
             timingFunction   : 'linear',
             stylesTo         : {
                 fontSize         : '20px',
-				textShadow       : '2px 2px 4px black',
-				backgroundColor  : 'yellow',
+                textShadow       : '2px 2px 4px black',
+                backgroundColor  : 'yellow',
                 opacity          : 1
             }
         }
     };
-	
+
     optionsEffects.subWoofer = {
         effect            : 'center',
         newAtTop          : 1,
         delay             : 580,
         maxSeeds          : 25,
         emitterRadius     : 0,
-		emitterCenterLeft : '50%',
+        emitterCenterLeft : '50%',
         emitterCenterTop  : '50%',
         styles            : {
-			position         : 'absolute',
+            position         : 'absolute',
             width            : '25%',
             backgroundImage  : '-'+$.browserPrefix+'-radial-gradient(10% 30%, circle cover,rgba(230,230,230,1) 0%,rgba(230,230,230,1) 35%,rgba(50,50,50,1) 90%,rgba(50,50,50,1) 100%)',
             boxShadow        : 'inset 0 0 30px rgba(50,50,50,1)',
-			borderRadius     : '50%'
+            borderRadius     : '50%'
         },
         transition        : {
             duration         : '9000ms',
             timingFunction   : 'cubic-bezier(.2,.8,.8,.2)',
             stylesTo         : {
                 width            : '75%',
-            	boxShadow        : 'inset 0 0 5px rgba(250,250,250,1)',
-				borderRadius     : '50%',
+                boxShadow        : 'inset 0 0 5px rgba(250,250,250,1)',
+                borderRadius     : '50%',
                 opacity          : 0
             }
         }
     };
-     
+
 });
