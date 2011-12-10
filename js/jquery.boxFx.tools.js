@@ -5,8 +5,7 @@
 */
 
 // I use this for debuging ^^
-var db  = function() { 'console' in window && console.log.call(console, arguments); },
-    die = function(mess) { throw(( mess ? mess : "Oh my god, moonWalker is down...")); };
+var db  = function() { 'console' in window && console.log.call(console, arguments); };
 
 (function ($, window) {
     
@@ -130,7 +129,10 @@ var db  = function() { 'console' in window && console.log.call(console, argument
                 return browsers[p];
         return false;
     })(navigator.userAgent.toLowerCase());
-
+    
+    //////////////// TODO : OPTIMIZE THIS ! ///////////////
+    // Waiting some crazy guy to implements this //////////
+    
     // Cf Modernizr doc // "Static" fct
     $.transitionEnd = (function(Modernizr) { // Todo : add support for animationstart, animationend, animationiteration
         var eventEnd = {
@@ -142,6 +144,30 @@ var db  = function() { 'console' in window && console.log.call(console, argument
         };
         return eventEnd[Modernizr.prefixed('transition')];
     })(Modernizr);
+    
+    // AS THEY SAYS, this is experimental ^^
+    $.animationStart = (function(Modernizr) { 
+        var eventEnd = {
+            'WebkitAnimation' :'webkitAnimationStart',
+            'MozAnimation'    :'animationstart',
+            'OAnimation'      :'oAnimationStart',
+            'msAnimation'     :'msAnimationStart',
+            'animation'       :'animationStart'
+        };
+        return eventEnd[Modernizr.prefixed('animation')];
+    })(Modernizr);
+    
+    $.animationEnd = (function(Modernizr) { 
+        var eventEnd = {
+            'WebkitAnimation' :'webkitAnimationEnd',
+            'MozAnimation'    :'animationend',
+            'OAnimation'      :'oAnimationEnd',
+            'msAnimation'     :'msAnimationEnd',
+            'animation'       :'animationEnd'
+        };
+        return eventEnd[Modernizr.prefixed('animation')];
+    })(Modernizr);     
+    
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // boxFx config and CSS manipulations
@@ -204,7 +230,7 @@ var db  = function() { 'console' in window && console.log.call(console, argument
             $.each(animation.steps, function(j, stepObj) {
                 var stepObjPropsString = (typeof stepObj.step == 'number' ? stepObj.step+'%' : stepObj.step)+' { '; // stepObj.step == 0 | '0%' | '0%, 100%'
                 $.each(stepObj, function(k, step) {
-                    if (k == 'step') return; // continue
+                    if (k == 'step') return; // continue : only non CSS properties
                         stepObjPropsString += String(Modernizr.prefixed(k) || k).toDash()+': '+step+'; ';
                 });
                 stepObjPropsString += ' } ';

@@ -19,7 +19,7 @@ $(function() { // Wait jQuery to be ready
         template              : null,        // 'N°{id} - {title}' // By default can be set in options.seeds
         data                  : [{id:1, title:'toto'}, {id:2, title:'tutu'}], // [{id:1}, {id:2}, {}] OR a "callback()" // Cf. preset example below
         styles2Class          : true,        // Convert styles to 'class' in <head> instead of dealing in the DOM, for each elements : cannot be "live" edited
-        clss                  : null,        // Custom CSS static (starting) class, default : null (Cf. $.boxFxFullOptions.styles)
+        clss                  : null,        // 'rollOut animated' // Custom CSS static (starting) class, default : null (Cf. ./animate.css) for example
         //perspective         : null,        // TODO // 500px // if seeds 'options.styles.webktiTransformStyle' == 'preserve-3d', apply perspective to seeds container
 
         // Effect work mostly with 'options.transition', giving custom ending style foreach elements
@@ -191,7 +191,7 @@ $(function() { // Wait jQuery to be ready
             backgroundColor       : 'rgba(100, 100, 0, 1)',
             //...
                                              // Custom 'options.effect' property...
-            maxSize               : null       // 10, '10px' or '50%' // Randomize size between width/height and maxSize ?
+            maxSize               : null     // 10, '10px' or '50%' // Randomize size between width/height and maxSize ?
         }
     };
 
@@ -200,25 +200,26 @@ $(function() { // Wait jQuery to be ready
     // animation : 'myAnim0 3s steps(10, end) 0 3 forwards, myAnim1 .8s ease 0 infinite',...
     // Each keyframes animation can have differents parameters and differents steps, for exemple one is infinite an the other occurs twice
     // You can use $.cubicBeziers ( console.log($.cubicBeziers) ) for 'timingFunction'
-    boxFxFullOptions.keyframes = [{          // The 7 arguments must be sets
+    boxFxFullOptions.keyframes = [{          // The 7 arguments have default values (if you use keyframes) Check $.boxFxOptions.defaultKeyframes
             duration              : '2s',
             timingFunction        : $.cubicBeziers.easeOutQuad, // $.cubicBeziers.xxx OR steps(10, end) OR ease, ease-out, ease-in, ease-in-out, linear, cubic-bezier(1,.2,1,1)
             delay                 : 0,       // time // Wait until start anim ?
             iterationCount        : 5,       // infinite | <number>
             direction             : 'normal', // normal | alternate
             fillMode              : 'forwards', // to persist the end state // none/backwards/forwards/both
-            steps: [{
+            steps: [{                               
+                    // "step" is the only "non-CSS" property (Added by plugin and translated to real CSS keyframes)
                     step              : '0%, 100%', // % or [%,%] // Example : Keyframe will be at 0% and 100% of the duration
-                    boxShadow         : '0 0 0 rgba(0,0,0,0)',
-                    // ...
+                    boxShadow         : '0 0 0 rgba(0,0,0,0)', // All CSS property that you want
+                    // CSS props...
                 }, {
-                    step              : '50%',
+                    step              : '50%', 
                     boxShadow         : '0 0 30px rgba(100, 100, 0, 1)',
             }]
         }, {
             duration              : '500ms',
             timingFunction        : 'linear',
-            delay                 : 0, //function() { return 1000* Math.random(); },
+            delay                 : 0,       // function() { return 1000* Math.random(); },
             iterationCount        : 'infinite', // often used with an 'animationDirection' : 'alternate'
             direction             : 'alternate',
             fillMode              : 'backwards',

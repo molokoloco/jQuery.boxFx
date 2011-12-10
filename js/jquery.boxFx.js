@@ -25,7 +25,7 @@
     // Options above a setted to the minimal, they makes things works when no values are provided
     // Particules seeds are 'options.seeds' or 'options.targets'...
 
-    var _db_ = false; // Activate boxFx debug logs ?
+    var _db_ = true; // Activate boxFx debug logs ?
 
     $.boxFxOptions = {                       // $.emitter() defaults params Object
         seeds                 : '<div/>',    // '<tag/>' OR '<div class="test">N°{id} - {title}</div>' // Generated DOM element with or without template...
@@ -192,6 +192,10 @@
                         options = $.extend(true, {}, $.boxFxOptions, newOptions);
                         publicMethods.start();
                     }, 0);
+                },
+                // Global seeds object, with all the seeds and states
+                getSeeds:function() {
+                    return window[FX.id];
                 }
             };
 
@@ -262,7 +266,13 @@
                         options.styles = $.extend({}, options.defaultStyles); // Some CSS that print something
                     if (options.styles)
                         $.removeObjEmptyValue(options.styles);
-
+                    
+                    // Default class ?
+                    if (!options.clss && options.seeds)
+                        options.clss = $(options.seeds).attr('class');
+                    else if (!options.clss)
+                        options.clss = $(options.targets).eq(0).attr('class');
+                    
                     if (options.effect) {
                         if (!options.styles)
                             options.styles = {};
@@ -425,49 +435,42 @@
                 ///////////////////////////////////////////////////////////////////////////////
                 // Apply CSS on the element
                 applyCssStart: function(name_, index_, cssStart_) {
-                    // if (_db_) db('applyCssStart()');
-                    if (options.clss)
-                        window[name_][index_].addClass(options.clss); // User custom Class ?
+                    // if (_db_) 
+                    db('applyCssStart()');
                     if (cssStart_) {
                         $.addCssUnit(cssStart_); // Set back 'px' units // Sometimes does not need a REDOO ???
                         window[name_][index_].crossCss(cssStart_); // Custom style // Cross-browsers CSS+
                     }
+                    if (options.clss)
+                        window[name_][index_].addClass(options.clss); // User custom Class ?
+                    if (options.animationsClss) // can trigger an animation (Cf. slideLeft, etc)
+                        window[name_][index_].crossCss(options.animationsClss); // APPLY generated CSS keyframe anim ?
                     if (window[name_][index_].css('display') == 'none') // Previously hidden ?
                         window[name_][index_].css({display:''});
-                    if (options.animationsClss) // && !seed.hasClass(options.animationsClss))
-                        window[name_][index_].crossCss(options.animationsClss); // APPLY generated CSS keyframe anim ?
                 },
                 ///////////////////////////////////////////////////////////////////////////////
-                // Apply ending CSS (Apply transition at this moment)
+                // Apply ending CSS styles (Apply transition at this moment)
                 applyCssEnd: function(name_, index_, cssEnd_) {
-                    // if (_db_) db('applyCssEnd()');
-                    if (!name_ || !(name_ in window) || !(index_ in window[name_])) return; // When killing app, some events can end after (timeout)
-
-                    if (options.clssTo)
-                        window[name_][index_].addClass(options.clssTo); //.removeClass(options.clss)
-
+                    // if (_db_) 
+                    db('applyCssEnd()');
+                    if (!name_ || !(name_ in window) || !(index_ in window[name_]))
+                        return; // When killing app, in case some events end after (timeout)
                     if (cssEnd_) {
                         $.addCssUnit(cssEnd_); // Set back 'px'
                         window[name_][index_].crossCss(cssEnd_);
                     }
-
-                    // if (!options.transition) return; // ???????????????????????????????????????????
-
-                    // Wait the end event of CSS transition : transitionend || webkitTransitionEnd ...
-                    window[name_][index_].bind($.transitionEnd, function animationEnd(event) { // // Whom is the end event for transition ?
-                        // if (_db_) db($.transitionEnd, event.elapsedTime, name_, index_, options.stopAtEnd);
-                        if (!name_ || !name_ in window || !index_ in window[name_]) return;
-                        window[name_][index_].unbind($.transitionEnd); // $(this) is not the element
-
-                        if (!options.stopAtEnd) {// Hide element until re-use ?
-                            $.data(window[name_][index_], 'animated', 0); // Release element
-                            window[name_][index_].detach(); // Remove from DOM
-                            window[name_][index_].attr('style', ''); // Reset all styles (& transition)
-                            if (options.clss)           window[name_][index_].removeClass(options.clss);
-                            if (options.clssTo)         window[name_][index_].removeClass(options.clssTo);
-                            if (options.animationsClss) window[name_][index_].removeClass(options.animationsClss);
-                        }
-                    });
+                },
+                ///////////////////////////////////////////////////////////////////////////////
+                // Apply ending CSS class
+                applyClssEnd: function(name_, index_) {
+                    // if (_db_) 
+                    db('applyClssEnd()');
+                    if (!name_ || !(name_ in window) || !(index_ in window[name_]))
+                        return; // When killing app, in case some events end after (timeout)
+                    if (options.clss)
+                        window[name_][index_].removeClass(options.clss); // Start class
+                    if (options.transition && options.transition.clssTo)
+                        window[name_][index_].addClass(options.transition.clssTo);
                 }
             };
 
@@ -481,8 +484,8 @@
                 // Did we got a element that is not in use in our Array ?
                 S.index = -1;
                 for (var i = 0; i < options.maxSeeds; i++) { // Check elements stack
-                    if (!window[FX.id][i] || !$.data(window[FX.id][i], 'animated')) {
-                        S.index = i;         // Find an empty place
+                    if (!window[FX.id][i] || !$.data(window[FX.id][i], 'inUse')) {
+                        S.index = i; // Find an empty place
                         break;
                     }
                 }
@@ -490,7 +493,7 @@
                 if (_db_ && options.maxSeeds < 10 && options.delay > 0) // ! Flood ? ;)
                     db('addSeed() - S.index', S.index);
 
-                if (S.index >= 0) {          // Create or manage a seed
+                if (S.index >= 0) { // Create or manage a seed
 
                     // SPRITE CSS ///////////////////////////////////////////////////////////////////////
                     // Generate S.cssStart & S.cssEnd CSS obj with default properties
@@ -574,8 +577,9 @@
                         case 'rotate': // TODO http://jsfiddle.net/molokoloco/EG8m7/
                         break;
 
-                        // Do yours !!! plenty of  properties...
-
+                        case 'YourEffect': // !!! plenty of  properties...
+                        break;
+                        
                         default: // If used with position:relative or display:inline/block we can
                                  // just let elements push others, without any effects/positions...
                         break;
@@ -583,17 +587,6 @@
 
                     ///////////////////////////////////////////////////////////////////////////////
                     // SEED creation
-
-                    // CREATE a new seed element ? window['boxFx78589996'][0] is a $() element ?
-                   /*  if (!window[FX.id][S.index] || window[FX.id][S.index].length < 1) {
-                        if (options.targets) window[FX.id][S.index] = $(options.targets).eq(S.index); // Catch existing DOM element
-                        else                 window[FX.id][S.index] = $(options.seeds).appendTo($canvas); // .prependTo($canvas);
-                        // Cache each targets innerHtml ? It can be a template, done one time
-                        if (!options.template && options.data) {
-                             $.data(window[FX.id][S.index], 'template', window[FX.id][S.index].html());
-                             window[FX.id][S.index].html('');
-                        }
-                    } */
 
                     // CREATE a new seed element ? window['boxFx78589996'][0] is a $() element
                     if (!window[FX.id][S.index] || window[FX.id][S.index].length < 1)
@@ -623,36 +616,140 @@
                         }
                     }
 
-                    /*
-                    $.proxy(function(e) {}, this)
-                    */
+                    // Pass current element to the event context object
+                    var eventObjContext = { 
+                        name        : FX.id,
+                        index       : S.index,
+                        cssEnd      : S.cssEnd
+                    };
+
+                    window[FX.id][S.index].bind($.animationStart, eventObjContext, function animStart(event) { // // Whom is the end event for transition ?
+                        // if (_db_) 
+db($.animationStart);
+                        if (!event.data.name || !(event.data.name in window) || !(event.data.index in window[event.data.name]))
+                            return;
+                        var Se = window[event.data.name][event.data.index]; // $(this) is not the element
+                        Se.unbind($.animationStart);
+                        $.data(Se, 'animationStart', Date.now());
+                        $.data(Se, 'isAnimated', 1);
+                    });
+
+                    // Todo add support for animation iterations ! We cut at the end of the first loop
+                    window[FX.id][S.index].bind($.animationEnd, eventObjContext, function animEnd(event) { // // Whom is the end event for transition ?
+                        // if (_db_) 
+db($.animationEnd);
+                        if (!event.data.name || !(event.data.name in window) || !(event.data.index in window[event.data.name]))
+                            return;
+                        var Se = window[event.data.name][event.data.index];
+                        Se.unbind($.animationEnd);
+
+                        $.data(Se, 'isAnimated', 0); // Finish
+                        Se.trigger($.transitionEnd); // Re-call (skipped) transitionEnd
+                        
+                    });
+
+                    // Wait the end event of CSS transition : transitionend || webkitTransitionEnd ...
+                    window[FX.id][S.index].bind($.transitionEnd, eventObjContext, function transEnd(event) { // // Whom is the end event for transition ?
+                        // if (_db_) db($.transitionEnd, event.data);
+                        if (!event.data.name || !(event.data.name in window) || !(event.data.index in window[event.data.name]))
+                            return;
+                        var Se = window[event.data.name][event.data.index];                     
+                        
+                        if (!options.keyframes) { // && options.styles ?
+                            if ($.data(Se, 'isAnimated')) {
+                                 return;
+                            }
+                            else if ($.data(Se, 'animationStart')) { // We can now apply ending style
+                                privateMethods.applyCssEnd(event.data.name, event.data.index, event.data.cssEnd); // APPLY Style
+                                
+                                // Magical extrapolation than can only work when intro time is the same as end time...
+                                var animationDelay = Date.now() - $.data(Se, 'animationStart'),
+                                    duration       = parseInt(options.transition.duration, 10);
+                                $.data(Se, 'animationStart', 0);
+                               
+                                if (animationDelay > 0 && duration > 0) {
+                                    // if "options.clss" have an animation, we trigger "options.transition.clssTo"
+                                    // with the same laps of time, but before the end of the transition
+                                    eventObjContext.int = setTimeout(function(data) {
+                                        privateMethods.applyClssEnd(data.name, data.index); // APPLY Class
+                                    }, (duration - animationDelay), event.data);
+                                }
+                                else {
+                                    privateMethods.applyClssEnd(event.data.name, event.data.index); // immediatly
+                                }
+                                //if (options.transition) return; // Redo ?
+                            }
+                        }
+                        
+                        Se.unbind($.transitionEnd);    // $(this).unbind do not work ?
+                        
+                        // We clear element before regenerating a new one
+                        if (!options.stopAtEnd) {      // Hide element until re-use ?
+                            $.data(Se, 'inUse', 0);    // Release element
+                            Se.detach()                // Remove from DOM
+                              .attr('style', '');      // Reset all styles (& transition)
+                            
+                            if (options.transition.clssTo)  Se.removeClass(options.transition.clssTo);
+                            if (options.animationsClss)     Se.removeClass(options.animationsClss);
+                        }
+                    });
 
                     // SET STYLES a CLASS
                     privateMethods.applyCssStart(FX.id, S.index, S.cssStart);
 
-                    // (re)attach to DOM
+                    // (re)attach to DOM (manipulations are done outside)
                     window[FX.id][S.index].appendTo($canvas);
 
                     // In use now !
-                    $.data(window[FX.id][S.index], 'animated', 1);
-
-                    // Wait DOM init with Timeout (even 0), move the element to final location
-                    // and wait the magical GPU transition from CSS before removing element
-                    setTimeout(privateMethods.applyCssEnd, 0, FX.id, S.index, S.cssEnd); // Pass new css + apply trans
+                    $.data(window[FX.id][S.index], 'inUse', 1);
 
                     // If someone outside want to catch our event particule before it move...
                     $canvas.trigger('emit', [window[FX.id][S.index]]); //> $canvas.bind('emit', function(e, $seed) {});
 
                     // Debug Styles ?
                     // db('FX', FX, 'S', S); db('S.cssStart', S.cssStart, 'S.cssEnd', S.cssEnd); return;
+                    
+
+                    // CSS3 animationStarted event trigger with a delay of 25/30 milliseconds
+                    // http://stackoverflow.com/questions/8428838/css3-animationstarted-event-trigger-with-a-delay-of-25-30-milliseconds
+                    // Eg. : http://jsfiddle.net/molokoloco/yvTje/
+                    // I have calculated that Chrome and Firefox generaly trigger animationStart event
+                    // after a delay of 25/30 milliseconds
+                    // TODO : must extract real CSS animation and duration from stylesheet ......
+                    // For now i'me waiting here for 50ms before checking it
+                    /*
+                    var animationName = "";
+                    for (var i = 0; i < document.styleSheets.length; ++i) {
+                        var sheet = document.styleSheets[i];
+                        var rules = sheet.cssRules || sheet.rules;
+                        for (var j = 0; j < rules.length; ++j) {
+                            var rule = rules[j];
+                            if (window[FX.id][S.index].matchesSelector(rule.selectorText)) {
+                                var theStyle = rule.style;
+                                animationName = theStyle['WebkitAnimationName'];
+                            }
+                        }
+                    }
+                    
+                    db(animationName);
+                    */
+                                        
+                    setTimeout(function(context) {
+                        // Si une anim est en cours, on ne fait rien (Can trigger with "options.clss") 
+                        if (options.keyframes || !$.data(window[context.name][context.index], 'isAnimated')) {
+                            // Wait DOM init with Timeout (even 0), move the element to final location
+                            // and wait the magical GPU transition from CSS before removing element
+                            privateMethods.applyCssEnd(context.name, context.index, context.cssEnd);  // Pass new css + apply trans
+                            privateMethods.applyClssEnd(context.name, context.index);
+                        }
+                    }, 50, eventObjContext); // 50 is minimal ? timeOut before we can have a "$.animationStart" event ?
 
                 } // End if "S.index"
 
-                S = {}; // Reset this seed properties
-
                 // Stoping after reaching the end of the seeds stack ?
                 if (!(options.stopAtEnd && S.index == (options.maxSeeds - 1))) {  // Don't stop ?
-                    // Or do it again ?
+                    S = {}; // Reset this seed properties
+                    // ...or Do it again ?
                     if (options.delay) FX.timer = setTimeout(addSeed, options.delay);
                     else               window.requestAnimFrame(addSeed); // As fast as possible -> Waiting a "maxSpeed" param :-?
                 }

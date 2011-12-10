@@ -15,24 +15,27 @@ $(function() { // Wait jQuery to be ready
     ///////////////////////////////////////////////////////////////////////////////
     // Simplest transition
     ///////////////////////////////////////////////////////////////////////////////
-    
+
     optionsVarious.simpleTransition = {
+        clss           : 'fadeIn fast',
         styles         : { // Draw default div with this styles
             width          : 60,
             height         : 60,
-            opacity        : 0,
             background     : 'orange'
         },
         transition     : {
             duration       : '3000ms',
             timingFunction : $.cubicBeziers.easeInOutQuad,
+            clssTo         : 'fadeOut slow',
             stylesTo       : { // Animate to
-                opacity:1,
-                transform:'translate(230px, 100px) rotate(180deg)'
+                background    : 'yellow',
+                transform     : 'translate(230px, 100px) rotate(180deg)'
             }
         }
     };
     
+
+
     ///////////////////////////////////////////////////////////////////////////////
     // Simple transition for some <div>
     // Optionnal, fill innerHTML template with provided data obj

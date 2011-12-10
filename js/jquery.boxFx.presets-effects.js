@@ -9,25 +9,25 @@ $(function() { // Wait jQuery to be ready
 
     optionsEffects.html5Ize = {
         seeds             : '<img src="http://www.w3.org/html/logo/downloads/HTML5_Badge_32.png" width="32" heigh="32"/>',
-        effect            : 'nebula',
-        newAtTop          : true,
+        effect            : 'artifice',
+        newAtTop          : 'random',
         delay             : 0,
         maxSeeds          : 280,
         emitterRadius     : 150,
         emitterCenterLeft : '50%',
         emitterCenterTop  : '50%',
+        clss              : 'rollIn animated',
         styles            : {
             position         : 'absolute',
             width            : 32,
-            height           : 32,
-            borderRadius     : 0
+            height           : 32
         },
         transition        : {
             duration         : '2000ms',
             timingFunction   : 'linear',
+            clssTo           : 'bounceOut animated',
             stylesTo         : {
-                opacity        : 0,
-                transform      : 'rotateY(-260deg)'
+                opacity         : 0
             }
         }
     };

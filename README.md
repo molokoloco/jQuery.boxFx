@@ -19,6 +19,44 @@ GPL/MIT/Copyleft - Beta V0.94 - [@molokoloco](https://twitter.com/#!/molokoloco/
 
 ---
 
+EXAMPLE(S) SETTINGS 
+================
+
+See the BoxFx (full) options properties list here : "***./js/jquery.boxFx.presets-full-options.js***"  
+All is *heavily* commented, check also "*./js/jquery.boxFx.presets-XXX.js*"  
+Here a code example for your site :
+
+    $emitter1 = $('div#emitterZone1').emitter({
+        delay       : 500,
+        seeds       : '<div class="test">N°{id} - {title}</div>',
+        data        : [
+            {id:1, title:'toto'}, {id:2, title:'tutu'}, {id:3, title:'toto'}, {id:4, title:'tutu'},
+            {id:5, title:'toto'}, {id:6, title:'tutu'}, {id:7, title:'toto'}, {id:8, title:'tutu'}
+        ],
+        clss        : 'bounceIn animated',
+        styles      : {
+            position       : 'absolute',
+            width          : 150,
+            height         : 20,
+            opacity        : 0,
+            background     : 'white',
+            transform      : 'rotate(-20deg) translate(200px, 300px)'
+        },
+        transition  : {
+            duration       : '3000ms',
+            timingFunction : $.cubicBeziers.easeInOutQuad,
+            stylesTo       : {
+                opacity        : 1,
+                textShadow     : '0 0 10px rgba(255,255,255,1)',
+                transform      : function(index) { 
+                    return 'rotate(0deg) translate(30px, '+(30+(index*20))+'px)';
+                }
+            }
+        }
+    });
+
+    $('a#stop').click(function() { $emitter1.trigger('stop'); });
+
 
 WHAT are we talking about ?
 ================
@@ -36,50 +74,13 @@ to animate HTML elements with polished CSS3. Dead simple and hard at the same ti
 - If you use a data provider (JSON), you can deal with a template for each elements
 
 
-EXAMPLE(S) SETTINGS 
-================
-
-See the BoxFx (full) options properties list here : "***./js/jquery.boxFx.presets-full-options.js***"  
-All is *heavily* commented, check also "*./js/jquery.boxFx.presets-XXX.js*"  
-Here a code example for your site :
-
-    $emitter1 = $('div#emitterZone1').emitter({
-        delay       : 500,
-        seeds       : '<div class="test">N°{id} - {title}</div>',
-        data        : [
-            {id:1, title:'toto'}, {id:2, title:'tutu'}, {id:3, title:'toto'}, {id:4, title:'tutu'},
-            {id:5, title:'toto'}, {id:6, title:'tutu'}, {id:7, title:'toto'}, {id:8, title:'tutu'}
-        ],
-        styles      : {
-            position       : 'absolute',
-            width          : 150,
-            opacity        : 0,
-            background     : 'white',
-            transform      : 'rotate(-20deg) translate(200px, 300px)'
-        },
-        transition  : {
-            duration       : '3000ms',
-            timingFunction : $.cubicBeziers.easeInOutQuad,
-            stylesTo       : {
-                opacity        : 1,
-                textShadow     : '0 0 10px rgba(255,255,255,1)',
-                transform      : function(index) { 
-                    return 'translate(30px, '+(30+(index*20))+'px)';
-                }
-            }
-        }
-    });
-
-    $('a#stop').click(function() { $emitter1.trigger('stop'); });
-
-
 PARADIGMS
 ================
 
 With JavaScript, we dynamically **animate HTML elements based on CSS3**, like a proxy  
 We take avantage of the both world, GPU acceleration and interactivity
 
-We work on a set of HTML  &lt;elements&gt; ("Seeds") inside a "box".  
+We work on a set of HTML  &lt;elements&gt; ("Seeds") inside a "Box".  
 A "Box" and a "Seed" can be ether the &lt;body&gt;, a &lt;div&gt;, or whatever jQuery element we want.
 
 The seeds are generated one after other in the "box".  
@@ -92,16 +93,17 @@ class ("*options.clss*"). If "*options.transition*" is set, plugin also apply th
 The "*options.transition.duration*" you've set determine the time to morph properties from one(s) to the other(s).
 
 **Effects** can also be used to apply individual settings to each seed, in opposite to values for the entire set.  
-For example, "*options.effect = 'nebula'*" will manage left positioning and margin for each seed.  
-Effect can overwrite defaults seeds styles values at start and end.
+For example, "*options.effect = 'nebula'*" will manage left/top positioning and left/top margin for each seed (Moves them in 2D space). 
+Effects can overwrite defaults seeds styles values at start and end (collections values VS per/element).
 
 If you need a lot of granularity and parameters for your animation, you can even use "*options.keyframes*".  
 **Keyframes** are a way of giving multiple sets of animations to elements.  
 For example you can set a first keyframe with infinite rotation and a second keyframe with a one time fadeIn opacity.  
-Implementation as shown here : <http://jsfiddle.net/molokoloco/rf8zt/>
+Check full example provided here : "./jquery.boxFx.presets-full-options.js"  
+Internal implementation as shown here : <http://jsfiddle.net/molokoloco/rf8zt/>
 
 We can feed the seeds with some **data provider**. For the moment, data are some content stored in  
-a JSON object OR a dynamic *$deferred* function ^^ Example with websocket, to come ;)  
+a JSON object OR a dynamic *$deferred* function (Example with websocket, to come ?)  
 Asynchronous "*jsonp*" provider can be a little tricky, see current implementation here :  
 <http://jsfiddle.net/molokoloco/Ebc27/>  
 This content is injected in a (simple) template you can set in seeds *innerHTML* (See below)
@@ -194,6 +196,27 @@ Look at "*./js/jquery.boxFx.tools.js*" for easing listing.
         stylesTo         : {opacity:1, transform:'translate(0,-480px)'}
     }
 
+Keyframes animations can be a little tricky, but powerfull
+
+    options.keyframes = [{
+        duration              : '2s',
+        timingFunction        : $.cubicBeziers.easeOutQuad,
+        delay                 : 0,
+        iterationCount        : 5,
+        direction             : 'normal',
+        fillMode              : 'forwards',
+        steps: [{
+                step              : '0%, 100%',
+                boxShadow         : '0 0 0 rgba(0,0,0,0)',
+                // ...
+            }, {
+                step              : '50%',
+                boxShadow         : '0 0 30px rgba(100, 100, 0, 1)',
+        }]
+    }, {
+        other:animation
+    }]
+        
 We can "feed" the seed with the data provider we want.  
 Data are some content stored in a JSON object or a dynamic *$.deferred* function.  
 This content is injected in a (dead simple) template you can set in seeds innerHTML  
@@ -233,34 +256,32 @@ The project is build with **jQuery 1.7** from <http://jquery.com/>, but i though
 I also use jQuery Color for some fancy rainbow <https://github.com/jquery/jquery-color>
 
     $("#block").css({
-        backgroundColor: $.Color({ saturation: 0 })
+        backgroundColor: $.Color({saturation: 0})
     }, 1500);
 
-Some stunning **CSS animations presets** with <https://github.com/daneden/animate.css>
+Some stunning **CSS animations presets** with <https://github.com/daneden/animate.css>  
 Check <http://daneden.me/animate> for more infos
 
-* Attention seekers
-    * flash bounce shake tada swing wobble pulse
-* Flippers (currently Webkit & IE10 only)
-    * flip flipInX flipOutX flipInY flipOutY
-* Fading entrances
-    * fadeIn fadeInUp fadeInDown fadeInLeft fadeInRight fadeInUpBig fadeInDownBig fadeInLeftBig fadeInRightBig
-* Fading exits
-    * fadeOut fadeOutUp fadeOutDown fadeOutLeft fadeOutRight fadeOutUpBig fadeOutDownBig fadeOutLeftBig fadeOutRightBig
-* Bouncing entrances
-    * bounceIn bounceInDown bounceInUp bounceInLeft bounceInRight
-* Bouncing exits
-    * bounceOut bounceOutDown bounceOutUp bounceOutLeft bounceOutRight
-* Rotating entrances
-    * rotateIn rotateInDownLeft rotateInDownRight rotateInUpLeft rotateInUpRight
-* Rotating exits
-    * rotateOut rotateOutDownLeft rotateOutDownRight rotateOutUpLeft rotateOutUpRight
-* Specials
-    * hinge rollIn rollOut
+* Usage : 
+    * ```<div class="fadeOut slow"/>```
+* 3 preset speed :
+    * fast (0.6s), medium (1.2s), slow (2s)
+* Effects :
+    * Attention seekers : flash bounce shake tada swing wobble pulse
+    * Flippers (currently Webkit & IE10 only) : flip flipInX flipOutX flipInY flipOutY
+    * Fading entrances : fadeIn fadeInUp fadeInDown fadeInLeft fadeInRight fadeInUpBig fadeInDownBig fadeInLeftBig fadeInRightBig
+    * Fading exits : fadeOut fadeOutUp fadeOutDown fadeOutLeft fadeOutRight fadeOutUpBig fadeOutDownBig fadeOutLeftBig fadeOutRightBig
+    * Bouncing entrances : bounceIn bounceInDown bounceInUp bounceInLeft bounceInRight
+    * Bouncing exits : bounceOut bounceOutDown bounceOutUp bounceOutLeft bounceOutRight
+    * Rotating entrances : rotateIn rotateInDownLeft rotateInDownRight rotateInUpLeft rotateInUpRight
+    * Rotating exits : rotateOut rotateOutDownLeft rotateOutDownRight rotateOutUpLeft rotateOutUpRight
+    * Specials : hinge rollIn rollOut
+
+In this example "*fadeInLeft*" is the type of effect and "*animated*" is a generic class to give delay and easing
 
     $("#banniere").boxFx({
-        clss: 'fadeInLeft'
-        transition: {clssTo:'bounceOutDown'}
+        clss: 'fadeInLeft animated'
+        transition: {clssTo:'bounceOutDown animated'}
     });
 
 HTML5/CSS3 compatibility mode is managed with <https://github.com/Modernizr/Modernizr/blob/master/modernizr.js>  
@@ -275,6 +296,7 @@ Further READING about CSS3 and animations ? (You would ;)
 
 * **Docs**
     * <https://developer.mozilla.org/en/CSS/CSS_animations>
+    * <http://developer.apple.com/library/safari/#documentation/InternetWeb/Conceptual/SafariVisualEffectsProgGuide/Transitions/Transitions.html>
     * <http://www.w3.org/TR/css3-3d-transforms/#transform-functions>
     * <http://www.w3schools.com/css3/css3_animations.asp>
     * <http://lea.verou.me/2011/10/animatable-a-css-transitions-gallery/>
