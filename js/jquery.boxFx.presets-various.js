@@ -8,10 +8,10 @@ $(function() { // Wait jQuery to be ready
 
     // Array to stock some options presets...
     var optionsVarious = window.optionsVarious = {};
-    
+
     // Here you can find various plugin declaration examples
     // At the bottom you can find the full options examples
-    
+
     ///////////////////////////////////////////////////////////////////////////////
     // Simplest transition
     ///////////////////////////////////////////////////////////////////////////////
@@ -33,14 +33,14 @@ $(function() { // Wait jQuery to be ready
             }
         }
     };
-    
+
 
 
     ///////////////////////////////////////////////////////////////////////////////
     // Simple transition for some <div>
     // Optionnal, fill innerHTML template with provided data obj
     ///////////////////////////////////////////////////////////////////////////////
-    
+
     optionsVarious.transitionWithTemplate = {
         seeds          : '<div>N°{id} - {title}</div>',
         data           : [
@@ -51,7 +51,7 @@ $(function() { // Wait jQuery to be ready
         styles         : {
             position       : 'absolute',
             width          : 150,
-            opacity        : 0,
+            opacity        : 0.3,
             background     : 'white',
             transform      : 'rotate(-20deg) translate(200px, 300px)',
             textAlign      : 'center',
@@ -63,13 +63,13 @@ $(function() { // Wait jQuery to be ready
             stylesTo       : {
                 opacity       : 1,
                 textShadow    : '0 0 10px rgba(255,255,255,1)',
-                transform     : function(index) { 
+                transform     : function(index) {
                     return 'translate(30px, '+(30+(index*20))+'px)';
                 }
             }
         }
     };
-    
+
     ///////////////////////////////////////////////////////////////////////////////
     // Animate with CSS effect keyframes (multi-steps)
     ///////////////////////////////////////////////////////////////////////////////
@@ -104,14 +104,14 @@ $(function() { // Wait jQuery to be ready
             }]
         }]
     };
-     
+
     ///////////////////////////////////////////////////////////////////////////////
     // Animate with CSS effect emitter and keyframes
     ///////////////////////////////////////////////////////////////////////////////
-    
+
     optionsVarious.emitterWithKeyframes = {
         seeds             : '<div></div>',
-        
+
         styles2Class      : false, ////////////////////////////////////////////////////////////////////////////
 
         effect            : 'nebula',
@@ -127,31 +127,31 @@ $(function() { // Wait jQuery to be ready
         perspective       : '500px',
         keyframes         : [{ // Translate forever from left to right
             duration         : '1500ms',
-            timingFunction   : 'linear',
+            timingFunction   : 'ease',
             iterationCount   : 'infinite',
             direction        : 'alternate',
             fillMode         : 'forwards',
             steps: [{
                     step            : '0%, 100%',
-                    timingFunction  : $.cubicBeziers.easeInOutQuad,
                     transform       : 'rotate(-60deg)'
                 }, {
                     step            : '50%',
+                    timingFunction  : $.cubicBeziers.easeInOutQuad,
                     transform       : 'rotate(60deg)'
             }]
         }]
     };
-    
+
     ///////////////////////////////////////////////////////////////////////////////
     // Data for filling the template is provided by a function with asynchronous JSONP inside
     // Ex. : http://jsfiddle.net/molokoloco/sBqWq/ - http://stackoverflow.com/q/8190016/174449
     ///////////////////////////////////////////////////////////////////////////////
-    
-    var twitsObj = null,
+
+    var twitsObj     = null,
         twitsCurrent = 0,
-        jsonReq = null,
-        reqQueue = [];
-    
+        jsonReq      = null,
+        reqQueue     = [];
+
     // I want each call to "streamNewTweet()" to give back a new tweet...
     var streamNewTweet = function(_self) { // Plugin inject 'self' context when calling streamNewTweet(), must give it back
         // db('streamNewTweet', _self, twitsCurrent);
@@ -162,6 +162,9 @@ $(function() { // Wait jQuery to be ready
                 dataType: 'jsonp',
                 url: 'http://search.twitter.com/search.json', // Here our distant webservice
                 data: {q: 'html5'},
+                error: function() {
+                    alert('Sorry, Twitter service seems unavailable');
+                },
                 success: function(data) {
                     twitsObj = $.map(data.results, function(obj) { // Map all tweets to 'options.seeds' {template}
                         return {
@@ -192,10 +195,10 @@ $(function() { // Wait jQuery to be ready
         }
         return dfd.promise(); // Always give back the promise to do the job ;)
     };
-    
+
     // Test (debug)
     // $.when(new streamNewTweet({})).then(function(o, t) { db(o, t); });
-    
+
     // We create some CSS class for our element...
     $('<style type="text/css">\
         div.twit {\
@@ -215,12 +218,11 @@ $(function() { // Wait jQuery to be ready
             height:48px;\
         }\
     </style>').appendTo('head');
-    
+
     // Ok let's go with our data EMITTER :)
     optionsVarious.transitionWithJsonpData = {
         seeds             : '<div class="twit"><img src="{avatar}" align="right"/>@{username} - {tweet}</div>',
         data              : streamNewTweet, // Our magical function(), return an object that map to the template
-        
         effect            : 'center',
         newAtTop          : 'random',
         delay             : 1600,
@@ -228,20 +230,21 @@ $(function() { // Wait jQuery to be ready
         emitterRadius     : 0,
         emitterCenterLeft : '50%',
         emitterCenterTop  : '125%',
-        
         styles            : {
-            width             : 340, 
-            height            : 50, 
-            opacity           : 0, 
-            borderRadius      : '5px', 
+            width             : 340,
+            height            : 68,
+            borderRadius      : '5px',
+            color             : 'rgba(250,250,0,1)',
             transform         :  function(index) { return 'rotate('+(10 - (Math.random()*20))+'deg)'; }
         },
-
         transition        : {
             duration          : '8000ms',
             timingFunction    : $.cubicBeziers.easeOutQuad,
-            stylesTo          : {opacity:1, transform:'rotate(0deg) translate(0,-480px)'}
+            stylesTo          : {
+                transform          : 'rotate(0deg) translate(0,-480px)',
+                textShadow         : 'none'
+            }
         }
     };
-    
+
 });

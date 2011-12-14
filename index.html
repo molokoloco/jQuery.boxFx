@@ -301,9 +301,9 @@ var initDemoPage = function() {
         },
         mouseIsLeave = function(evt) {
             $boxFx1.unbind('mousemove', mouseIsMove);
-            $boxFx1.trigger('update', [{ // Reset
-                emitterCenterLeft : parseInt($boxFx1.width(), 10) / 2,
-                emitterCenterTop : parseInt($boxFx1.height(), 10) / 2
+            $boxFx1.trigger('update', [{ // Reset default
+                emitterCenterLeft : effect.emitterCenterLeft || null,
+                emitterCenterTop : effect.emitterCenterTop || null
             }]);
         };
 

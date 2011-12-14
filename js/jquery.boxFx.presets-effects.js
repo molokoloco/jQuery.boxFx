@@ -310,7 +310,7 @@ $(function() { // Wait jQuery to be ready
             duration         : '2000ms',
             timingFunction   : 'ease-in-out',
             stylesTo         : {
-                transform        : 'scale(1) translate(0, -70px)',
+                transform        : 'scale(1) translate(0, -90px)',
                 textShadow       : '0 0 1px yellow',
                 textFillColor    : 'yellow'
             }
