@@ -252,6 +252,7 @@ For example :
 RESSOURCES AND DEPENDENCIES
 ================
 
+Scripts loaded with LAB.js <https://github.com/getify/LABjs>  
 The project is build with **jQuery 1.7** from <http://jquery.com/>, but i though 1.5 can work too  
 I also use jQuery Color for some fancy rainbow <https://github.com/jquery/jquery-color>
 
