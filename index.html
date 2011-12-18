@@ -201,23 +201,8 @@
         <img src="http://www.b2bweb.fr/bonus/jx/images/github-ribbon.png" alt="GitHub" width="100" height="100">
     </a>
     
-    <!-- Our friend jQuery -->
-    <script src="./js/jquery-1.7.js"></script>
-    <script src="./js/jquery.color.min.js"></script>
-    
-    <!-- BoxFx Plugin + tools dependancy : ".min.js" for minimified version -->
-    <script src="./js/jquery.boxFx.tools.js" type="text/javascript"></script>
-    <script src="./js/jquery.boxFx.js" type="text/javascript"></script>
-    
-    <!-- For the demo, somes effects presets -->
-    <script src="./js/jquery.boxFx.presets-effects.js" type="text/javascript"></script>
-    <script src="./js/jquery.boxFx.presets-full-options.js" type="text/javascript"></script>
-    <script src="./js/jquery.boxFx.presets-various.js" type="text/javascript"></script>
-    
-    <!-- For the demo, displaying MarkDown README.md with http://code.google.com/p/pagedown/ -->
-    <script src="./js/Markdown.Converter.js" type="text/javascript"></script>
-    <script src="./js/Markdown.Sanitizer.js" type="text/javascript"></script>
-    
+    <!-- Ressources loader -->
+    <script src="./js/LAB.min.js" type="text/javascript"></script>
     
     <script type="text/javascript">
 
@@ -301,9 +286,9 @@ var initDemoPage = function() {
         },
         mouseIsLeave = function(evt) {
             $boxFx1.unbind('mousemove', mouseIsMove);
-            $boxFx1.trigger('update', [{ // Reset
-                emitterCenterLeft : parseInt($boxFx1.width(), 10) / 2,
-                emitterCenterTop : parseInt($boxFx1.height(), 10) / 2
+            $boxFx1.trigger('update', [{ // Reset default
+                emitterCenterLeft : effect.emitterCenterLeft || null,
+                emitterCenterTop : effect.emitterCenterTop || null
             }]);
         };
 
@@ -431,51 +416,26 @@ var initDemoPage = function() {
     }
 };
 
-
-$(document).ready(function() {
-    initDemoPage();
-});
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 // OK we're ready
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*
-
-    // jQuery come with : $.getScript('./test.js', function(data, textStatus){});
-    // But i need something more flexy
-    $.loadJs = function(src, async, callback) { // loadJs('./new.js', function() { ok(); }); // On-demand same domain JS
-        return $.ajax({
-            url:src, async:async || 0, dataType:'script', cache:1,
-            error:function(){ alert('Sorry, some JS file not found : '+src); },
-            success:function() { if (callback && typeof callback == 'function') callback(); }
+$LAB
+    .setOptions({AlwaysPreserveOrder:true})
+    .script('./js/jquery-1.7.min.js')
+    .script('./js/jquery.color.min.js')             // Colors toy
+    .script('./js/jquery.boxFx.tools.js')           // Tools dependancy : ".min.js" for minimified version
+    .script('./js/jquery.boxFx.js')                 // BoxFx Plugin
+    .script('./js/jquery.boxFx.presets-effects.js') // Only for the demo, somes effects presets
+    .script('./js/jquery.boxFx.presets-full-options.js')
+    .script('./js/jquery.boxFx.presets-various.js')
+    .script('./js/Markdown.Converter.js')           // For the demo, displaying MarkDown README.md with http://code.google.com/p/pagedown/
+    .script('./js/Markdown.Sanitizer.js')
+    .wait(function(){
+            $(document).ready(function() {
+                initDemoPage();
+            });
         });
-    };
-
-
-    // Smooth ? load JS files dependancies
-    $.when(
-        // Helpers for colors
-        $.loadJs('./js/jquery.color.min.js'),
-        // BoxFx Plugin + tools dependancy : ".min.js" for minimified version
-        $.loadJs('./js/jquery.boxFx.tools.js'),
-        $.loadJs('./js/jquery.boxFx.js'),
-        // Only for the demo, somes effects presets
-        $.loadJs('./js/jquery.boxFx.presets-effects.js'),
-        $.loadJs('./js/jquery.boxFx.presets-full-options.js'),
-        $.loadJs('./js/jquery.boxFx.presets-various.js'),
-        // For the demo, displaying MarkDown README.md with http://code.google.com/p/pagedown/
-        $.loadJs('./js/Markdown.Converter.js'),
-        $.loadJs('./js/Markdown.Sanitizer.js')
-    ).done(function(){
-        $(document).ready(function() {
-        //setTimeout(function() { // Loaded... and parsed 
-            initDemoPage();
-        //}, 0);
-        });
-    });
-*/
 
 </script>
 </body>

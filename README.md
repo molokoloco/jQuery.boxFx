@@ -33,7 +33,7 @@ Here a code example for your site :
             {id:1, title:'toto'}, {id:2, title:'tutu'}, {id:3, title:'toto'}, {id:4, title:'tutu'},
             {id:5, title:'toto'}, {id:6, title:'tutu'}, {id:7, title:'toto'}, {id:8, title:'tutu'}
         ],
-        clss        : 'bounceIn animated',
+        clss        : 'bounceIn fast',
         styles      : {
             position       : 'absolute',
             width          : 150,
