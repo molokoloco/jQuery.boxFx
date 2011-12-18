@@ -1,0 +1,36 @@
+{
+    "name": "boxFx",
+    "version": "0.9.5",
+    "title": "jQuery.boxFx()",
+    "author": {
+        "name": "Julien G (molokoloco)",
+        "url": "http://b2bweb.fr"
+    },
+    "licenses": [{
+            "type": "MIT",
+            "url": "MIT-LICENSE.txt"
+        }, {
+            "type": "GPL",
+            "url": "GPL-LICENSE.txt"
+     }],
+    "dependencies": {
+        "jquery": "1.7"
+    },
+    "description": "Motion effects JS plugin, powered with CSS3 animations and transitions. jQuery.boxFx.js is like a \"DOM particles emitter factory\" [Beta]",
+    "keywords": [
+        "DOM",
+        "animate",
+        "transition",
+        "particules",
+        "cross-browser"
+    ],
+    "homepage": "https://github.com/molokoloco/jquery.boxFx",
+    "contributors": [],
+    "files": [
+        "./js/jquery.boxFx.min.js",
+        "./js/jquery.boxFx.tools.min.js",
+        "./js/jquery.color.min.js",
+        "./js/modernizr.min.js",
+        "./css/animates.css"
+    ]
+}

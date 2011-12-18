@@ -19,7 +19,7 @@ $(function() { // Wait jQuery to be ready
         template              : null,        // 'N°{id} - {title}' // By default can be set in options.seeds
         data                  : [{id:1, title:'toto'}, {id:2, title:'tutu'}], // [{id:1}, {id:2}, {}] OR a "callback()" // Cf. preset example below
         styles2Class          : true,        // Convert styles to 'class' in <head> instead of dealing in the DOM, for each elements : cannot be "live" edited
-        clss                  : null,        // 'rollOut animated' // Custom CSS static (starting) class, default : null (Cf. ./animate.css) for example
+        clss                  : null,        // 'rollOut fast' // Custom CSS static (starting) class (Cf. ./animate.css) for example
         //perspective         : null,        // TODO // 500px // if seeds 'options.styles.webktiTransformStyle' == 'preserve-3d', apply perspective to seeds container
 
         // Effect work mostly with 'options.transition', giving custom ending style foreach elements
@@ -64,6 +64,7 @@ $(function() { // Wait jQuery to be ready
         zIndex                : 500,         // Starting index for seeds // Cf. options.newAtTop
 
         overflow              : 'hidden',    // 'hidden' | 'visible'
+        backfaceVisibility    : 'visible',   // visible | hidden
         whiteSpace            : null,        // 'nowrap',
         textOverflow          : null,        // 'ellipsis', ...
         cursor                : 'pointer',   // 'pointer',
@@ -74,7 +75,8 @@ $(function() { // Wait jQuery to be ready
         maskImage             : null,        // 'gradient()' | 'url()' // Text effect (Mostly webkit) // better with background-clip:text && display:inline-block
         backgroundImage       : '-'+$.browserPrefix+'-radial-gradient(33% 33%, circle cover,rgba(230,230,0,1) 25%,rgba(180,180,0,1) 80%)', // 'url()' | '-BROWSER-radial-gradient()'
                                              // TODO : Add advanced background-image: linear-gradient() https://github.com/codler/jQuery-Css3-Finalize/
-        
+        borderImage           : null,        // 'url(border-image.jpg) 45 20 45 30 repeat'
+
         // Some properties, managed by 'options.effect' --------------------------------
         top                   : 0,           // Element is positionned within the boxFx 'options.emitterRadius' with 'top'/'left'
         left                  : 0,
@@ -90,7 +92,6 @@ $(function() { // Wait jQuery to be ready
         transform             : null,        // rotate(180deg), rotateX, rotateY, rotateZ, skew(-10deg,10deg), skewX, skewY, perspective, matrix, matrix3d and rotate3d(1,1,0,360deg)
         transformOrigine      : null,        // '10px', '50%', 'left', 'center center', ...
         transformStyle        : 'preserve-3d', // 'flat' | 'preserve-3d'
-        backfaceVisibility    : 'visible',   // visible | hidden
         
         minWidth              : null,
         maxWidth              : null,
@@ -119,9 +120,8 @@ $(function() { // Wait jQuery to be ready
         boxReflect            : null,        // (Mostly webkit) // 'below 5px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.5, transparent), to(white))'
 
         border                : '1px solid white', // '1px dashed rgb(0,0,0)', // buggus with rgba() alpha
-        borderImage           : null,        // 'url(border-image.jpg) 45 20 45 30 repeat'
         borderWidth           : null,
-        borderRadius          : '20px / 50px',       // '10px' or '50%',  '10px 30px 20px 0px' or '50px / 150px' // Default round with half W/H radius or 50%
+        borderRadius          : '20px / 50px', // '10px' or '50%',  '10px 30px 20px 0px' or '50px / 150px' // Default round with half W/H radius or 50%
         outline               : null,        // '1px dashed rgb(0,0,0)',
         outlineOffset         : null,        // '10px', ...
         

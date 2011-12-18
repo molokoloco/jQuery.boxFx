@@ -278,11 +278,13 @@ Check <http://daneden.me/animate> for more infos
     * Rotating exits : rotateOut rotateOutDownLeft rotateOutDownRight rotateOutUpLeft rotateOutUpRight
     * Specials : hinge rollIn rollOut
 
-In this example "*fadeInLeft*" is the type of effect and "*animated*" is a generic class to give delay and easing
+In this example "*fadeInLeft*" is the type of effect and "*fast*" is a generic class to give delay and easing
+When "*clss*" is used like this, it's help you achieve intro and outro animations **over** the general transition
+Animated class cannot be used with options.keyframes (must choose)
 
     $("#banniere").boxFx({
-        clss: 'fadeInLeft animated'
-        transition: {clssTo:'bounceOutDown animated'}
+        clss: 'fadeInLeft fast'
+        transition: {clssTo:'bounceOutDown slow', color:'XXX' /* ,... */}
     });
 
 HTML5/CSS3 compatibility mode is managed with <https://github.com/Modernizr/Modernizr/blob/master/modernizr.js>  
@@ -297,7 +299,7 @@ Further READING about CSS3 and animations ? (You would ;)
 
 * **Docs**
     * <https://developer.mozilla.org/en/CSS/CSS_animations>
-    * <http://developer.apple.com/library/safari/#documentation/InternetWeb/Conceptual/SafariVisualEffectsProgGuide/Transitions/Transitions.html>
+    * <http://developer.apple.com/library/safari/#documentation/InternetWeb/Conceptual/SafariVisualEffectsProgGuide/>
     * <http://www.w3.org/TR/css3-3d-transforms/#transform-functions>
     * <http://www.w3schools.com/css3/css3_animations.asp>
     * <http://lea.verou.me/2011/10/animatable-a-css-transitions-gallery/>
@@ -319,5 +321,11 @@ Further READING about CSS3 and animations ? (You would ;)
     * <http://jsperf.com/class-vs-style>
     * <http://jsfiddle.net/molokoloco/rf8zt/> (CSS animation(s) with 'options.keyframes' OBJ)
     * <http://jsfiddle.net/molokoloco/7rV7a/> (CSS 3D animations via sources)
+
+Et...
+
+* <https://twitter.com/molokoloco/> (Some infos, from time to time ;)  
+  
+---
 
 ![CSS Transform] (http://d3pr5r64n04s3o.cloudfront.net/articles/042_css_animation_intro/tut.html/images/axis-5.jpg)

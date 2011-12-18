@@ -7,7 +7,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 
 // And here we go !
-(function ($, window) {
+(function ($, Modernizr, window) {
 
     // JS Dependancy ?
     if (typeof(Modernizr) != 'object')       alert('$.fn.boxFx require "./js/modernizr(.min).js"'); // Moderniz for Cross browser CSS-Prefix support
@@ -447,8 +447,7 @@
                 ///////////////////////////////////////////////////////////////////////////////
                 // Apply CSS on the element
                 applyCssStart: function(name_, index_, cssStart_) {
-                    //
-                    if (_db_) db('applyCssStart()', cssStart_);
+                    // if (_db_) db('applyCssStart()', cssStart_);
                     if (cssStart_) {
                         $.addCssUnit(cssStart_); // Set back 'px' units // Sometimes does not need a REDOO ???
                         window[name_][index_].crossCss(cssStart_); // Custom style // Cross-browsers CSS+
@@ -463,8 +462,7 @@
                 ///////////////////////////////////////////////////////////////////////////////
                 // Apply ending CSS styles (Apply transition at this moment)
                 applyCssEnd: function(name_, index_, cssEnd_) {
-                    //
-                    if (_db_) db('applyCssEnd(name_, index_, cssEnd_)', name_, index_, cssEnd_);
+                    // if (_db_) db('applyCssEnd(name_, index_, cssEnd_)', name_, index_, cssEnd_);
                     if (!name_ || !(name_ in window) || !(index_ in window[name_]))
                         return; // When killing app, in case some events end after (timeout)
                     if (cssEnd_) {
@@ -475,14 +473,28 @@
                 ///////////////////////////////////////////////////////////////////////////////
                 // Apply ending CSS class
                 applyClssEnd: function(name_, index_) {
-                    //
-                    if (_db_) db('applyClssEnd()');
+                    // if (_db_) db('applyClssEnd()');
                     if (!name_ || !(name_ in window) || !(index_ in window[name_]))
                         return; // When killing app, in case some events end after (timeout)
                     if (options.clss)
                         window[name_][index_].removeClass(options.clss); // Start class
                     if (options.transition && options.transition.clssTo)
                         window[name_][index_].addClass(options.transition.clssTo);
+                },
+                ///////////////////////////////////////////////////////////////////////////////
+                // Apply ending CSS or ending class
+                fireEndStyles: function(data) {
+                    // if (_db_) db('fireEndStyle', data);
+                    privateMethods.applyCssEnd(data.name, data.index, data.cssEnd);  // Pass new css + apply trans
+                    var duration = (options.transition ? parseInt(options.transition.duration, 10) : 0);
+                    if (options.animationOutroDuration > 0 && duration > 0) {
+                        // we trigger "options.transition.clssTo" before the end of the transition,
+                        // "options.transition.clssTo:'fade fast'" will end at the same time than the transition
+                        setTimeout(function(data_) {
+                            privateMethods.applyClssEnd(data_.name, data_.index); // APPLY Class
+                        }, (duration - options.animationOutroDuration), data);
+                    }
+                    else privateMethods.applyClssEnd(data.name, data.index); // immediatly
                 }
             };
 
@@ -636,25 +648,10 @@
                         index       : S.index,
                         cssEnd      : S.cssEnd
                     };
-
-                    var fireEndStyle = function(data) {
-                        //
-                        if (_db_) db('fireEndStyle', data);
-                        privateMethods.applyCssEnd(data.name, data.index, data.cssEnd);  // Pass new css + apply trans
-                        var duration = (options.transition ? parseInt(options.transition.duration, 10) : 0);
-                        if (options.animationOutroDuration > 0 && duration > 0) {
-                            // we trigger "options.transition.clssTo" before the end of the transition,
-                            // "options.transition.clssTo:'fade fast'" will end at the same time than the transition
-                            setTimeout(function(data_) {
-                                privateMethods.applyClssEnd(data_.name, data_.index); // APPLY Class
-                            }, (duration - options.animationOutroDuration), data);
-                        }
-                        else privateMethods.applyClssEnd(data.name, data.index); // immediatly
-                    };
-
-                    window[FX.id][S.index].bind($.animationStart, eventObjContext, function animStart(event) { // // Whom is the end event for transition ?
-                        //
-                        if (_db_) db($.animationStart);
+                    
+                    // Listen seed animationStart event
+                    window[FX.id][S.index].bind($.animationStart, eventObjContext, function animStart(event) { // Check "./tool.js" for "$.animationStart" property
+                        // if (_db_) db($.animationStart);
                         if (!event.data.name || !(event.data.name in window) || !(event.data.index in window[event.data.name]))
                             return;
                         var Se = window[event.data.name][event.data.index]; // $(this) is not the element
@@ -663,9 +660,8 @@
                     });
 
                     // Todo add support for animation iterations ! We cut at the end of the first loop
-                    window[FX.id][S.index].bind($.animationEnd, eventObjContext, function animEnd(event) { // // Whom is the end event for transition ?
-                        //
-                        if (_db_) db($.animationEnd);
+                    window[FX.id][S.index].bind($.animationEnd, eventObjContext, function animEnd(event) {
+                        // if (_db_) db($.animationEnd);
                         if (!event.data.name || !(event.data.name in window) || !(event.data.index in window[event.data.name]))
                             return;
                         var Se = window[event.data.name][event.data.index];
@@ -676,23 +672,24 @@
                     });
 
                     // Wait the end event of CSS transition : transitionend || webkitTransitionEnd ...
-                    window[FX.id][S.index].bind($.transitionEnd, eventObjContext, function transEnd(event) { // // Whom is the end event for transition ?
-                        //
-                        if (_db_) db($.transitionEnd, event.data);
+                    window[FX.id][S.index].bind($.transitionEnd, eventObjContext, function transEnd(event) {
+                        // if (_db_) db($.transitionEnd, event.data);
                         if (!event.data.name || !(event.data.name in window) || !(event.data.index in window[event.data.name]))
                             return;
                         var Se = window[event.data.name][event.data.index];
                         if ((options.animationIntroDuration > 0 || !options.keyframes) && $.data(Se, 'isAnimated'))
                              return;
-                        fireEndStyle(event.data);
+                        privateMethods.fireEndStyles(event.data);
                         Se.unbind($.transitionEnd);    // $(this).unbind do not work ?
                         // We clear element before regenerating a new one
                         if (!options.stopAtEnd) {      // Hide element until re-use ?
-                            $.data(Se, 'inUse', 0);    // Release element
-                            Se.detach()                // Remove from DOM
-                              .attr('style', '');      // Reset all styles (& transition)
-                            if (options.transition.clssTo)  Se.removeClass(options.transition.clssTo);
-                            if (options.animationsClss)     Se.removeClass(options.animationsClss);
+                            setTimeout(function() {    // Let the fireEndStyle apply
+                                $.data(Se, 'inUse', 0);    // Release element
+                                Se.detach()                // Remove from DOM
+                                  .attr('style', '');      // Reset all styles (& transition)
+                                if (options.transition.clssTo)  Se.removeClass(options.transition.clssTo);
+                                if (options.animationsClss)     Se.removeClass(options.animationsClss);
+                            }, 0);
                         }
                     });
 
@@ -718,7 +715,7 @@
                         // OK apply ending styles to seed
                         // wait just a little before applying ending style (time for browser to apply the starting one)
                         setTimeout(function(data_) {
-                            fireEndStyle(data_);
+                            privateMethods.fireEndStyles(data_);
                         }, 0, eventObjContext);
                     }
                 } // End if "S.index"
@@ -745,4 +742,4 @@
 
     }; // End plugin
 
-})(jQuery, window);
+})(jQuery, Modernizr, window);

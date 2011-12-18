@@ -46,8 +46,9 @@
     }
 
     /*
-        You can also choose to apply plain CSS to seeds, but in this case you must set browsers-prefix
-        Depending on your settings, plugin will generate some statics CSS class to (Appended in head)
+        You can choose to apply plain CSS to seeds, but in this case you must set browsers-prefix
+        Depending on your settings, plugin will also generate some statics CSS class (Appended in head)
+        So i think it's better to deal with JS settings
     */
     /*
         div.seed {
@@ -144,25 +145,20 @@
         <ul>
             <li>Add your properties, set unwanted existing ones to "null" (live editor constrain)</li>
             <li><em>gradient</em>, <em>boxShadow</em>, <em>opacity</em>, <em>borderRadius</em>... are CPU consumming</li>
-            <li>Some properties like functions doesn't appear in the JSON export you see above (Print only string value)</li>
-            <li>Read the lovely <a href="./README.md" id="pause">./README.md</a> for (much) more infos ~=[,,_,,]:3</li>
+            <li>Some properties like functions doesn't appear in the JSON export you see above (Print only string values)</li>
+            <li>Read the lovely <a href="./README.md">./README.md</a> for (much) more infos ~=[,,_,,]:3</li>
+            <li>And the <a href="./js/jquery.boxFx.presets-full-options.js" target="_blank">presets-full-options.js</a> for comments about settings</li>
         </ul>
         
         <div class="spacer"></div>
         <p>There so much possibilities... help me if you found bug or enhancements<br />
         → Sugestions or effects to share ? Contact me : <a href="mailto:molokoloco@gmail.com">molokoloco@gmail.com</p>
         <div class="spacer"></div>
-        <ul>
+        <a href="https://github.com/molokoloco/jQuery.boxFx/zipball/master" target="_blank"><img width="45" src="https://github.com/images/modules/download/zip.png" align="right"></a><ul>
             <li>Fork it and get updated on GitHub : <a href="https://github.com/molokoloco/jquery.boxfx" target="_blank">https://github.com/molokoloco/jquery.boxfx</a></li>
-            <li>Edit it in your <a href="http://cloud9ide.com" target="_blank">http://cloud9ide.com</a> editor and send me feedback ;)</li>
+            <li>Edit it in your <a href="http://cloud9ide.com" target="_blank">http://cloud9ide.com</a> editor and send me feedbacks ;)</li>
             <li>Check <a href="http://molokoloco.github.com/jQuery.boxFx/boxfx-minimalist.html" target="_blank">./boxfx-minimalist.html</a> source code for minimalists settings</li>
         </ul>
-        
-        <div class="spacer"></div>
-        <p style="text-align:center;">
-            <a href="https://github.com/molokoloco/jQuery.boxFx/zipball/master" target="_blank"><img width="45" src="https://github.com/images/modules/download/zip.png"></a> 
-            <a href="https://github.com/molokoloco/jQuery.boxFx/tarball/master" target="_blank"><img width="45" src="https://github.com/images/modules/download/tar.png"></a>
-        </p>
         
         <!-- Social APIs -->
         <div class="spacer"></div>
@@ -187,7 +183,7 @@
             // DISQUS comments system, must by global
             var disqus_url    = 'http://molokoloco.github.com/jQuery.boxFx/', // This page URL
             disqus_identifier = 'jqueryboxfx', // I give this name...
-            disqus_domain     = 'disqus.com', // Don't touch
+            disqus_domain     = 'disqus.com',  // Don't touch
             disqus_shortname  = 'jqueryboxfx', // Get it by creating a new forum under Discuss dashboard
             disqus_title      = 'jquery.boxFx.js'; // Page title (Will be displayed in comments)
         </script>
@@ -204,9 +200,11 @@
     <!-- Ressources loader -->
     <script src="./js/LAB.min.js" type="text/javascript"></script>
     
+    <!-- Demo samples -->
     <script type="text/javascript">
 
 var initDemoPage = function() {
+    
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // jQuery boxFx (demo) presets
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -373,16 +371,13 @@ var initDemoPage = function() {
         btnHtml.push('<a id="btn_'+k+'" href="javascript:void(0);" class="button">'+k+'</a>');
     $presets.append('<p><strong>Effects with transitions :</strong> '+btnHtml.join(', ')+'</p>');
 
-    // options3Danimations // TODO :)
-    btnHtml = [];
-    /*for(var k in optionsEffects)
+    // TODO :)
+    /* btnHtml = [];
+    for(var k in options3Danimations)
         btnHtml.push('<a id="btn_'+k+'" href="javascript:void(0);" class="button">'+k+'</a>'); */
-    $presets.append('<p><strong>3D animations :</strong> Examples TODO '+btnHtml.join(', ')+'</p>');
-
-    // boxFxFullOptions
-    $presets.append('<p><strong>Full plugin options :</strong> <a id="btn_boxFxFullOptions" href="javascript:void(0);" class="button">boxFxFullOptions</a></p>');
-
-    $presets.delegate('a.button', 'click', buttonsClickSetOptions);
+    $presets.append('<p><strong>3D animations :</strong> Examples TODO</p>')
+            .append('<p><strong>Full plugin options :</strong> <a id="btn_boxFxFullOptions" href="javascript:void(0);" class="button">boxFxFullOptions</a></p>')
+            .delegate('a.button', 'click', buttonsClickSetOptions);
 
     if (hash) $('a#btn_'+hash).addClass('selected'); // Auto-select current effect link ?
 
@@ -424,18 +419,18 @@ $LAB
     .setOptions({AlwaysPreserveOrder:true})
     .script('./js/jquery-1.7.min.js')
     .script('./js/jquery.color.min.js')             // Colors toy
-    .script('./js/jquery.boxFx.tools.js')           // Tools dependancy : ".min.js" for minimified version
+    .script('./js/jquery.boxFx.tools.js')           // Tools dependency : ".min.js" for minimified version
     .script('./js/jquery.boxFx.js')                 // BoxFx Plugin
     .script('./js/jquery.boxFx.presets-effects.js') // Only for the demo, somes effects presets
     .script('./js/jquery.boxFx.presets-full-options.js')
     .script('./js/jquery.boxFx.presets-various.js')
-    .script('./js/Markdown.Converter.js')           // For the demo, displaying MarkDown README.md with http://code.google.com/p/pagedown/
-    .script('./js/Markdown.Sanitizer.js')
+    .script('./js/Markdown.Converter.min.js')       // For the demo, displaying MarkDown README.md http://code.google.com/p/pagedown/
+    .script('./js/Markdown.Sanitizer.min.js')
     .wait(function(){
-            $(document).ready(function() {
-                initDemoPage();
-            });
+        $(document).ready(function() {
+            initDemoPage();
         });
+    });
 
 </script>
 </body>

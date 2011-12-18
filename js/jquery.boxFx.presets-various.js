@@ -221,28 +221,35 @@ $(function() { // Wait jQuery to be ready
 
     // Ok let's go with our data EMITTER :)
     optionsVarious.transitionWithJsonpData = {
-        seeds             : '<div class="twit"><img src="{avatar}" align="right"/>@{username} - {tweet}</div>',
-        data              : streamNewTweet, // Our magical function(), return an object that map to the template
+        seeds             : '<div class="twit"><img src="{avatar}" align="right"/><a href="http://twitter.com/{username}">@{username}</a> - {tweet}</div>',
+        data              : streamNewTweet, // Our magical function(), return an object that map to the template  
         effect            : 'center',
-        newAtTop          : 'random',
-        delay             : 1600,
-        maxSeeds          : 10,
+        newAtTop          : true,
+        delay             : 2200,
+        maxSeeds          : 7,
         emitterRadius     : 0,
         emitterCenterLeft : '50%',
-        emitterCenterTop  : '125%',
+        emitterCenterTop  : '120%', 
         styles            : {
-            width             : 340,
-            height            : 68,
+            position          : 'absolute',
+            width             : 300, 
+            height            : 60,
+            color             : 'orange',
+            background        : 'yellow',
+            boxShadow         : '3px 3px 0 orange, 0 0 7px rgba(0,0,0,0.6)',
+            //textShadow      : '0 0 2px white',
             borderRadius      : '5px',
-            color             : 'rgba(250,250,0,1)',
-            transform         :  function(index) { return 'rotate('+(10 - (Math.random()*20))+'deg)'; }
+            padding           : '5px',
+            transform         :  function(index) {
+                return 'rotate('+(20 - (Math.random()*40))+'deg) translate('+(35 - (Math.random()*70))+'px, 0)'; 
+            }
         },
         transition        : {
-            duration          : '8000ms',
-            timingFunction    : $.cubicBeziers.easeOutQuad,
+            duration          : '16000ms',
+            timingFunction    : $.cubicBeziers.easeInOutSine,
             stylesTo          : {
-                transform          : 'rotate(0deg) translate(0,-480px)',
-                textShadow         : 'none'
+                background        : 'pink',
+                transform         : 'rotate(0deg) translate(0,-565px)'
             }
         }
     };

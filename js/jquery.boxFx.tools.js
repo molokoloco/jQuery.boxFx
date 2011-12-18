@@ -1,13 +1,13 @@
 /*
     // jQuery tools
     // GPL/MIT License - @molokoloco 2011 - http://b2bweb.fr
-    // Dependancy to moderniz.js for $.fn.crossCss
+    // Dependancy to ./moderniz.js for $.fn.crossCss
 */
 
 // I use this for debuging ^^
 var db  = function() { 'console' in window && console.log.call(console, arguments); };
 
-(function ($, window) {
+(function ($, Modernizr, window) {
 
     $.toolsLoaded = true; // Declare tools.js as loaded...
 
@@ -264,4 +264,4 @@ var db  = function() { 'console' in window && console.log.call(console, argument
         return {animation:cssAnimations.join(','), animationFillMode: cssAnimationsFillMode.join(',')}; // apply this to element, with 'crossCss()', to trigger keyframe
     };
 
-})(jQuery, window);
+})(jQuery, Modernizr, window);
