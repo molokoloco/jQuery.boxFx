@@ -42,7 +42,7 @@ $(function() { // Wait jQuery to be ready
     ///////////////////////////////////////////////////////////////////////////////
 
     optionsVarious.transitionWithTemplate = {
-        seeds          : '<div>N°{id} - {title}</div>',
+        seeds          : '<div>N°#id# - #title#</div>',
         data           : [
             {id:1, title:'toto'}, {id:2, title:'tutu'}, {id:3, title:'toto'}, {id:4, title:'tutu'},
             {id:5, title:'toto'}, {id:6, title:'tutu'}, {id:7, title:'toto'}, {id:8, title:'tutu'}
@@ -221,7 +221,7 @@ $(function() { // Wait jQuery to be ready
 
     // Ok let's go with our data EMITTER :)
     optionsVarious.transitionWithJsonpData = {
-        seeds             : '<div class="twit"><img src="{avatar}" align="right"/><a href="http://twitter.com/{username}">@{username}</a> - {tweet}</div>',
+        seeds             : '<div class="twit"><img src="#avatar#" align="right"/><a href="http://twitter.com/#username#">@#username#</a> - #tweet#</div>',
         data              : streamNewTweet, // Our magical function(), return an object that map to the template  
         effect            : 'center',
         newAtTop          : true,
