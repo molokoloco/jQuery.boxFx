@@ -80,7 +80,7 @@ var db  = function() { 'console' in window && console.log.call(console, argument
     // Lightest TPL // $.getTpl('<div>{title}</div>', {title:'toto'}) // '<div>toto</div>'
     $.getTpl = function(tpl, val) {
         for (var p in val)
-            tpl = tpl.replace(new RegExp('({'+p+'})', 'g'), val[p] || '');
+            tpl = tpl.replace(new RegExp('(#'+p+'#)', 'g'), val[p] || '');
         return tpl;
     };
 
