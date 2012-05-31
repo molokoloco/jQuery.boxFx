@@ -8,7 +8,7 @@ jQuery.boxFx.js
 
 **BoxFx JS is like a "DOM particles emitter" factory**  
 "*Clash the DOM with the most optimized jQuery animations framework on earth*" ^^   
-GPL/MIT/Copyleft - Beta V0.94 - [@molokoloco](https://twitter.com/#!/molokoloco/) 2011 - <http://b2bweb.fr>
+GPL/MIT/Copyleft - Beta V0.97 - [@molokoloco](https://twitter.com/#!/molokoloco/) 2011 - <http://b2bweb.fr>
 
 ---
 
@@ -26,7 +26,7 @@ See the BoxFx (full) options properties list here : "***./js/jquery.boxFx.preset
 All is *heavily* commented, check also "*./js/jquery.boxFx.presets-XXX.js*"  
 Here a code example for your site :
 
-    $emitter1 = $('div#emitterZone1').emitter({
+    $emitter1 = $('div#emitterZone1').boxFx({
         delay       : 500,
         seeds       : '<div class="test">N°{id} - {title}</div>',
         data        : [
