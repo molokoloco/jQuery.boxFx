@@ -11,7 +11,7 @@ GPL/MIT/Copyleft - Beta V0.97 - [@molokoloco](https://twitter.com/#!/molokoloco/
 
 ---
 
-- Infos (on my blog)  : <http://goo.gl/P18db>
+- Infos (on my blog)  : <http://www.b2bweb.fr/molokoloco/dynamisez-vos-pages-web-avec-jquery-boxfx-js/>
 - Fiddle live example : <http://jsfiddle.net/molokoloco/sBqWq/>
 - Full demo           : <http://molokoloco.github.com/jQuery.boxFx/>
 - Sources & download  : <https://github.com/molokoloco/jQuery.boxFx/>
