@@ -27,6 +27,9 @@ a {
 
     a.button {
         border-radius: 5px;
+        line-height: 22px;
+        padding: 1px 2px;
+        background: rgba(255, 255, 255, 0.3);
     }
         a.button.selected {
             border-top:1px solid rgba(255,255,255,1);
