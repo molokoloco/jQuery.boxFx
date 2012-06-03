@@ -1,5 +1,4 @@
-***[ANNOUNCEMENT] Project to be released in the nexts days***  
-***"Work in Progress" For the moment i commit a lot...***
+***"Work in Progress" This is a prototype...***
 
 ---
 
@@ -167,7 +166,7 @@ Example :
 
     options.styles : {
         width        : '25%', // Will be internally converted in "px"
-        borderRadius : 10,    // CSS3 : Camel case ("camelCase") declaration, 10 will be converted to '"10px"
+        borderRadius : 10,    // borderRadius : Camel case ("camelCase") declaration, 10 will be converted to '"10px"
         transform    :  function(index) { return 'rotate('+(10 * index)+'deg)'; } // Each element increment with an index
     },
 
@@ -324,7 +323,8 @@ Further READING about CSS3 and animations ? (You would ;)
 
 Et...
 
-* <https://twitter.com/molokoloco/> (Some infos, from time to time ;)  
+* <https://twitter.com/molokoloco/> (Some infos, from time to time ;)
+* Contact me for any trouble using this : molokoloco{at}gmail.com
   
 ---
 
