@@ -1,5 +1,4 @@
-***[ANNOUNCEMENT] Project to be released in the nexts days***  
-***"Work in Progress" For the moment i commit a lot...***
+***"Work in Progress" This is a prototype...***
 
 ---
 
@@ -8,11 +7,11 @@ jQuery.boxFx.js
 
 **BoxFx JS is like a "DOM particles emitter" factory**  
 "*Clash the DOM with the most optimized jQuery animations framework on earth*" ^^   
-GPL/MIT/Copyleft - Beta V0.94 - [@molokoloco](https://twitter.com/#!/molokoloco/) 2011 - <http://b2bweb.fr>
+GPL/MIT/Copyleft - Beta V0.97 - [@molokoloco](https://twitter.com/#!/molokoloco/) 2011 - <http://b2bweb.fr>
 
 ---
 
-- Infos (on my blog)  : <http://goo.gl/P18db>
+- Infos (on my blog)  : <http://www.b2bweb.fr/molokoloco/dynamisez-vos-pages-web-avec-jquery-boxfx-js/>
 - Fiddle live example : <http://jsfiddle.net/molokoloco/sBqWq/>
 - Full demo           : <http://molokoloco.github.com/jQuery.boxFx/>
 - Sources & download  : <https://github.com/molokoloco/jQuery.boxFx/>
@@ -26,7 +25,7 @@ See the BoxFx (full) options properties list here : "***./js/jquery.boxFx.preset
 All is *heavily* commented, check also "*./js/jquery.boxFx.presets-XXX.js*"  
 Here a code example for your site :
 
-    $emitter1 = $('div#emitterZone1').emitter({
+    $emitter1 = $('div#emitterZone1').boxFx({
         delay       : 500,
         seeds       : '<div class="test">N°{id} - {title}</div>',
         data        : [
@@ -167,7 +166,7 @@ Example :
 
     options.styles : {
         width        : '25%', // Will be internally converted in "px"
-        borderRadius : 10,    // CSS3 : Camel case ("camelCase") declaration, 10 will be converted to '"10px"
+        borderRadius : 10,    // borderRadius : Camel case ("camelCase") declaration, 10 will be converted to '"10px"
         transform    :  function(index) { return 'rotate('+(10 * index)+'deg)'; } // Each element increment with an index
     },
 
@@ -252,6 +251,7 @@ For example :
 RESSOURCES AND DEPENDENCIES
 ================
 
+Scripts loaded with LAB.js <https://github.com/getify/LABjs>  
 The project is build with **jQuery 1.7** from <http://jquery.com/>, but i though 1.5 can work too  
 I also use jQuery Color for some fancy rainbow <https://github.com/jquery/jquery-color>
 
@@ -277,11 +277,13 @@ Check <http://daneden.me/animate> for more infos
     * Rotating exits : rotateOut rotateOutDownLeft rotateOutDownRight rotateOutUpLeft rotateOutUpRight
     * Specials : hinge rollIn rollOut
 
-In this example "*fadeInLeft*" is the type of effect and "*animated*" is a generic class to give delay and easing
+In this example "*fadeInLeft*" is the type of effect and "*fast*" is a generic class to give delay and easing
+When "*clss*" is used like this, it's help you achieve intro and outro animations **over** the general transition
+Animated class cannot be used with options.keyframes (must choose)
 
     $("#banniere").boxFx({
-        clss: 'fadeInLeft animated'
-        transition: {clssTo:'bounceOutDown animated'}
+        clss: 'fadeInLeft fast'
+        transition: {clssTo:'bounceOutDown slow', color:'XXX' /* ,... */}
     });
 
 HTML5/CSS3 compatibility mode is managed with <https://github.com/Modernizr/Modernizr/blob/master/modernizr.js>  
@@ -296,7 +298,7 @@ Further READING about CSS3 and animations ? (You would ;)
 
 * **Docs**
     * <https://developer.mozilla.org/en/CSS/CSS_animations>
-    * <http://developer.apple.com/library/safari/#documentation/InternetWeb/Conceptual/SafariVisualEffectsProgGuide/Transitions/Transitions.html>
+    * <http://developer.apple.com/library/safari/#documentation/InternetWeb/Conceptual/SafariVisualEffectsProgGuide/>
     * <http://www.w3.org/TR/css3-3d-transforms/#transform-functions>
     * <http://www.w3schools.com/css3/css3_animations.asp>
     * <http://lea.verou.me/2011/10/animatable-a-css-transitions-gallery/>
@@ -318,5 +320,12 @@ Further READING about CSS3 and animations ? (You would ;)
     * <http://jsperf.com/class-vs-style>
     * <http://jsfiddle.net/molokoloco/rf8zt/> (CSS animation(s) with 'options.keyframes' OBJ)
     * <http://jsfiddle.net/molokoloco/7rV7a/> (CSS 3D animations via sources)
+
+Et...
+
+* <https://twitter.com/molokoloco/> (Some infos, from time to time ;)
+* Contact me for any trouble using this : molokoloco{at}gmail.com
+  
+---
 
 ![CSS Transform] (http://d3pr5r64n04s3o.cloudfront.net/articles/042_css_animation_intro/tut.html/images/axis-5.jpg)
