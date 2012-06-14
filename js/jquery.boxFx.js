@@ -13,9 +13,9 @@
     if (typeof(Modernizr) != 'object')       alert('$.fn.boxFx require "./js/modernizr(.min).js"'); // Moderniz for Cross browser CSS-Prefix support
 
     // Does the current browser support CSS Transitions ? We silently fall back ?
-    if (!Modernizr.csstransitions)           alert('Sad, your old browser don\'t support CSS transition');
+    if (!Modernizr.csstransitions)           console.log('Sad, your old browser don\'t support CSS transition');
     //if (!(Modernizr.prefixed('transition'))) alert('$.fn.boxFx require a (modern) browser, sorry...'); // Don't you play ?
-    if (!Modernizr.csstransforms3d)          alert('Sad, your computer don\'t support CSS 3D');
+    if (!Modernizr.csstransforms3d)          console.log('Sad, your computer don\'t support CSS 3D');
 
     ///////////////////////////////////////////////////////////////////////////////
     // PUBLIC : default plugin properties
