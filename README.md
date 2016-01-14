@@ -1,4 +1,6 @@
-***"Work in Progress" This is a prototype...***
+***This is a prototype...***
+
+[![No Maintenance Intended](https://img.shields.io/badge/No_Maintenance_Intended-%C3%97-red.svg)](http://unmaintained.tech/)
 
 ---
 
